@@ -31,7 +31,8 @@ class FlyWithWings : public IFlyBehavior
 public:
 	void Fly() override
 	{
-		cout << "I'm flying with wings!!" << endl;
+		m_flightCounter.Increment();
+		cout << "I'm flying with wings!! (" << m_flightCounter.GetCount() << ")" << endl;
 	}
 private:
 	FlightCounter m_flightCounter;
@@ -225,6 +226,7 @@ void PlayWithDuck(Duck& duck)
 void main()
 {
 	MallardDuck mallarDuck;
+	PlayWithDuck(mallarDuck);
 	PlayWithDuck(mallarDuck);
 
 	RedheadDuck redheadDuck;
