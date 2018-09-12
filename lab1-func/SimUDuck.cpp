@@ -26,32 +26,14 @@ QuackBehaviorF squeakBehavior = [] {
 	cout << "Squeek!!!" << endl;
 };
 
-struct IDanceBehavior
-{
-	virtual ~IDanceBehavior() {}
-	virtual void Dance() = 0;
+using DanceBehaviorF = function<void(void)>;
+
+DanceBehaviorF waltzBehavior = [] {
+	cout << "I'm dancing the waltz!!!" << endl;
 };
 
-class ValseDanceBehavior : public IDanceBehavior
-{
-public:
-	void Dance() override
-	{
-		cout << "I'm dancing the valse!!!" << endl;
-	}
-};
-
-class MinuetDanceBehavior : public IDanceBehavior
-{
-	void Dance() override
-	{
-		cout << "I'm dancing the minuet!!!" << endl;
-	}
-};
-
-class NoDanceBehavior : public IDanceBehavior
-{
-	void Dance() override {}
+DanceBehaviorF minuetBehavior = [] {
+	cout << "I'm dancing the minuet!!!" << endl;
 };
 
 class Duck
@@ -59,12 +41,11 @@ class Duck
 public:
 	Duck(const FlyBehaviorF& flyBehavior,
 		const QuackBehaviorF& quackBehavior,
-		unique_ptr<IDanceBehavior>&& danceBehavior
+		const DanceBehaviorF& danceBehavior
 	)
 		: m_quackBehavior(quackBehavior)
-		, m_danceBehavior(move(danceBehavior))
+		, m_danceBehavior(danceBehavior)
 	{
-		assert(m_danceBehavior);
 		SetFlyBehavior(move(flyBehavior));
 	}
 	void Quack() const
@@ -87,7 +68,10 @@ public:
 	}
 	void Dance()
 	{
-		m_danceBehavior->Dance();
+		if (m_danceBehavior)
+		{
+			m_danceBehavior();
+		}
 	}
 	void SetFlyBehavior(const FlyBehaviorF& flyBehavior)
 	{
@@ -99,14 +83,14 @@ public:
 private:
 	FlyBehaviorF m_flyBehavior;
 	QuackBehaviorF m_quackBehavior;
-	unique_ptr<IDanceBehavior> m_danceBehavior;
+	DanceBehaviorF m_danceBehavior;
 };
 
 class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(flyWithWingsFactory(), quackBehavior, make_unique<ValseDanceBehavior>())
+		: Duck(flyWithWingsFactory(), quackBehavior, waltzBehavior)
 	{
 	}
 
@@ -120,7 +104,7 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck()
-		: Duck(flyWithWingsFactory(), quackBehavior, make_unique<MinuetDanceBehavior>())
+		: Duck(flyWithWingsFactory(), quackBehavior, minuetBehavior)
 	{
 	}
 	void Display() const override
@@ -133,7 +117,7 @@ class DecoyDuck : public Duck
 {
 public:
 	DecoyDuck()
-		: Duck(FlyBehaviorF(), QuackBehaviorF(), make_unique<NoDanceBehavior>())
+		: Duck(FlyBehaviorF(), QuackBehaviorF(), DanceBehaviorF())
 	{
 	}
 	void Display() const override
@@ -145,7 +129,7 @@ class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(FlyBehaviorF(), squeakBehavior, make_unique<NoDanceBehavior>())
+		: Duck(FlyBehaviorF(), squeakBehavior, DanceBehaviorF())
 	{
 	}
 	void Display() const override
@@ -158,7 +142,7 @@ class ModelDuck : public Duck
 {
 public:
 	ModelDuck()
-		: Duck(FlyBehaviorF(), quackBehavior, make_unique<NoDanceBehavior>())
+		: Duck(FlyBehaviorF(), quackBehavior, DanceBehaviorF())
 	{
 	}
 	void Display() const override
