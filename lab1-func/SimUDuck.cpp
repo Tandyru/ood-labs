@@ -7,12 +7,13 @@
 using namespace std;
 
 using FlyBehaviorF = function<void(void)>;
+
 FlyBehaviorF flyWithWingsFactory()
 {
-	shared_ptr<int> counter = make_shared<int>(0);
-	return [counter]() {
-		(*counter)++;
-		cout << "I'm flying with wings!! (" << *counter << ")" << endl;
+	int counter = 0;
+	return [counter]() mutable {
+		counter++;
+		cout << "I'm flying with wings!! (" << counter << ")" << endl;
 	};
 }
 
