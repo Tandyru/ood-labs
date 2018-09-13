@@ -30,6 +30,45 @@ private:
 	}
 };
 
+class CStatisticsCounter
+{
+public:
+	void AddValue(double value)
+	{
+		if (m_minValue > value)
+		{
+			m_minValue = value;
+		}
+		if (m_maxValue < value)
+		{
+			m_maxValue = value;
+		}
+		m_accValue += value;
+		++m_countAcc;
+	}
+
+	double GetMinValue() const
+	{
+		return m_minValue;
+	}
+
+	double GetMaxValue() const
+	{
+		return m_maxValue;
+	}
+
+	double GetAverageValue() const
+	{
+		return m_countAcc != 0 ? m_accValue / m_countAcc : 0;
+	}
+
+private:
+	double m_minValue = std::numeric_limits<double>::infinity();
+	double m_maxValue = -std::numeric_limits<double>::infinity();
+	double m_accValue = 0;
+	unsigned m_countAcc = 0;
+};
+
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 private:
@@ -39,27 +78,27 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
-		{
-			m_minTemperature = data.temperature;
-		}
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
-		m_accTemperature += data.temperature;
-		++m_countAcc;
+		m_temperatureStats.AddValue(data.temperature);
+		m_humidityStats.AddValue(data.humidity);
+		m_pressureStats.AddValue(data.pressure);
 
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
+		DisplayStats(m_temperatureStats, "temperature");
+		DisplayStats(m_humidityStats, "humidity");
+		DisplayStats(m_humidityStats, "humidity");
+
 		std::cout << "----------------" << std::endl;
 	}
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
+	static void DisplayStats(const CStatisticsCounter& stats, const string& name)
+	{
+		std::cout << "Max " << name.c_str() << ": " << stats.GetMaxValue() << std::endl;
+		std::cout << "Min " << name.c_str() << ": " << stats.GetMinValue() << std::endl;
+		std::cout << "Average " << name.c_str() << ": " << stats.GetAverageValue() << std::endl;
+	}
+
+	CStatisticsCounter m_temperatureStats;
+	CStatisticsCounter m_humidityStats;
+	CStatisticsCounter m_pressureStats;
 
 };
 
