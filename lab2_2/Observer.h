@@ -1,7 +1,9 @@
 ﻿#pragma once
 
 #include <set>
+#include <iterator>
 #include <functional>
+#include <algorithm>
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -46,16 +48,28 @@ public:
 
 	void NotifyObservers() override
 	{
+		using Observers = std::set<ObserverType *>;
 		T data = GetChangedData();
-		//std::set<ObserverType *> m_notifiedObservers;
-		std::set<ObserverType *> observers(m_observers);
-		for (auto & observer : observers)
+		Observers notifiedObservers;
+		Observers observers(m_observers);
+		Observers::iterator it = observers.begin();
+		while (it != observers.end())
 		{
-			observersVersion = m_observersVersion;
+			auto observer = *it;
+			int observersVersion = m_observersVersion;
 			observer->Update(data);
+			notifiedObservers.insert(observer);
 			if (observersVersion != m_observersVersion)
 			{
-				// ??
+				observers.clear();
+				std::set_difference(m_observers.begin(), m_observers.end(),
+					notifiedObservers.begin(), notifiedObservers.end(),
+					std::inserter(observers, observers.begin()));
+				it = observers.begin();
+			}
+			else
+			{
+				it++;
 			}
 		}
 	}
