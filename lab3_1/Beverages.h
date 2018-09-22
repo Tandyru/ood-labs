@@ -18,6 +18,21 @@ private:
 	std::string m_description;
 };
 
+template<typename T1, typename T2>
+T2 MapEnum(const std::pair<T1, T2> map[], T1 value)
+{
+	auto size = sizeof(map);
+	for (decltype(size) idx = 0; idx < size; idx++)
+	{
+		auto& item = map[idx];
+		if (item.first == value)
+		{
+			return item.second;
+		}
+	}
+	throw std::exception("Invalid enum value");
+}
+
 // Кофе
 class CCoffee : public CBeverage
 {
@@ -87,8 +102,15 @@ const auto TEA_DESCR = "Tea";
 class CTea : public CBeverage
 {
 public:
-	CTea(const std::string& prefix = "")
-		:CBeverage(prefix.empty() ? TEA_DESCR : prefix + " " + TEA_DESCR)
+	enum class TeaSort
+	{
+		Black,
+		White,
+		Green, 
+		Oolong
+	};
+	CTea(TeaSort teaSort)
+		:CBeverage(GetDescription(teaSort))
 	{
 	}
 
@@ -96,86 +118,58 @@ public:
 	{
 		return 30; 
 	}
-};
-
-class CWhiteTea : public CTea
-{
-public:
-	CWhiteTea()
-		: CTea("White")
+private:
+	static std::string GetDescription(TeaSort teaSort)
 	{
+		static const std::pair<TeaSort, const char*> map[] = {
+			{ TeaSort::Black, "Black Tea" },
+			{ TeaSort::White, "White Tea" },
+			{ TeaSort::Green, "Green Tea" },
+			{ TeaSort::Oolong, "Oolong Tea" },
+		};
+		return MapEnum(map, teaSort);
 	}
 };
-
-class CGreenTea : public CTea
-{
-public:
-	CGreenTea()
-		: CTea("Green")
-	{
-	}
-};
-
-class CBlackTea : public CTea
-{
-public:
-	CBlackTea()
-		: CTea("Black")
-	{
-	}
-};
-
-class COolongTea : public CTea
-{
-public:
-	COolongTea()
-		: CTea("Oolong")
-	{
-	}
-};
-
-const auto MILKSHAKE_DESCR = "Milkshake";
 
 // Молочный коктейль
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake(const std::string& prefix = "", double cost = 80)
-		: CBeverage(prefix.empty() ? MILKSHAKE_DESCR : prefix + " " + MILKSHAKE_DESCR)
-		, m_cost(cost)
+	enum class PortionSize
+	{
+		Small,
+		Medium,
+		Large
+	};
+
+	CMilkshake(PortionSize portionSize)
+		: CBeverage(GetDescription(portionSize))
+		, m_portionSize(portionSize)
 	{}
 
-	double GetCost() const override 
-	{ 
-		return m_cost; 
+	double GetCost() const override
+	{
+		static const std::pair<PortionSize, double> map[] = {
+			{ PortionSize::Small, 50 },
+			{ PortionSize::Medium, 60 },
+			{ PortionSize::Large, 80 },
+		};
+		return MapEnum(map, m_portionSize);
 	}
+
 private:
-	double m_cost;
-};
 
-class CSmallMilkshake : public CMilkshake
-{
-public:
-	CSmallMilkshake()
-		: CMilkshake("Small", 50)
+	static std::string GetDescription(PortionSize portionSize)
 	{
+		static const std::pair<PortionSize, const char*> map[] = {
+			{ PortionSize::Small, "Small Milkshake" }, 
+			{ PortionSize::Medium, "Medium Milkshake" },
+			{ PortionSize::Large, "Large Milkshake" },
+		};
+		return MapEnum(map, portionSize);
 	}
-};
 
-class CMediumMilkshake : public CMilkshake
-{
-public:
-	CMediumMilkshake()
-		: CMilkshake("Medium", 60)
-	{
-	}
-};
 
-class CLargeMilkshake : public CMilkshake
-{
-public:
-	CLargeMilkshake()
-		: CMilkshake("Large", 80)
-	{
-	}
+private:
+	PortionSize m_portionSize;
 };

@@ -135,19 +135,26 @@ unique_ptr<IBeverage> AskUserForTeaType()
 	cout << "1 - black, 2 - green, 3 - white, 4 - oolong\n";
 	int teaChoice;
 	cin >> teaChoice;
+	using Sort = CTea::TeaSort;
+	Sort sort;
 	switch (teaChoice)
 	{
 	case 1:
-		return make_unique<CBlackTea>();
+		sort = Sort::Black;
+		break;
 	case 2:
-		return make_unique<CGreenTea>();
+		sort = Sort::Green;
+		break;
 	case 3:
-		return make_unique<CWhiteTea>();
+		sort = Sort::White;
+		break;
 	case 4:
-		return make_unique<COolongTea>();
+		sort = Sort::Oolong;
+		break;
 	default:
 		return unique_ptr<IBeverage>();
 	}
+	return make_unique<CTea>(sort);
 }
 
 unique_ptr<IBeverage> AskUserForMilkshakeType()
@@ -155,17 +162,23 @@ unique_ptr<IBeverage> AskUserForMilkshakeType()
 	cout << "1 - small portion, 2 - medium portion, 3 - large portion\n";
 	int sizeChoice;
 	cin >> sizeChoice;
+	using PortionSize = CMilkshake::PortionSize;
+	PortionSize portionSize;
 	switch (sizeChoice)
 	{
 	case 1:
-		return make_unique<CSmallMilkshake>();
+		portionSize = PortionSize::Small;
+		break;
 	case 2:
-		return make_unique<CMediumMilkshake>();
+		portionSize = PortionSize::Medium;
+		break;
 	case 3:
-		return make_unique<CLargeMilkshake>();
+		portionSize = PortionSize::Large;
+		break;
 	default:
 		return unique_ptr<IBeverage>();
 	}
+	return make_unique<CMilkshake>(portionSize);
 }
 
 void DialogWithUser()
@@ -273,7 +286,7 @@ int main()
 		// iceCubes - функция, добавляющая "3 кусочка льда" к любому напитку
 		auto iceCubes3 = MakeCondiment<CIceCubes>(3, IceCubeType::Water);
 		
-		auto tea = make_unique<CTea>();
+		auto tea = make_unique<CTea>(CTea::TeaSort::Black);
 
 		// декорируем чай двумя дольками лимона и тремя кусочками льда
 		auto lemonIceTea = iceCubes3(lemon2(move(tea)));	
@@ -287,7 +300,7 @@ int main()
 		*/
 		
 		auto oneMoreLemonIceTea =
-			make_unique<CTea>()	// Берем чай
+			make_unique<CTea>(CTea::TeaSort::Black)	// Берем чай
 			<< MakeCondiment<CLemon>(2)	// добавляем пару долек лимона
 			<< MakeCondiment<CIceCubes>(3, IceCubeType::Water); // и 3 кубика льда
 		/*
@@ -315,7 +328,7 @@ int main()
 
 	{
 		auto beverage = 
-			make_unique<CMilkshake>()					// Наливаем молочный коктейль
+			make_unique<CMilkshake>(CMilkshake::PortionSize::Medium)					// Наливаем молочный коктейль
 			<< MakeCondiment<CSyrup>(SyrupType::Maple)	// заливаем кленовым сиропом
 			<< MakeCondiment<CCoconutFlakes>(8);		// посыпаем кокосовой стружкой
 
