@@ -22,6 +22,9 @@
     <Filter Include="shape_serializers">
       <UniqueIdentifier>{6d01cbb9-8b17-4f71-abea-79dc6bcba16f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{899ebf64-9ad5-45d4-8c9b-9e4c747e8143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -54,6 +57,48 @@
     <ClInclude Include="Rectangle.h">
       <Filter>shape</Filter>
     </ClInclude>
+    <ClInclude Include="json\platform_selector.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="json\stringer.h">
+      <Filter>json</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeSerializers.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEnum.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PointSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapeFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeType.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="IDesigner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDesigner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureDraft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -64,6 +109,24 @@
     </ClCompile>
     <ClCompile Include="Rectangle.cpp">
       <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleSerializer.cpp">
+      <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorSerializer.cpp">
+      <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="PointSerializer.cpp">
+      <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDesigner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureDraft.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

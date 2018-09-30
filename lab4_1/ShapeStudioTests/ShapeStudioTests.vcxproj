@@ -156,6 +156,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="PictureDraftTests.cpp" />
+    <ClCompile Include="ShapeSerializersTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -165,8 +167,8 @@
     <ClCompile Include="ShapeFactoryTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShapeStudio\ShapeStudio.vcxproj">
-      <Project>{a569f040-4763-46a4-b23e-875f87b13762}</Project>
+    <ProjectReference Include="..\ShapeStudioLib\ShapeStudioLib.vcxproj">
+      <Project>{6e5835b5-6e41-4c8b-b6e3-a6756c191ed0}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -61,6 +61,7 @@
 #include <string>
 #include <list>
 #include <stack>
+#include <vector>
 
 // requires lexer for token types.
 #include "json_lexer.h"

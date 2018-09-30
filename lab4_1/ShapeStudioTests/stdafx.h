@@ -5,6 +5,10 @@
 
 #pragma once
 
+#ifndef NOMINMAX
+# define NOMINMAX
+#endif
+
 #include "targetver.h"
 
 // Headers for CppUnitTest

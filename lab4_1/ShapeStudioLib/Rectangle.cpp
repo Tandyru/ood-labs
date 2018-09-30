@@ -4,7 +4,7 @@
 namespace shape
 {
 	CRectangle::CRectangle(Color color, Point leftTop, Point rightBottom)
-		: CShape(color)
+		: CShape(color, ShapeType::Rectangle)
 		, m_leftTop(leftTop)
 		, m_rightBottom(rightBottom)
 	{
@@ -18,6 +18,13 @@ namespace shape
 	Point CRectangle::GetRightBottom() const
 	{
 		return m_rightBottom;
+	}
+
+	bool CRectangle::operator==(const CRectangle& rectangle) const
+	{
+		return CShape::operator==(rectangle) &&
+			m_leftTop == rectangle.m_leftTop &&
+			m_rightBottom == rectangle.m_rightBottom;
 	}
 
 }
