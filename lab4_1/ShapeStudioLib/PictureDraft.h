@@ -1,6 +1,7 @@
 #pragma once
 #include "Shape.h"
 #include <vector>
+#include <memory>
 
 class CPictureDraft
 {

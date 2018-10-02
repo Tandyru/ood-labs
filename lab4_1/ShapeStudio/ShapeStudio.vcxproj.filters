@@ -27,12 +27,18 @@
     <ClInclude Include="ShapeStudio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PictureDraftLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShapeStudio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureDraftLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

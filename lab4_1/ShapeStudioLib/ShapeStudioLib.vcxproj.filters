@@ -93,10 +93,13 @@
     <ClInclude Include="IDesigner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CDesigner.h">
+    <ClInclude Include="PictureDraft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PictureDraft.h">
+    <ClInclude Include="Designer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnknownShapeTypeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -122,10 +125,10 @@
     <ClCompile Include="ShapeFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDesigner.cpp">
+    <ClCompile Include="PictureDraft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PictureDraft.cpp">
+    <ClCompile Include="Designer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

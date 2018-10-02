@@ -156,6 +156,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DesignerTests.cpp" />
     <ClCompile Include="PictureDraftTests.cpp" />
     <ClCompile Include="ShapeSerializersTests.cpp" />
     <ClCompile Include="stdafx.cpp">

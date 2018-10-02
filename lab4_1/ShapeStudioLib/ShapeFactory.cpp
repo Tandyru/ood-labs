@@ -39,7 +39,7 @@ unique_ptr<shape::CShape> CShapeFactory::CreateShape(const string& descr) const
 	}
 	catch (exception)
 	{
-		throw exception(("Unknown shape type: "s + type).c_str());
+		throw UnknownShapeTypeException(type);
 	}
 	return creator(descr);
 }

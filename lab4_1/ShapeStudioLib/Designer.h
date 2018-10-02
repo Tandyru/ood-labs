@@ -6,11 +6,11 @@ class CDesigner :
 	public IDesigner
 {
 public:
-	CDesigner(const IShapeFactory& shapeFactory);
+	CDesigner(std::unique_ptr<IShapeFactory> && shapeFactory);
 
 	// IDesigner
 	std::unique_ptr<CPictureDraft> CreateDraft(std::istream& strm) const override;
 private:
-	const IShapeFactory& m_shapeFactory;
+	std::unique_ptr<IShapeFactory> m_shapeFactory;
 };
 

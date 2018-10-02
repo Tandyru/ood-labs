@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CDesigner.h" />
+    <ClInclude Include="Designer.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorSerializer.h" />
     <ClInclude Include="IDesigner.h" />
@@ -171,9 +171,10 @@
     <ClInclude Include="ShapeType.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UnknownShapeTypeException.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CDesigner.cpp" />
+    <ClCompile Include="Designer.cpp" />
     <ClCompile Include="ColorSerializer.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />

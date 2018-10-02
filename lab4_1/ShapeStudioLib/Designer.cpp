@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "CDesigner.h"
+#include "Designer.h"
 
 using namespace std;
 using namespace shape;
 
-CDesigner::CDesigner(const IShapeFactory& shapeFactory)
-	: m_shapeFactory(shapeFactory)
+CDesigner::CDesigner(unique_ptr<IShapeFactory> && shapeFactory)
+	: m_shapeFactory(move(shapeFactory))
 {
 }
 
@@ -15,7 +15,7 @@ std::unique_ptr<CPictureDraft> CDesigner::CreateDraft(std::istream& strm) const
 	string readline;
 	while (getline(strm, readline))
 	{
-		auto shape = m_shapeFactory.CreateShape(readline);
+		auto shape = m_shapeFactory->CreateShape(readline);
 		shapes.push_back(move(shape));
 	}
 	return make_unique<CPictureDraft>(move(shapes));
