@@ -102,6 +102,24 @@
     <ClInclude Include="UnknownShapeTypeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularPolygon.h">
+      <Filter>shape</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="EllipseSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularPolygonSerializer.h">
+      <Filter>shape_serializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -130,6 +148,24 @@
     </ClCompile>
     <ClCompile Include="Designer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularPolygon.cpp">
+      <Filter>shape</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleSerializer.cpp">
+      <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="EllipseSerializer.cpp">
+      <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularPolygonSerializer.cpp">
+      <Filter>shape_serializers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

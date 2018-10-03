@@ -150,8 +150,12 @@
     <ClInclude Include="Designer.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorSerializer.h" />
+    <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="EllipseSerializer.h" />
     <ClInclude Include="IDesigner.h" />
     <ClInclude Include="PictureDraft.h" />
+    <ClInclude Include="RegularPolygon.h" />
+    <ClInclude Include="RegularPolygonSerializer.h" />
     <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="json\platform_selector.h" />
@@ -171,12 +175,18 @@
     <ClInclude Include="ShapeType.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="TriangleSerializer.h" />
     <ClInclude Include="UnknownShapeTypeException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="ColorSerializer.cpp" />
+    <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="EllipseSerializer.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
+    <ClCompile Include="RegularPolygon.cpp" />
+    <ClCompile Include="RegularPolygonSerializer.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="PointSerializer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -188,6 +198,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="TriangleSerializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

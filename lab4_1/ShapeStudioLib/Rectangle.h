@@ -11,7 +11,7 @@ namespace shape
 		Point GetLeftTop() const;
 		Point GetRightBottom() const;
 
-		bool operator==(const CRectangle& rectangle) const;
+		bool operator==(const CRectangle& Rectangle) const;
 	private:
 		const Point m_leftTop;
 		const Point m_rightBottom;

@@ -12,6 +12,9 @@ typedef unique_ptr<CShape> (*Creator)(const string&);
 
 const pair<const char*, Creator> shapeCreators[] = {
 	{ RectangleSerializer::STRING_ID, RectangleSerializer::Create },
+	{ TriangleSerializer::STRING_ID, TriangleSerializer::Create },
+	{ EllipseSerializer::STRING_ID, EllipseSerializer::Create },
+	{ RegularPolygonSerializer::STRING_ID, RegularPolygonSerializer::Create },
 };
 
 CShapeFactory::CShapeFactory()

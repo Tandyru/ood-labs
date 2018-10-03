@@ -45,8 +45,6 @@ namespace ShapeStudioTests
 
 			auto json = RectangleSerializer::Serialize(expectedRectangle);
 
-//Logger::WriteMessage(json.c_str());
-
 			auto rectangle = RectangleSerializer::Unserialize(json);
 
 			Assert::IsTrue(bool(rectangle));
@@ -65,5 +63,44 @@ namespace ShapeStudioTests
 			}
 		}
 
+		TEST_METHOD(TestReadTriangle)
+		{
+			shape::CTriangle expectedTriangle(Color::Yellow, { 11, 12 }, { 13, 14 }, { 15, 16 });
+
+			auto json = TriangleSerializer::Serialize(expectedTriangle);
+
+			auto triangle = TriangleSerializer::Unserialize(json);
+
+			Assert::IsTrue(bool(triangle));
+			Assert::IsTrue(expectedTriangle == *triangle);
+		}
+
+		TEST_METHOD(TestReadEllipse)
+		{
+			shape::CEllipse expectedEllipse(Color::Blue, { 60, 60 }, 40, 20);
+
+			auto json = EllipseSerializer::Serialize(expectedEllipse);
+
+//Logger::WriteMessage(json.c_str());
+
+			auto ellipse = EllipseSerializer::Unserialize(json);
+
+			Assert::IsTrue(bool(ellipse));
+			Assert::IsTrue(expectedEllipse == *ellipse);
+		}
+
+		TEST_METHOD(TestReadRegularPolygon)
+		{
+			shape::CRegularPolygon expectedPolygon(Color::Black, 5, { 70, 70 }, 40);
+
+			auto json = RegularPolygonSerializer::Serialize(expectedPolygon);
+
+//Logger::WriteMessage(json.c_str());
+
+			auto polygon = RegularPolygonSerializer::Unserialize(json);
+
+			Assert::IsTrue(bool(polygon));
+			Assert::IsTrue(expectedPolygon == *polygon);
+		}
 	};
 }

@@ -13,7 +13,7 @@ namespace shape_serializer
 		static const char* STRING_ID;
 
 		RectangleSerializer();
-		RectangleSerializer(const shape::CRectangle& rectangle);
+		RectangleSerializer(const shape::CRectangle& Rectangle);
 
 		static std::unique_ptr<shape::CShape> Create(const std::string& descr);
 

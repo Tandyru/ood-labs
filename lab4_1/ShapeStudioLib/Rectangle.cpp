@@ -20,11 +20,11 @@ namespace shape
 		return m_rightBottom;
 	}
 
-	bool CRectangle::operator==(const CRectangle& rectangle) const
+	bool CRectangle::operator==(const CRectangle& Rectangle) const
 	{
-		return CShape::operator==(rectangle) &&
-			m_leftTop == rectangle.m_leftTop &&
-			m_rightBottom == rectangle.m_rightBottom;
+		return CShape::operator==(Rectangle) &&
+			m_leftTop == Rectangle.m_leftTop &&
+			m_rightBottom == Rectangle.m_rightBottom;
 	}
 
 }
