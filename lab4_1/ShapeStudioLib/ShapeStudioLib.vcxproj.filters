@@ -25,6 +25,12 @@
     <Filter Include="utils">
       <UniqueIdentifier>{899ebf64-9ad5-45d4-8c9b-9e4c747e8143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="canvas">
+      <UniqueIdentifier>{09adcae6-e2f3-4669-88bd-05378b8ddad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="painter">
+      <UniqueIdentifier>{47baef7f-2394-4f83-bf63-d4a64a8bfb9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -120,6 +126,24 @@
     <ClInclude Include="RegularPolygonSerializer.h">
       <Filter>shape_serializers</Filter>
     </ClInclude>
+    <ClInclude Include="ICanvas.h">
+      <Filter>canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="IPainter.h">
+      <Filter>painter</Filter>
+    </ClInclude>
+    <ClInclude Include="RectanglePainter.h">
+      <Filter>painter</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>painter</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePainterFactory.h">
+      <Filter>painter</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePainter.h">
+      <Filter>painter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -166,6 +190,15 @@
     </ClCompile>
     <ClCompile Include="RegularPolygonSerializer.cpp">
       <Filter>shape_serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="RectanglePainter.cpp">
+      <Filter>painter</Filter>
+    </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>painter</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapePainterFactory.cpp">
+      <Filter>painter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

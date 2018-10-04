@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="PictureDraftLoader.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ShapeStudio.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="PictureDraftLoader.cpp" />
     <ClCompile Include="ShapeStudio.cpp" />
     <ClCompile Include="stdafx.cpp">
