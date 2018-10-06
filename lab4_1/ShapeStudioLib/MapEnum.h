@@ -1,5 +1,6 @@
 #pragma once
 #include <utility>
+#include <string>
 
 template<typename T1, typename T2, unsigned int SZ>
 T2 MapEnum(const std::pair<T1, T2> (&map)[SZ], T1 value)
