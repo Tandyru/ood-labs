@@ -152,20 +152,24 @@
     <ClInclude Include="ConstDocumentItem.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="DocumentItem.h" />
+    <ClInclude Include="DocumentItemPosition.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandParser.h" />
+    <ClInclude Include="InsertParagraphCommandParser.h" />
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="MapEnum.h" />
+    <ClInclude Include="PositionParser.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Document.cpp" />
-    <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
+    <ClCompile Include="InsertParagraphCommandParser.cpp" />
+    <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

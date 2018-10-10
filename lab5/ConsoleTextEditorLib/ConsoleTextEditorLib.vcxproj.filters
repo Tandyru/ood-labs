@@ -57,30 +57,42 @@
     <ClInclude Include="Document.h">
       <Filter>document</Filter>
     </ClInclude>
-    <ClInclude Include="InputCommandParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CommandType.h">
-      <Filter>command</Filter>
-    </ClInclude>
-    <ClInclude Include="InsertParagraphInputCommand.h">
       <Filter>command</Filter>
     </ClInclude>
     <ClInclude Include="MapEnum.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertParagraphInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItemPosition.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertParagraphCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="InputCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionParser.h">
+      <Filter>command_parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputCommand.cpp">
-      <Filter>input_command</Filter>
-    </ClCompile>
     <ClCompile Include="Document.cpp">
       <Filter>document</Filter>
     </ClCompile>
     <ClCompile Include="InputCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertParagraphCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="PositionParser.cpp">
       <Filter>command_parser</Filter>
     </ClCompile>
   </ItemGroup>
