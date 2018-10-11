@@ -78,6 +78,12 @@
     <ClInclude Include="PositionParser.h">
       <Filter>command_parser</Filter>
     </ClInclude>
+    <ClInclude Include="InsertImageInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertImageCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -93,6 +99,9 @@
       <Filter>command_parser</Filter>
     </ClCompile>
     <ClCompile Include="PositionParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertImageCommandParser.cpp">
       <Filter>command_parser</Filter>
     </ClCompile>
   </ItemGroup>

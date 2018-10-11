@@ -2,12 +2,14 @@
 #include "CppUnitTest.h"
 #include "../ConsoleTextEditorLib/InputCommandParser.h"
 #include "../ConsoleTextEditorLib/InsertParagraphInputCommand.h"
+#include "../ConsoleTextEditorLib/InsertImageInputCommand.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 using namespace command;
 using namespace input_command;
 using namespace command_parser;
+using namespace std;
 
 namespace ConsoleTextEditorTests
 {		
@@ -57,6 +59,23 @@ namespace ConsoleTextEditorTests
 			catch (std::exception)
 			{
 			}
+		}
+
+		TEST_METHOD(TestParseInsertImage)
+		{
+			const unsigned int expectedPosition = 11;
+			const unsigned int expectedWidth = 200;
+			const unsigned int expectedHeight = 150;
+			const string expectedPath = "c:\\image\\file\\path";
+			auto inputCommand = ParseInputCommand("InsertImage"s + 
+				" " + to_string(expectedPosition) + 
+				" " + to_string(expectedWidth) +
+				" " + to_string(expectedHeight) +
+				" " + expectedPath
+			);
+			auto& command = static_cast<InsertImageInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.type == CommandType::InsertImage);
+			Assert::IsTrue(command.position == expectedPosition);
 		}
 
 		TEST_METHOD(TestParseSetTitle)

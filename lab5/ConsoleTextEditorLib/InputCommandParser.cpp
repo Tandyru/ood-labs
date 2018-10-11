@@ -3,6 +3,7 @@
 #include <regex>
 #include "MapEnum.h"
 #include "InsertParagraphCommandParser.h"
+#include "InsertImageCommandParser.h"
 
 using namespace command;
 
@@ -17,6 +18,8 @@ unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input, Com
 	{
 	case CommandType::InsertParagraph:
 		return ParseInsertParagraphCommand(input);
+	case CommandType::InsertImage:
+		return ParseInsertImageCommand(input);
 		// TODO:
 	}
 	throw std::exception("Command parser is not implemented");

@@ -105,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,6 +158,8 @@
     <ClInclude Include="IImage.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandParser.h" />
+    <ClInclude Include="InsertImageCommandParser.h" />
+    <ClInclude Include="InsertImageInputCommand.h" />
     <ClInclude Include="InsertParagraphCommandParser.h" />
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="IParagraph.h" />
@@ -168,6 +171,7 @@
   <ItemGroup>
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
+    <ClCompile Include="InsertImageCommandParser.cpp" />
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
     <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="stdafx.cpp">
