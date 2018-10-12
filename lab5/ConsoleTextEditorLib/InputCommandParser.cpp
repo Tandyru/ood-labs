@@ -4,6 +4,11 @@
 #include "MapEnum.h"
 #include "InsertParagraphCommandParser.h"
 #include "InsertImageCommandParser.h"
+#include "SetTitleCommandParser.h"
+#include "ReplaceTextCommandParser.h"
+#include "ResizeImageCommandParser.h"
+#include "DeleteItemCommandParser.h"
+#include "SaveCommandParser.h"
 
 using namespace command;
 
@@ -12,15 +17,30 @@ namespace command_parser
 namespace
 {
 
-unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input, CommandType type)
+using namespace input_command;
+
+unique_ptr<InputCommand> ParseInputCommand(string_view input, CommandType type)
 {
+	if (IsNonargCommand(type))
+	{
+		return make_unique<InputCommand>(InputCommand{type});
+	}
 	switch (type)
 	{
 	case CommandType::InsertParagraph:
 		return ParseInsertParagraphCommand(input);
 	case CommandType::InsertImage:
 		return ParseInsertImageCommand(input);
-		// TODO:
+	case CommandType::SetTitle:
+		return ParseSetTitleCommand(input);
+	case CommandType::ReplaceText:
+		return ParseReplaceTextCommand(input);
+	case CommandType::ResizeImage:
+		return ParseResizeImageCommand(input);
+	case CommandType::DeleteItem:
+		return ParseDeleteItemCommand(input);
+	case CommandType::Save:
+		return ParseSaveCommand(input);
 	}
 	throw std::exception("Command parser is not implemented");
 }

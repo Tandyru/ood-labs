@@ -149,8 +149,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CommandParser.h" />
     <ClInclude Include="CommandType.h" />
     <ClInclude Include="ConstDocumentItem.h" />
+    <ClInclude Include="DeleteItemCommandParser.h" />
+    <ClInclude Include="DeleteItemInputCommand.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
@@ -165,15 +168,30 @@
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="PositionParser.h" />
+    <ClInclude Include="ReplaceTextCommandParser.h" />
+    <ClInclude Include="ReplaceTextInputCommand.h" />
+    <ClInclude Include="ResizeImageCommandParser.h" />
+    <ClInclude Include="ResizeImageInputCommand.h" />
+    <ClInclude Include="SaveCommandParser.h" />
+    <ClInclude Include="SaveInputCommand.h" />
+    <ClInclude Include="SetTitleCommandParser.h" />
+    <ClInclude Include="SetTitleInputCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommandParser.cpp" />
+    <ClCompile Include="CommandType.cpp" />
+    <ClCompile Include="DeleteItemCommandParser.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
     <ClCompile Include="PositionParser.cpp" />
+    <ClCompile Include="ReplaceTextCommandParser.cpp" />
+    <ClCompile Include="ResizeImageCommandParser.cpp" />
+    <ClCompile Include="SaveCommandParser.cpp" />
+    <ClCompile Include="SetTitleCommandParser.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -16,4 +16,6 @@ namespace command
 		Redo,
 		Save
 	};
+
+	bool IsNonargCommand(CommandType type);
 }

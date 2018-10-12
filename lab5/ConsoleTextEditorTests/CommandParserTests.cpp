@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../ConsoleTextEditorLib/InputCommandParser.h"
-#include "../ConsoleTextEditorLib/InsertParagraphInputCommand.h"
-#include "../ConsoleTextEditorLib/InsertImageInputCommand.h"
+#include "../ConsoleTextEditorLib/InputCommands.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -80,8 +79,78 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestParseSetTitle)
 		{
-			// TODO: Your test code here
+			const string expectedTitle = "The Title";
+			auto inputCommand = ParseInputCommand("SetTitle "s + expectedTitle);
+			auto& command = static_cast<SetTitleInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.type == CommandType::SetTitle);
+			Assert::IsTrue(command.title == expectedTitle);
+
+			inputCommand = ParseInputCommand("SetTitle");
+			auto& command2 = static_cast<SetTitleInputCommand&>(*inputCommand);
+			Assert::IsTrue(command2.title.empty());
 		}
 
+		TEST_METHOD(TestParseNonargCommands)
+		{
+			auto inputCommand = ParseInputCommand("List");
+			Assert::IsTrue(inputCommand->type == CommandType::List);
+			inputCommand = ParseInputCommand("Help");
+			Assert::IsTrue(inputCommand->type == CommandType::Help);
+			inputCommand = ParseInputCommand("Undo");
+			Assert::IsTrue(inputCommand->type == CommandType::Undo);
+			inputCommand = ParseInputCommand("Redo");
+			Assert::IsTrue(inputCommand->type == CommandType::Redo);
+		}
+
+		TEST_METHOD(TestParseReplaceText)
+		{
+			const string expectedText = "The text \nof the paragraph to replace.";
+			const unsigned int expectedPosition = 33;
+			auto inputCommand = ParseInputCommand("ReplaceText "s + to_string(expectedPosition) + " " + expectedText);
+			auto& command = static_cast<ReplaceTextInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.type == CommandType::ReplaceText);
+			Assert::IsTrue(command.position == expectedPosition);
+			Assert::IsTrue(command.text == expectedText);
+		}
+
+		TEST_METHOD(TestParseResizeImage)
+		{
+			const unsigned int expectedPosition = 12;
+			const unsigned int expectedWidth = 250;
+			const unsigned int expectedHeight = 350;
+			auto inputCommand = ParseInputCommand("ResizeImage"s +
+				" " + to_string(expectedPosition) +
+				" " + to_string(expectedWidth) +
+				" " + to_string(expectedHeight)
+			);
+			auto& command = static_cast<ResizeImageInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.type == CommandType::ResizeImage);
+			Assert::IsTrue(command.position == expectedPosition);
+			Assert::IsTrue(command.width == expectedWidth);
+			Assert::IsTrue(command.height == expectedHeight);
+		}
+
+		TEST_METHOD(TestParseDeleteItem)
+		{
+			const unsigned int expectedPosition = 15;
+			auto inputCommand = ParseInputCommand("DeleteItem"s +
+				" " + to_string(expectedPosition)
+			);
+			Assert::IsTrue(inputCommand->type == CommandType::DeleteItem);
+			auto& command = static_cast<DeleteItemInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.position == expectedPosition);
+		}
+
+		TEST_METHOD(TestParseSave)
+		{
+			const unsigned int expectedPosition = 15;
+			const string expectedPath = "c:\\output\\file\\path";
+			auto inputCommand = ParseInputCommand("Save"s +
+				" " + expectedPath
+			);
+			Assert::IsTrue(inputCommand->type == CommandType::Save);
+			auto& command = static_cast<SaveInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.path == expectedPath);
+		}
 	};
 }

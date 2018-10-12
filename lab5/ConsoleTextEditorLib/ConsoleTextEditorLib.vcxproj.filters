@@ -84,6 +84,39 @@
     <ClInclude Include="InsertImageCommandParser.h">
       <Filter>command_parser</Filter>
     </ClInclude>
+    <ClInclude Include="SetTitleCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="SetTitleInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplaceTextInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeImageInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteItemInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveInputCommand.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplaceTextCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeImageCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteItemCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveCommandParser.h">
+      <Filter>command_parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -102,6 +135,27 @@
       <Filter>command_parser</Filter>
     </ClCompile>
     <ClCompile Include="InsertImageCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="SetTitleCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandType.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceTextCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteItemCommandParser.cpp">
+      <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveCommandParser.cpp">
       <Filter>command_parser</Filter>
     </ClCompile>
   </ItemGroup>
