@@ -117,6 +117,12 @@
     <ClInclude Include="SaveCommandParser.h">
       <Filter>command_parser</Filter>
     </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>document</Filter>
+    </ClInclude>
+    <ClInclude Include="Paragraph.h">
+      <Filter>document</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -157,6 +163,18 @@
     </ClCompile>
     <ClCompile Include="SaveCommandParser.cpp">
       <Filter>command_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph.cpp">
+      <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstDocumentItem.cpp">
+      <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItem.cpp">
+      <Filter>document</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

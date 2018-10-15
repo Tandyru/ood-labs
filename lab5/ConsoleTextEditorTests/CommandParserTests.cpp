@@ -8,7 +8,6 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace command;
 using namespace input_command;
 using namespace command_parser;
-using namespace std;
 
 namespace ConsoleTextEditorTests
 {		

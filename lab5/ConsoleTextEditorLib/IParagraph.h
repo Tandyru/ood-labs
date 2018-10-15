@@ -1,5 +1,8 @@
 #pragma once
 
+namespace document
+{
+
 /* Параграф текста*/
 class IParagraph
 {
@@ -8,3 +11,5 @@ public:
 	virtual void SetText(const string& text) = 0;
 	virtual ~IParagraph() = default;
 };
+
+}

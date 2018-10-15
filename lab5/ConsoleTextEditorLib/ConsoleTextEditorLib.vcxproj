@@ -159,6 +159,7 @@
     <ClInclude Include="DocumentItemPosition.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IImage.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandParser.h" />
     <ClInclude Include="InsertImageCommandParser.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="MapEnum.h" />
+    <ClInclude Include="Paragraph.h" />
     <ClInclude Include="PositionParser.h" />
     <ClInclude Include="ReplaceTextCommandParser.h" />
     <ClInclude Include="ReplaceTextInputCommand.h" />
@@ -182,11 +184,15 @@
   <ItemGroup>
     <ClCompile Include="CommandParser.cpp" />
     <ClCompile Include="CommandType.cpp" />
+    <ClCompile Include="ConstDocumentItem.cpp" />
     <ClCompile Include="DeleteItemCommandParser.cpp" />
     <ClCompile Include="Document.cpp" />
+    <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
+    <ClCompile Include="Paragraph.cpp" />
     <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />
     <ClCompile Include="ResizeImageCommandParser.cpp" />
