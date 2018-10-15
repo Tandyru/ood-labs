@@ -19,7 +19,7 @@ namespace
 
 using namespace input_command;
 
-unique_ptr<InputCommand> ParseInputCommand(string_view input, CommandType type)
+unique_ptr<InputCommand> ParseInputCommand(string_view input, InputCommandType type)
 {
 	if (IsNonargCommand(type))
 	{
@@ -27,19 +27,19 @@ unique_ptr<InputCommand> ParseInputCommand(string_view input, CommandType type)
 	}
 	switch (type)
 	{
-	case CommandType::InsertParagraph:
+	case InputCommandType::InsertParagraph:
 		return ParseInsertParagraphCommand(input);
-	case CommandType::InsertImage:
+	case InputCommandType::InsertImage:
 		return ParseInsertImageCommand(input);
-	case CommandType::SetTitle:
+	case InputCommandType::SetTitle:
 		return ParseSetTitleCommand(input);
-	case CommandType::ReplaceText:
+	case InputCommandType::ReplaceText:
 		return ParseReplaceTextCommand(input);
-	case CommandType::ResizeImage:
+	case InputCommandType::ResizeImage:
 		return ParseResizeImageCommand(input);
-	case CommandType::DeleteItem:
+	case InputCommandType::DeleteItem:
 		return ParseDeleteItemCommand(input);
-	case CommandType::Save:
+	case InputCommandType::Save:
 		return ParseSaveCommand(input);
 	}
 	throw std::exception("Command parser is not implemented");
@@ -49,19 +49,19 @@ unique_ptr<InputCommand> ParseInputCommand(string_view input, CommandType type)
 
 unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input)
 {
-	static pair<const char*, CommandType> cmdNameMap[] =
+	static pair<const char*, InputCommandType> cmdNameMap[] =
 	{
-		{ "InsertParagraph", CommandType::InsertParagraph },
-		{ "InsertImage", CommandType::InsertImage },
-		{ "SetTitle", CommandType::SetTitle },
-		{ "List", CommandType::List },
-		{ "ReplaceText", CommandType::ReplaceText },
-		{ "ResizeImage", CommandType::ResizeImage },
-		{ "DeleteItem", CommandType::DeleteItem },
-		{ "Help", CommandType::Help },
-		{ "Undo", CommandType::Undo },
-		{ "Redo", CommandType::Redo },
-		{ "Save", CommandType::Save },
+		{ "InsertParagraph", InputCommandType::InsertParagraph },
+		{ "InsertImage", InputCommandType::InsertImage },
+		{ "SetTitle", InputCommandType::SetTitle },
+		{ "List", InputCommandType::List },
+		{ "ReplaceText", InputCommandType::ReplaceText },
+		{ "ResizeImage", InputCommandType::ResizeImage },
+		{ "DeleteItem", InputCommandType::DeleteItem },
+		{ "Help", InputCommandType::Help },
+		{ "Undo", InputCommandType::Undo },
+		{ "Redo", InputCommandType::Redo },
+		{ "Save", InputCommandType::Save },
 	};
 
 	regex re(R"e(^(\w+))e");

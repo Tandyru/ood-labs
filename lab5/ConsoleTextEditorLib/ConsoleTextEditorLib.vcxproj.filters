@@ -123,6 +123,24 @@
     <ClInclude Include="Paragraph.h">
       <Filter>document</Filter>
     </ClInclude>
+    <ClInclude Include="InvalidPositionException.h">
+      <Filter>document</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHistory.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="InputCommandType.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="IsValueInArray.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="InputCommandExecutor.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -175,6 +193,18 @@
     </ClCompile>
     <ClCompile Include="DocumentItem.cpp">
       <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHistory.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCommandType.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCommandExecutor.cpp">
+      <Filter>input_command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

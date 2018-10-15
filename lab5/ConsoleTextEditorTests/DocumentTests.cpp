@@ -4,6 +4,8 @@
 #include "../ConsoleTextEditorLib/Paragraph.h"
 #include "../ConsoleTextEditorLib/ConstDocumentItem.h"
 #include "../ConsoleTextEditorLib/DocumentItem.h"
+#include "../ConsoleTextEditorLib/Document.h"
+#include "../ConsoleTextEditorLib/InvalidPositionException.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,6 +16,7 @@ namespace ConsoleTextEditorTests
 	TEST_CLASS(DocumentTests)
 	{
 	public:
+		CDocument document;
 
 		TEST_METHOD(TestImageConstruction)
 		{
@@ -99,6 +102,58 @@ namespace ConsoleTextEditorTests
 
 			Assert::IsTrue(!bool(item.GetImage()));
 			Assert::IsTrue(bool(item.GetParagraph()));
+		}
+
+		TEST_METHOD(TestInsertParagraphIntoInvalidPosition)
+		{
+			Assert::ExpectException<CInvalidPositionException>([&]() {
+				document.InsertParagraph("", 1);
+			});
+		}
+
+		TEST_METHOD(TestInsertParagraph)
+		{
+			const auto expectedText = "paragraphText";
+
+			document.InsertParagraph(expectedText);
+
+			Assert::IsTrue(document.GetItemsCount() == 1);
+			const CConstDocumentItem item = document.GetItem(0);
+			const auto paragraph = item.GetParagraph();
+			Assert::IsTrue(bool(paragraph));
+			Assert::IsFalse(bool(item.GetImage()));
+			Assert::AreEqual(string(expectedText), paragraph->GetText());
+		}
+
+		TEST_METHOD(TestInsertImage)
+		{
+			const auto expectedPath = "image/file/path";
+			const auto expectedWidth = 300;
+			const auto expectedHeight = 200;
+
+			document.InsertImage(expectedPath, expectedWidth, expectedHeight);
+
+			Assert::IsTrue(document.GetItemsCount() == 1);
+			const CConstDocumentItem item = document.GetItem(0);
+			const auto image = item.GetImage();
+			Assert::IsTrue(bool(image));
+			Assert::IsFalse(bool(item.GetParagraph()));
+			Assert::AreEqual(string(expectedPath), image->GetPath().string());
+			Assert::AreEqual(expectedWidth, image->GetWidth());
+		}
+
+		TEST_METHOD(TestGetItemInvalidIndex)
+		{
+			Assert::ExpectException<CInvalidPositionException>([&]() {
+				document.GetItem(10);
+			});
+		}
+
+		TEST_METHOD(TestDeleteItem)
+		{
+			document.InsertParagraph("");
+			document.DeleteItem(0);
+			Assert::AreEqual(size_t(0), document.GetItemsCount());
 		}
 	};
 }

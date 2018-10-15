@@ -15,7 +15,7 @@ unique_ptr<input_command::InputCommand> ParseInsertParagraphCommand(string_view 
 		const string positionStr = match[2];
 		const string text = match.suffix();
 		const command::Position position = ParsePosition(positionStr);
-		return make_unique<InsertParagraphInputCommand>(InsertParagraphInputCommand{ command::CommandType::InsertParagraph, position, text });
+		return make_unique<InsertParagraphInputCommand>(InsertParagraphInputCommand{ command::InputCommandType::InsertParagraph, position, text });
 	}, "Invalid 'InsertParagraph' command string format");
 }
 

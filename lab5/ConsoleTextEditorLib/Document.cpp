@@ -1,84 +1,96 @@
 #include "stdafx.h"
 #include "Document.h"
+#include "Paragraph.h"
+#include "Image.h"
 
 namespace document
 {
 
-Document::Document()
+CDocument::CDocument()
 {
 }
 
-shared_ptr<IParagraph> Document::InsertParagraph(const string& text,
+shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
-	// TODO:
-	return shared_ptr<IParagraph>();
+	return InsertItem<IParagraph>(position, [&]() -> shared_ptr<IParagraph> {
+		return make_shared<CParagraph>(text);
+	});
 }
 
-shared_ptr<IImage> Document::InsertImage(const Path& path, int width, int height,
+shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
-	// TODO:
-	return shared_ptr<IImage>();
+	return InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
+		return make_shared<CImage>(path, width, height);
+	});
 }
 
-size_t Document::GetItemsCount()const
+size_t CDocument::GetItemsCount()const
 {
-	// TODO:
-	return 0;
+	return m_items.size();
 }
 
-CConstDocumentItem Document::GetItem(size_t index)const
+CConstDocumentItem CDocument::GetItem(size_t index)const
 {
-	// TODO:
-	return CConstDocumentItem(shared_ptr<IImage>());
+	CheckIndex(index);
+	return *m_items[index];
 }
 
-CDocumentItem Document::GetItem(size_t index)
+CDocumentItem CDocument::GetItem(size_t index)
 {
-	// TODO:
-	return CDocumentItem(shared_ptr<IImage>());
+	CheckIndex(index);
+	return *m_items[index];
 }
 
-void Document::DeleteItem(size_t index)
+void CDocument::DeleteItem(size_t index)
 {
-	// TODO:
+	CheckIndex(index);
+	m_items.erase(m_items.begin() + index);
 }
 
-string Document::GetTitle()const
+string CDocument::GetTitle()const
 {
 	return m_title;
 }
 
-void Document::SetTitle(const string & title)
+void CDocument::SetTitle(const string & title)
 {
 	m_title = title;
 }
 
-bool Document::CanUndo()const
+bool CDocument::CanUndo()const
 {
 	// TODO:
 	return false;
 }
 
-void Document::Undo()
+void CDocument::Undo()
 {
 	// TODO:
 }
 
-bool Document::CanRedo()const
+bool CDocument::CanRedo()const
 {
 	// TODO:
 	return false;
 }
-void Document::Redo()
+void CDocument::Redo()
 {
 	// TODO:
 }
 
-void Document::Save(const Path& path)const
+void CDocument::Save(const Path& path)const
 {
 	// TODO:
+}
+
+void CDocument::CheckIndex(size_t index)const
+{
+	if (index >= m_items.size())
+	{
+		throw CInvalidPositionException();
+	}
 }
 
 }

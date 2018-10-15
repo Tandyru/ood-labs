@@ -18,7 +18,7 @@ namespace ConsoleTextEditorTests
 		TEST_METHOD(TestParseType)
 		{
 			auto command = ParseInputCommand("InsertParagraph end The text \nof the paragraph.");
-			Assert::IsTrue(command->type == CommandType::InsertParagraph);
+			Assert::IsTrue(command->type == InputCommandType::InsertParagraph);
 		}
 
 		TEST_METHOD(TestParseUnknownTypeThrowsException)
@@ -38,7 +38,7 @@ namespace ConsoleTextEditorTests
 			const string expectedParagraphText = "The text \nof the paragraph.";
 			auto inputCommand = ParseInputCommand("InsertParagraph end "s + expectedParagraphText);
 			auto& command = static_cast<InsertParagraphInputCommand&>(*inputCommand);
-			Assert::IsTrue(command.type == CommandType::InsertParagraph);
+			Assert::IsTrue(command.type == InputCommandType::InsertParagraph);
 			Assert::IsTrue(command.position == END_POSITION);
 			Assert::IsTrue(command.text == expectedParagraphText);
 			const Position expectedPosition = 12;
@@ -72,7 +72,7 @@ namespace ConsoleTextEditorTests
 				" " + expectedPath
 			);
 			auto& command = static_cast<InsertImageInputCommand&>(*inputCommand);
-			Assert::IsTrue(command.type == CommandType::InsertImage);
+			Assert::IsTrue(command.type == InputCommandType::InsertImage);
 			Assert::IsTrue(command.position == expectedPosition);
 		}
 
@@ -81,7 +81,7 @@ namespace ConsoleTextEditorTests
 			const string expectedTitle = "The Title";
 			auto inputCommand = ParseInputCommand("SetTitle "s + expectedTitle);
 			auto& command = static_cast<SetTitleInputCommand&>(*inputCommand);
-			Assert::IsTrue(command.type == CommandType::SetTitle);
+			Assert::IsTrue(command.type == InputCommandType::SetTitle);
 			Assert::IsTrue(command.title == expectedTitle);
 
 			inputCommand = ParseInputCommand("SetTitle");
@@ -92,13 +92,13 @@ namespace ConsoleTextEditorTests
 		TEST_METHOD(TestParseNonargCommands)
 		{
 			auto inputCommand = ParseInputCommand("List");
-			Assert::IsTrue(inputCommand->type == CommandType::List);
+			Assert::IsTrue(inputCommand->type == InputCommandType::List);
 			inputCommand = ParseInputCommand("Help");
-			Assert::IsTrue(inputCommand->type == CommandType::Help);
+			Assert::IsTrue(inputCommand->type == InputCommandType::Help);
 			inputCommand = ParseInputCommand("Undo");
-			Assert::IsTrue(inputCommand->type == CommandType::Undo);
+			Assert::IsTrue(inputCommand->type == InputCommandType::Undo);
 			inputCommand = ParseInputCommand("Redo");
-			Assert::IsTrue(inputCommand->type == CommandType::Redo);
+			Assert::IsTrue(inputCommand->type == InputCommandType::Redo);
 		}
 
 		TEST_METHOD(TestParseReplaceText)
@@ -107,7 +107,7 @@ namespace ConsoleTextEditorTests
 			const unsigned int expectedPosition = 33;
 			auto inputCommand = ParseInputCommand("ReplaceText "s + to_string(expectedPosition) + " " + expectedText);
 			auto& command = static_cast<ReplaceTextInputCommand&>(*inputCommand);
-			Assert::IsTrue(command.type == CommandType::ReplaceText);
+			Assert::IsTrue(command.type == InputCommandType::ReplaceText);
 			Assert::IsTrue(command.position == expectedPosition);
 			Assert::IsTrue(command.text == expectedText);
 		}
@@ -123,7 +123,7 @@ namespace ConsoleTextEditorTests
 				" " + to_string(expectedHeight)
 			);
 			auto& command = static_cast<ResizeImageInputCommand&>(*inputCommand);
-			Assert::IsTrue(command.type == CommandType::ResizeImage);
+			Assert::IsTrue(command.type == InputCommandType::ResizeImage);
 			Assert::IsTrue(command.position == expectedPosition);
 			Assert::IsTrue(command.width == expectedWidth);
 			Assert::IsTrue(command.height == expectedHeight);
@@ -135,7 +135,7 @@ namespace ConsoleTextEditorTests
 			auto inputCommand = ParseInputCommand("DeleteItem"s +
 				" " + to_string(expectedPosition)
 			);
-			Assert::IsTrue(inputCommand->type == CommandType::DeleteItem);
+			Assert::IsTrue(inputCommand->type == InputCommandType::DeleteItem);
 			auto& command = static_cast<DeleteItemInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.position == expectedPosition);
 		}
@@ -147,7 +147,7 @@ namespace ConsoleTextEditorTests
 			auto inputCommand = ParseInputCommand("Save"s +
 				" " + expectedPath
 			);
-			Assert::IsTrue(inputCommand->type == CommandType::Save);
+			Assert::IsTrue(inputCommand->type == InputCommandType::Save);
 			auto& command = static_cast<SaveInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.path == expectedPath);
 		}

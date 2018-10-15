@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandHistory.h" />
     <ClInclude Include="CommandParser.h" />
     <ClInclude Include="CommandType.h" />
     <ClInclude Include="ConstDocumentItem.h" />
@@ -161,12 +163,16 @@
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InputCommand.h" />
+    <ClInclude Include="InputCommandExecutor.h" />
     <ClInclude Include="InputCommandParser.h" />
+    <ClInclude Include="InputCommandType.h" />
     <ClInclude Include="InsertImageCommandParser.h" />
     <ClInclude Include="InsertImageInputCommand.h" />
     <ClInclude Include="InsertParagraphCommandParser.h" />
     <ClInclude Include="InsertParagraphInputCommand.h" />
+    <ClInclude Include="InvalidPositionException.h" />
     <ClInclude Include="IParagraph.h" />
+    <ClInclude Include="IsValueInArray.h" />
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="Paragraph.h" />
     <ClInclude Include="PositionParser.h" />
@@ -182,6 +188,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="CommandParser.cpp" />
     <ClCompile Include="CommandType.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
@@ -189,7 +197,9 @@
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="InputCommandExecutor.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
+    <ClCompile Include="InputCommandType.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
     <ClCompile Include="Paragraph.cpp" />

@@ -15,7 +15,7 @@ unique_ptr<input_command::InputCommand> ParseReplaceTextCommand(string_view inpu
 		const string positionStr = match[2];
 		const command::Position position = ParsePosition(positionStr);
 		const string text = match.suffix();
-		return make_unique<ReplaceTextInputCommand>(ReplaceTextInputCommand{ command::CommandType::ReplaceText, position, text });
+		return make_unique<ReplaceTextInputCommand>(ReplaceTextInputCommand{ command::InputCommandType::ReplaceText, position, text });
 	}, "Invalid 'ReplaceText' command string format");
 }
 

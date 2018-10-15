@@ -12,7 +12,7 @@ unique_ptr<input_command::InputCommand> ParseSaveCommand(string_view input)
 {
 	return ParseCommand(input, R"e(^(\w+)\s+)e", 1, [](const cmatch& match) {
 		const string path = match.suffix();
-		return make_unique<SaveInputCommand>(SaveInputCommand{ command::CommandType::Save, path });
+		return make_unique<SaveInputCommand>(SaveInputCommand{ command::InputCommandType::Save, path });
 	}, "Invalid 'Save' command string format");
 }
 

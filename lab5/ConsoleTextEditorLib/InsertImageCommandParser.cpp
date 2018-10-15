@@ -16,7 +16,7 @@ unique_ptr<input_command::InputCommand> ParseInsertImageCommand(string_view inpu
 		const unsigned int height = stoul(string(match[4]));
 		const command::Position position = ParsePosition(positionStr);
 		const string path = match.suffix();
-		return make_unique<InsertImageInputCommand>(InsertImageInputCommand{ command::CommandType::InsertImage, position, width, height, path });
+		return make_unique<InsertImageInputCommand>(InsertImageInputCommand{ command::InputCommandType::InsertImage, position, width, height, path });
 	}, "Invalid 'InsertImage' command string format");
 }
 

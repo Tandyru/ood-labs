@@ -12,7 +12,7 @@ unique_ptr<input_command::InputCommand> ParseSetTitleCommand(string_view input)
 {
 	return ParseCommand(input, R"e(^(\w+)\s*)e", 1, [](const cmatch& match) {
 		const string title = match.suffix();
-		return make_unique<SetTitleInputCommand>(SetTitleInputCommand{ command::CommandType::SetTitle, title });
+		return make_unique<SetTitleInputCommand>(SetTitleInputCommand{ command::InputCommandType::SetTitle, title });
 	}, "Invalid 'SetTitle' command string format");
 }
 

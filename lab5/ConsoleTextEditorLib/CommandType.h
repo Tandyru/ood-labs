@@ -7,15 +7,8 @@ namespace command
 		InsertParagraph = 1,
 		InsertImage, 
 		SetTitle,
-		List,
 		ReplaceText,
 		ResizeImage,
 		DeleteItem,
-		Help,
-		Undo,
-		Redo,
-		Save
 	};
-
-	bool IsNonargCommand(CommandType type);
 }

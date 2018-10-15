@@ -14,6 +14,7 @@
 #include <string>
 #include <optional>
 #include <filesystem>
+#include <functional>
 
 using Path = std::filesystem::path;
 
