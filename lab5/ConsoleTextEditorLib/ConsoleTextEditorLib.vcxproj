@@ -159,6 +159,7 @@
     <ClInclude Include="Document.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
+    <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="InputCommandExecutor.h" />
     <ClInclude Include="InputCommandParser.h" />
     <ClInclude Include="InputCommandType.h" />
+    <ClInclude Include="IInputCommandExecutor.h" />
     <ClInclude Include="InsertImageCommandParser.h" />
     <ClInclude Include="InsertImageInputCommand.h" />
     <ClInclude Include="InsertParagraphCommandParser.h" />
@@ -194,9 +196,12 @@
     <ClCompile Include="CommandType.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
     <ClCompile Include="DeleteItemCommandParser.cpp" />
+    <ClCompile Include="DeleteItemInputCommand.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandExecutor.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
     <ClCompile Include="InputCommandType.cpp" />
@@ -207,6 +212,7 @@
     <ClCompile Include="ReplaceTextCommandParser.cpp" />
     <ClCompile Include="ResizeImageCommandParser.cpp" />
     <ClCompile Include="SaveCommandParser.cpp" />
+    <ClCompile Include="SaveInputCommand.cpp" />
     <ClCompile Include="SetTitleCommandParser.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

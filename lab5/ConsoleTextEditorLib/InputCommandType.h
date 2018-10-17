@@ -1,6 +1,6 @@
 #pragma once
 
-namespace command
+namespace input_command
 {
 
 enum class InputCommandType

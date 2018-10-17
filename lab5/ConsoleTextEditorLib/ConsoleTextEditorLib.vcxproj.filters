@@ -141,6 +141,12 @@
     <ClInclude Include="InputCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
+    <ClInclude Include="IInputCommandExecutor.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpCommandExecutor.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -204,6 +210,18 @@
       <Filter>input_command</Filter>
     </ClCompile>
     <ClCompile Include="InputCommandExecutor.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpCommandExecutor.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteItemInputCommand.cpp">
       <Filter>input_command</Filter>
     </ClCompile>
   </ItemGroup>

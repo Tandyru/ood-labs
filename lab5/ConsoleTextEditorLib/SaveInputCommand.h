@@ -4,8 +4,14 @@
 
 namespace input_command
 {
-	struct SaveInputCommand : public InputCommand
-	{
-		std::string path;
-	};
+
+struct SaveInputCommand : public InputCommand
+{
+	std::string path;
+
+
+
+	void Execute(IInputCommandExecutor& executor) override;
+};
+
 }

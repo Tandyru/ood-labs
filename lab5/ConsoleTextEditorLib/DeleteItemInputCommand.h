@@ -4,8 +4,15 @@
 
 namespace input_command
 {
-	struct DeleteItemInputCommand : public InputCommand
-	{
-		command::Position position = command::END_POSITION;
-	};
+
+struct DeleteItemInputCommand : public InputCommand
+{
+	command::Position position = command::END_POSITION;
+
+	DeleteItemInputCommand(command::Position position);
+
+	void Execute(IInputCommandExecutor& executor) override;
+
+};
+
 }

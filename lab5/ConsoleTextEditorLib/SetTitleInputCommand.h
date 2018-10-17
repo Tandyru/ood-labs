@@ -4,8 +4,8 @@
 
 namespace input_command
 {
-	struct SetTitleInputCommand : public InputCommand
-	{
-		std::string title;
-	};
+struct SetTitleInputCommand : public InputCommand
+{
+	std::string title;
+};
 }

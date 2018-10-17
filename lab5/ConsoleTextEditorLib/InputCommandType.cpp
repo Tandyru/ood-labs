@@ -2,7 +2,7 @@
 #include "InputCommandType.h"
 #include "IsValueInArray.h"
 
-namespace command
+namespace input_command
 {
 
 bool IsNonargCommand(InputCommandType type)
