@@ -4,8 +4,15 @@
 
 namespace input_command
 {
+
 struct SetTitleInputCommand : public InputCommand
 {
-	std::string title;
+	string title;
+
+	SetTitleInputCommand(const string& title);
+
+	void Execute(IInputCommandExecutor& executor) override;
+
 };
+
 }

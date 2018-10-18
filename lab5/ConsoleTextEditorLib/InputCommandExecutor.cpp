@@ -10,6 +10,7 @@ CInputCommandExecutor::CInputCommandExecutor(shared_ptr<document::IDocument> doc
 	, m_out(out)
 	, m_helpHandler(helpHandler)
 {
+	assert(m_document);
 }
 
 void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
@@ -27,31 +28,45 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 	}
 }
 
-void CInputCommandExecutor::ExecuteInsertParagraphCommand(const InsertParagraphInputCommand & command)
+namespace
+{
+
+optional<size_t> ConvertPosition(command::Position position)
+{
+	return position != command::END_POSITION ? position : optional<size_t>();
+}
+
+}
+
+void CInputCommandExecutor::ExecuteCommand(const InsertParagraphInputCommand & command)
+{
+	m_document->InsertParagraph(command.text, ConvertPosition(command.position));
+}
+
+void CInputCommandExecutor::ExecuteCommand(const InsertImageInputCommand & command)
+{
+	m_document->InsertImage(command.path, command.width, command.height, ConvertPosition(command.position));
+}
+
+void CInputCommandExecutor::ExecuteCommand(const SetTitleInputCommand & command)
+{
+	m_document->SetTitle(command.title);
+}
+
+void CInputCommandExecutor::ExecuteCommand(const ReplaceTextInputCommand & command)
+{
+	//m_document->Repla
+}
+
+void CInputCommandExecutor::ExecuteCommand(const ResizeImageInputCommand & command)
 {
 }
 
-void CInputCommandExecutor::ExecuteInsertImageCommand(const InsertImageInputCommand & command)
+void CInputCommandExecutor::ExecuteCommand(const DeleteItemInputCommand & command)
 {
 }
 
-void CInputCommandExecutor::ExecuteSetTitleCommand(const SetTitleInputCommand & command)
-{
-}
-
-void CInputCommandExecutor::ExecuteReplaceTextCommand(const ReplaceTextInputCommand & command)
-{
-}
-
-void CInputCommandExecutor::ExecuteResizeImageCommand(const ResizeImageInputCommand & command)
-{
-}
-
-void CInputCommandExecutor::ExecuteDeleteItemCommand(const DeleteItemInputCommand & command)
-{
-}
-
-void CInputCommandExecutor::ExecuteSaveCommand(const SaveInputCommand & command)
+void CInputCommandExecutor::ExecuteCommand(const SaveInputCommand & command)
 {
 }
 

@@ -3,11 +3,14 @@
 
 shared_ptr<IParagraph> CDocumentMock::InsertParagraph(const string & text, optional<size_t> position)
 {
+	lastCommandText = text;
+	lastCommandPosition = position;
 	return shared_ptr<IParagraph>();
 }
 
 shared_ptr<IImage> CDocumentMock::InsertImage(const Path & path, int width, int height, optional<size_t> position)
 {
+	lastCommandPosition = position;
 	return shared_ptr<IImage>();
 }
 

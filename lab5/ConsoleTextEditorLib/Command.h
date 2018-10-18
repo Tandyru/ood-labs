@@ -14,8 +14,9 @@ public:
 	virtual void Execute() = 0;
 	virtual void Unexecute() = 0;
 
-private:
+protected:
 	CommandType m_type;
+	const document::IDocument& document;
 };
 
 }

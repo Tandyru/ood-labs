@@ -10,8 +10,6 @@
 #include "DeleteItemCommandParser.h"
 #include "SaveCommandParser.h"
 
-using namespace command;
-
 namespace command_parser
 {
 namespace

@@ -5,9 +5,15 @@
 namespace input_command
 {
 
+SaveInputCommand::SaveInputCommand(const string & path)
+	: InputCommand(InputCommandType::Save)
+	, path(path)
+{
+}
+
 void SaveInputCommand::Execute(IInputCommandExecutor & executor)
 {
-	executor.ExecuteSaveCommand(*this);
+	executor.ExecuteCommand(*this);
 }
 
 }

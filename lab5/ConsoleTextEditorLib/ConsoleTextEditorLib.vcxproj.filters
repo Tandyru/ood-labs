@@ -224,5 +224,20 @@
     <ClCompile Include="DeleteItemInputCommand.cpp">
       <Filter>input_command</Filter>
     </ClCompile>
+    <ClCompile Include="SetTitleInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceTextInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertParagraphInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertImageInputCommand.cpp">
+      <Filter>input_command</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

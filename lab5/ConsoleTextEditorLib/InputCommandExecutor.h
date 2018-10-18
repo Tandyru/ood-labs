@@ -17,13 +17,13 @@ public:
 
 	// IInputCommandExecutor
 	void ExecuteCommand(InputCommandType type) override;
-	void ExecuteInsertParagraphCommand(const InsertParagraphInputCommand& command) override;
-	void ExecuteInsertImageCommand(const InsertImageInputCommand& command) override;
-	void ExecuteSetTitleCommand(const SetTitleInputCommand& command) override;
-	void ExecuteReplaceTextCommand(const ReplaceTextInputCommand& command) override;
-	void ExecuteResizeImageCommand(const ResizeImageInputCommand& command) override;
-	void ExecuteDeleteItemCommand(const DeleteItemInputCommand& command) override;
-	void ExecuteSaveCommand(const SaveInputCommand& command) override;
+	void ExecuteCommand(const InsertParagraphInputCommand& command) override;
+	void ExecuteCommand(const InsertImageInputCommand& command) override;
+	void ExecuteCommand(const SetTitleInputCommand& command) override;
+	void ExecuteCommand(const ReplaceTextInputCommand& command) override;
+	void ExecuteCommand(const ResizeImageInputCommand& command) override;
+	void ExecuteCommand(const DeleteItemInputCommand& command) override;
+	void ExecuteCommand(const SaveInputCommand& command) override;
 
 private:
 	void ShowHelp();

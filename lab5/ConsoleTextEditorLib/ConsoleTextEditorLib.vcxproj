@@ -206,14 +206,19 @@
     <ClCompile Include="InputCommandParser.cpp" />
     <ClCompile Include="InputCommandType.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />
+    <ClCompile Include="InsertImageInputCommand.cpp" />
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
+    <ClCompile Include="InsertParagraphInputCommand.cpp" />
     <ClCompile Include="Paragraph.cpp" />
     <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />
+    <ClCompile Include="ReplaceTextInputCommand.cpp" />
     <ClCompile Include="ResizeImageCommandParser.cpp" />
+    <ClCompile Include="ResizeImageInputCommand.cpp" />
     <ClCompile Include="SaveCommandParser.cpp" />
     <ClCompile Include="SaveInputCommand.cpp" />
     <ClCompile Include="SetTitleCommandParser.cpp" />
+    <ClCompile Include="SetTitleInputCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

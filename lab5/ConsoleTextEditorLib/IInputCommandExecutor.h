@@ -16,13 +16,13 @@ class IInputCommandExecutor
 {
 public:
 	virtual void ExecuteCommand(InputCommandType type) = 0;
-	virtual void ExecuteInsertParagraphCommand(const InsertParagraphInputCommand& command) = 0;
-	virtual void ExecuteInsertImageCommand(const InsertImageInputCommand& command) = 0;
-	virtual void ExecuteSetTitleCommand(const SetTitleInputCommand& command) = 0;
-	virtual void ExecuteReplaceTextCommand(const ReplaceTextInputCommand& command) = 0;
-	virtual void ExecuteResizeImageCommand(const ResizeImageInputCommand& command) = 0;
-	virtual void ExecuteDeleteItemCommand(const DeleteItemInputCommand& command) = 0;
-	virtual void ExecuteSaveCommand(const SaveInputCommand& command) = 0;
+	virtual void ExecuteCommand(const InsertParagraphInputCommand& command) = 0;
+	virtual void ExecuteCommand(const InsertImageInputCommand& command) = 0;
+	virtual void ExecuteCommand(const SetTitleInputCommand& command) = 0;
+	virtual void ExecuteCommand(const ReplaceTextInputCommand& command) = 0;
+	virtual void ExecuteCommand(const ResizeImageInputCommand& command) = 0;
+	virtual void ExecuteCommand(const DeleteItemInputCommand& command) = 0;
+	virtual void ExecuteCommand(const SaveInputCommand& command) = 0;
 	virtual ~IInputCommandExecutor() = default;
 };
 

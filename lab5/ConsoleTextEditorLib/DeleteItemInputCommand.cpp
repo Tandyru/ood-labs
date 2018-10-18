@@ -13,7 +13,7 @@ DeleteItemInputCommand::DeleteItemInputCommand(command::Position position)
 
 void DeleteItemInputCommand::Execute(IInputCommandExecutor & executor)
 {
-	executor.ExecuteDelete(*this);
+	executor.ExecuteCommand(*this);
 }
 
 }

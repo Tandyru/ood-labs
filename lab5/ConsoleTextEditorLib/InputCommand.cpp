@@ -12,7 +12,7 @@ InputCommand::InputCommand(InputCommandType type)
 
 void InputCommand::Execute(IInputCommandExecutor & executor)
 {
-	executor.ExecuteNonArgCommand(type);
+	executor.ExecuteCommand(type);
 }
 
 }
