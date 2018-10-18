@@ -4,7 +4,7 @@
 namespace input_command
 {
 
-CInputCommandExecutor::CInputCommandExecutor(shared_ptr<document::IDocument> document, ostream& out, 
+CInputCommandExecutor::CInputCommandExecutor(IDocumentCommandFactory & documentCommandFactory, ostream& out,
 	const HelpCommandHandler& helpHandler)
 	: m_document(document)
 	, m_out(out)

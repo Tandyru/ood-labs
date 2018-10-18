@@ -10,7 +10,7 @@ class CReplaceTextCommand : public CCommand
 public:
 	CReplaceTextCommand(unique_ptr<input_command::ReplaceTextInputCommand>&& inputCommand, const document::IDocument& document);
 
-	void Execute() override;
+	void Accept() override;
 	void Unexecute() override;
 
 private:

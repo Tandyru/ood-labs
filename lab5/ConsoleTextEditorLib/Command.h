@@ -11,12 +11,12 @@ public:
 	CCommand(CommandType type, const document::IDocument& document);
 	virtual ~CCommand() = default;
 
-	virtual void Execute() = 0;
+	virtual void Accept() = 0;
 	virtual void Unexecute() = 0;
 
 protected:
 	CommandType m_type;
-	const document::IDocument& document;
+	const document::IDocument& m_document;
 };
 
 }

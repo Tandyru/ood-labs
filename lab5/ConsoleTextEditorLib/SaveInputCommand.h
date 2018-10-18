@@ -11,7 +11,7 @@ struct SaveInputCommand : public InputCommand
 
 	SaveInputCommand(const string& path);
 
-	void Execute(IInputCommandExecutor& executor) override;
+	void Accept(IInputCommandVisitor& executor) override;
 };
 
 }

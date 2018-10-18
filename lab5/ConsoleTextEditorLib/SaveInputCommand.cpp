@@ -11,7 +11,7 @@ SaveInputCommand::SaveInputCommand(const string & path)
 {
 }
 
-void SaveInputCommand::Execute(IInputCommandExecutor & executor)
+void SaveInputCommand::Accept(IInputCommandVisitor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

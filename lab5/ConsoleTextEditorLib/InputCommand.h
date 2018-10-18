@@ -4,7 +4,7 @@
 namespace input_command
 {
 
-class IInputCommandExecutor;
+class IInputCommandVisitor;
 
 struct InputCommand
 {
@@ -12,7 +12,7 @@ struct InputCommand
 
 	InputCommand(InputCommandType type);
 
-	virtual void Execute(IInputCommandExecutor& executor);
+	virtual void Accept(IInputCommandVisitor& visitor);
 	virtual ~InputCommand() = default;
 };
 

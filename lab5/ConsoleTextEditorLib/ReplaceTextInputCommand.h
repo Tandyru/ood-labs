@@ -13,7 +13,7 @@ struct ReplaceTextInputCommand : public InputCommand
 
 	ReplaceTextInputCommand(command::Position position, const string & text);
 
-	void Execute(IInputCommandExecutor& executor) override;
+	void Accept(IInputCommandVisitor& executor) override;
 
 };
 

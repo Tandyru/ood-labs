@@ -10,7 +10,7 @@ CInsertParagraphCommand::CInsertParagraphCommand(unique_ptr<input_command::Inser
 {
 }
 
-void CInsertParagraphCommand::Execute()
+void CInsertParagraphCommand::Accept()
 {
 	//optional<size_t> position = ;
 

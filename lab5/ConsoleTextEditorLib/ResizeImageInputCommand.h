@@ -14,7 +14,7 @@ struct ResizeImageInputCommand : public InputCommand
 
 	ResizeImageInputCommand(command::Position position, unsigned int width, unsigned int height);
 
-	void Execute(IInputCommandExecutor& executor) override;
+	void Accept(IInputCommandVisitor& executor) override;
 
 };
 

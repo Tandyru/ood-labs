@@ -1,17 +1,18 @@
 #pragma once
 #include "IDocument.h"
 #include "InputCommand.h"
-#include "IInputCommandExecutor.h"
+#include "IInputCommandVisitor.h"
+#include "IDocumentCommandFactory.h"
 #include <ostream>
 
 namespace input_command
 {
 
-class CInputCommandExecutor : public IInputCommandExecutor
+class CInputCommandExecutor : public IInputCommandVisitor
 {
 public:
 	using HelpCommandHandler = function<void(ostream& out)>;
-	CInputCommandExecutor(shared_ptr<document::IDocument> document, ostream& out, 
+	CInputCommandExecutor(IDocumentCommandFactory& documentCommandFactory, ostream& out,
 		const HelpCommandHandler& helpHandler);
 	CInputCommandExecutor(const CInputCommandExecutor&) = delete;
 

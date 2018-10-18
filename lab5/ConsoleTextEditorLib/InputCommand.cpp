@@ -10,7 +10,7 @@ InputCommand::InputCommand(InputCommandType type)
 {
 }
 
-void InputCommand::Execute(IInputCommandExecutor & executor)
+void InputCommand::Accept(IInputCommandVisitor & executor)
 {
 	executor.ExecuteCommand(type);
 }

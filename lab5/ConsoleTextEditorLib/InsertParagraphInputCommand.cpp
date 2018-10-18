@@ -13,7 +13,7 @@ InsertParagraphInputCommand::InsertParagraphInputCommand(command::Position posit
 
 }
 
-void InsertParagraphInputCommand::Execute(IInputCommandExecutor & executor)
+void InsertParagraphInputCommand::Accept(IInputCommandVisitor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

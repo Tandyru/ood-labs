@@ -12,7 +12,7 @@ ReplaceTextInputCommand::ReplaceTextInputCommand(command::Position position, con
 {
 }
 
-void ReplaceTextInputCommand::Execute(IInputCommandExecutor & executor)
+void ReplaceTextInputCommand::Accept(IInputCommandVisitor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

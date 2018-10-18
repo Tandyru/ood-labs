@@ -141,10 +141,22 @@
     <ClInclude Include="InputCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
-    <ClInclude Include="IInputCommandExecutor.h">
+    <ClInclude Include="HelpCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
-    <ClInclude Include="HelpCommandExecutor.h">
+    <ClInclude Include="ReplaceTextCommand.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertParagraphCommand.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocumentCommandFactory.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentCommandFactory.h">
+      <Filter>command</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputCommandVisitor.h">
       <Filter>input_command</Filter>
     </ClInclude>
   </ItemGroup>
@@ -238,6 +250,15 @@
     </ClCompile>
     <ClCompile Include="InsertImageInputCommand.cpp">
       <Filter>input_command</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceTextCommand.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertParagraphCommand.cpp">
+      <Filter>command</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentCommandFactory.cpp">
+      <Filter>command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

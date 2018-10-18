@@ -10,7 +10,7 @@ class CInsertParagraphCommand : public CCommand
 public:
 	CInsertParagraphCommand(unique_ptr<input_command::InsertParagraphInputCommand>&& inputCommand, const document::IDocument& document);
 
-	void Execute() override;
+	void Accept() override;
 	void Unexecute() override;
 
 private:

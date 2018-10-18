@@ -12,7 +12,7 @@
 namespace input_command
 {
 
-class IInputCommandExecutor
+class IInputCommandVisitor
 {
 public:
 	virtual void ExecuteCommand(InputCommandType type) = 0;
@@ -23,7 +23,7 @@ public:
 	virtual void ExecuteCommand(const ResizeImageInputCommand& command) = 0;
 	virtual void ExecuteCommand(const DeleteItemInputCommand& command) = 0;
 	virtual void ExecuteCommand(const SaveInputCommand& command) = 0;
-	virtual ~IInputCommandExecutor() = default;
+	virtual ~IInputCommandVisitor() = default;
 };
 
 }
