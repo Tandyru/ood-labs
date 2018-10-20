@@ -11,7 +11,7 @@ struct DeleteItemInputCommand : public InputCommand
 
 	DeleteItemInputCommand(command::Position position);
 
-	void Accept(IInputCommandVisitor& executor) override;
+	void Execute(IInputCommandExecutor& executor) override;
 
 };
 

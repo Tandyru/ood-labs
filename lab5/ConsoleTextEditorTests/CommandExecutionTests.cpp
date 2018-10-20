@@ -15,6 +15,7 @@ namespace ConsoleTextEditorTests
 	{
 	public:
 		stringstream out;
+		CDocumentMock document;
 		CInputCommandExecutor executor;
 		bool helpHandlerCalled = false;
 
@@ -24,8 +25,7 @@ namespace ConsoleTextEditorTests
 		}
 
 		CommandExecutionTests()
-			//: document(make_shared<CDocumentMock>())
-			//, executor(document, out, bind(&CommandExecutionTests::HelpHandler, this, placeholders::_1))
+			: executor(document, out, bind(&CommandExecutionTests::HelpHandler, this, placeholders::_1))
 		{
 		}
 
@@ -33,7 +33,7 @@ namespace ConsoleTextEditorTests
 		{
 			InputCommand command(InputCommandType::Help);
 
-			command.Accept(executor);
+			command.Execute(executor);
 			Assert::IsTrue(helpHandlerCalled);
 		}
 
@@ -42,7 +42,7 @@ namespace ConsoleTextEditorTests
 			command::Position expectedPosition = 3;
 			const string expectedText = "Text";
 			InsertParagraphInputCommand command(expectedPosition, expectedText);
-			command.Accept(executor);
+			command.Execute(executor);
 			//Assert::IsTrue(bool(document->lastCommandPosition));
 			//Assert::AreEqual(expectedPosition, *document->lastCommandPosition);
 		}

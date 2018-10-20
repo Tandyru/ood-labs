@@ -169,7 +169,7 @@
     <ClInclude Include="InputCommandExecutor.h" />
     <ClInclude Include="InputCommandParser.h" />
     <ClInclude Include="InputCommandType.h" />
-    <ClInclude Include="IInputCommandVisitor.h" />
+    <ClInclude Include="IInputCommandExecutor.h" />
     <ClInclude Include="InsertImageCommandParser.h" />
     <ClInclude Include="InsertImageInputCommand.h" />
     <ClInclude Include="InsertParagraphCommand.h" />

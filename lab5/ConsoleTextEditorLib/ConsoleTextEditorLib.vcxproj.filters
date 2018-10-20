@@ -156,7 +156,7 @@
     <ClInclude Include="DocumentCommandFactory.h">
       <Filter>command</Filter>
     </ClInclude>
-    <ClInclude Include="IInputCommandVisitor.h">
+    <ClInclude Include="IInputCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
   </ItemGroup>

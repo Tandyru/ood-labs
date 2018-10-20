@@ -12,7 +12,7 @@ struct InsertParagraphInputCommand : public InputCommand
 
 	InsertParagraphInputCommand(command::Position position, string text);
 
-	void Accept(IInputCommandVisitor& executor) override;
+	void Execute(IInputCommandExecutor& executor) override;
 
 };
 

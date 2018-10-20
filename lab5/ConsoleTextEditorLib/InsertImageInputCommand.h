@@ -15,7 +15,7 @@ struct InsertImageInputCommand : public InputCommand
 
 	InsertImageInputCommand(command::Position position, unsigned int width, unsigned int height, string path);
 
-	void Accept(IInputCommandVisitor& executor) override;
+	void Execute(IInputCommandExecutor& executor) override;
 
 };
 

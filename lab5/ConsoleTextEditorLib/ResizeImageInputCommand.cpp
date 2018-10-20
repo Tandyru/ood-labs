@@ -13,7 +13,7 @@ ResizeImageInputCommand::ResizeImageInputCommand(command::Position position, uns
 {
 }
 
-void ResizeImageInputCommand::Accept(IInputCommandVisitor & executor)
+void ResizeImageInputCommand::Execute(IInputCommandExecutor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

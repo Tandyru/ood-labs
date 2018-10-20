@@ -11,7 +11,7 @@ DeleteItemInputCommand::DeleteItemInputCommand(command::Position position)
 {
 }
 
-void DeleteItemInputCommand::Accept(IInputCommandVisitor & executor)
+void DeleteItemInputCommand::Execute(IInputCommandExecutor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

@@ -2,17 +2,17 @@
 #include "IDocument.h"
 #include "InputCommand.h"
 #include "IInputCommandVisitor.h"
-#include "IDocumentCommandFactory.h"
+#include "IDocument.h"
 #include <ostream>
 
 namespace input_command
 {
 
-class CInputCommandExecutor : public IInputCommandVisitor
+class CInputCommandExecutor : public IInputCommandExecutor
 {
 public:
 	using HelpCommandHandler = function<void(ostream& out)>;
-	CInputCommandExecutor(IDocumentCommandFactory& documentCommandFactory, ostream& out,
+	CInputCommandExecutor(document::IDocument& document, ostream& out,
 		const HelpCommandHandler& helpHandler);
 	CInputCommandExecutor(const CInputCommandExecutor&) = delete;
 
@@ -27,10 +27,7 @@ public:
 	void ExecuteCommand(const SaveInputCommand& command) override;
 
 private:
-	void ShowHelp();
-
-private:
-	shared_ptr<document::IDocument> m_document;
+	document::IDocument & m_document;
 	ostream& m_out;
 	HelpCommandHandler m_helpHandler;
 };

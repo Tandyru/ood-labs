@@ -14,7 +14,7 @@ InsertImageInputCommand::InsertImageInputCommand(command::Position position, uns
 {
 }
 
-void InsertImageInputCommand::Accept(IInputCommandVisitor & executor)
+void InsertImageInputCommand::Execute(IInputCommandExecutor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

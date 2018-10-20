@@ -11,7 +11,7 @@ SetTitleInputCommand::SetTitleInputCommand(const string & title)
 {
 }
 
-void SetTitleInputCommand::Accept(IInputCommandVisitor & executor)
+void SetTitleInputCommand::Execute(IInputCommandExecutor & executor)
 {
 	executor.ExecuteCommand(*this);
 }

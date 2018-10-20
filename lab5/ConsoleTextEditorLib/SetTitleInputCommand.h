@@ -11,7 +11,7 @@ struct SetTitleInputCommand : public InputCommand
 
 	SetTitleInputCommand(const string& title);
 
-	void Accept(IInputCommandVisitor& executor) override;
+	void Execute(IInputCommandExecutor& executor) override;
 
 };
 
