@@ -1,7 +1,6 @@
 #pragma once
 #include "IParagraph.h"
 #include "IImage.h"
-#include "ConstDocumentItem.h"
 #include "DocumentItem.h"
 
 namespace document

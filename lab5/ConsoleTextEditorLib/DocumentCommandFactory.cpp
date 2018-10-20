@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "DocumentCommandFactory.h"
 
-namespace command
+namespace document
 {
-
-CDocumentCommandFactory::CDocumentCommandFactory()
+/*
+CDocumentCommandFactory::CDocumentCommandFactory(IDocument & document)
+	: m_document(document)
 {
 }
 
@@ -12,5 +13,5 @@ unique_ptr<CCommand> CDocumentCommandFactory::CreateDocumentCommand() const
 {
 	return unique_ptr<CCommand>();
 }
-
+*/
 }

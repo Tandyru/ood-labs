@@ -1,6 +1,6 @@
 #pragma once
 
-namespace command
+namespace document
 {
 
 enum class CommandType

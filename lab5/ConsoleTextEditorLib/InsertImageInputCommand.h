@@ -8,12 +8,12 @@ namespace input_command
 
 struct InsertImageInputCommand : public InputCommand
 {
-	command::Position position = command::END_POSITION;
+	Position position = END_POSITION;
 	unsigned int width = 0;
 	unsigned int height = 0;
 	string path;
 
-	InsertImageInputCommand(command::Position position, unsigned int width, unsigned int height, string path);
+	InsertImageInputCommand(Position position, unsigned int width, unsigned int height, string path);
 
 	void Execute(IInputCommandExecutor& executor) override;
 

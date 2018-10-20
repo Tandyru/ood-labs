@@ -12,7 +12,7 @@ unique_ptr<InputCommand> ParseDeleteItemCommand(string_view input)
 {
 	return ParseCommand(input, R"e(^(\w+)\s+(\d+))e", 2, [](const cmatch& match) {
 		const string positionStr = match[2];
-		const command::Position position = ParsePosition(positionStr);
+		const Position position = ParsePosition(positionStr);
 		return make_unique<DeleteItemInputCommand>(position);
 	}, "Invalid 'DeleteItem' command string format");
 }

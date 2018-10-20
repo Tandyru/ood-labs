@@ -5,7 +5,7 @@
 namespace input_command
 {
 
-DeleteItemInputCommand::DeleteItemInputCommand(command::Position position)
+DeleteItemInputCommand::DeleteItemInputCommand(Position position)
 	: InputCommand(InputCommandType::DeleteItem)
 	, position(position)
 {

@@ -5,7 +5,6 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-using namespace command;
 using namespace input_command;
 using namespace command_parser;
 
@@ -42,7 +41,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command.position == END_POSITION);
 			Assert::IsTrue(command.text == expectedParagraphText);
 			const Position expectedPosition = 12;
-			auto inputCommand2 = ParseInputCommand("InsertParagraph "s + to_string(expectedPosition) + " " + expectedParagraphText);
+			auto inputCommand2 = ParseInputCommand("InsertParagraph "s + to_string(*expectedPosition) + " " + expectedParagraphText);
 			auto& command2 = static_cast<InsertParagraphInputCommand&>(*inputCommand2);
 			Assert::IsTrue(command2.position == expectedPosition);
 		}

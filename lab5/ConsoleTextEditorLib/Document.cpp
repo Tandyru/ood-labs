@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Document.h"
-#include "Paragraph.h"
-#include "Image.h"
+#include "InsertParagraphCommand.h"
 
 namespace document
 {
@@ -10,43 +9,51 @@ CDocument::CDocument()
 {
 }
 
-shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text,
-	optional<size_t> position)
+shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<size_t> position)
 {
-	return InsertItem<IParagraph>(position, [&]() -> shared_ptr<IParagraph> {
-		return make_shared<CParagraph>(text);
-	});
+	CheckPosition(position);
+	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, text);
+	size_t index = position ? *position : GetItemsCount();
+	m_commandHistory.Do(move(command));
+	assert(index < GetItemsCount());
+	CheckIndex(index);
+	auto item = m_impl.GetItem(index);
+	return item.GetParagraph();
 }
 
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
+	// TODO: make command and do it
+	/*
 	return InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
 		return make_shared<CImage>(path, width, height);
 	});
+	*/
+	return shared_ptr<IImage>();
 }
 
 size_t CDocument::GetItemsCount()const
 {
-	return m_items.size();
+	return m_impl.GetItemsCount();
 }
 
 CConstDocumentItem CDocument::GetItem(size_t index)const
 {
 	CheckIndex(index);
-	return *m_items[index];
+	return m_impl.GetItem(index);
 }
 
 CDocumentItem CDocument::GetItem(size_t index)
 {
 	CheckIndex(index);
-	return *m_items[index];
+	return m_impl.GetItem(index);
 }
 
 void CDocument::DeleteItem(size_t index)
 {
 	CheckIndex(index);
-	m_items.erase(m_items.begin() + index);
+	// TODO: make command and do it
 }
 
 string CDocument::GetTitle()const
@@ -61,23 +68,21 @@ void CDocument::SetTitle(const string & title)
 
 bool CDocument::CanUndo()const
 {
-	// TODO:
-	return false;
+	return m_commandHistory.CanUndo();
 }
 
 void CDocument::Undo()
 {
-	// TODO:
+	m_commandHistory.Undo();
 }
 
 bool CDocument::CanRedo()const
 {
-	// TODO:
-	return false;
+	return m_commandHistory.CanRedo();
 }
 void CDocument::Redo()
 {
-	// TODO:
+	m_commandHistory.Redo();
 }
 
 void CDocument::Save(const Path& path)const
@@ -85,9 +90,17 @@ void CDocument::Save(const Path& path)const
 	// TODO:
 }
 
+void CDocument::CheckPosition(optional<size_t> position) const
+{
+	if (position)
+	{
+		CheckIndex(*position);
+	}
+}
+
 void CDocument::CheckIndex(size_t index)const
 {
-	if (index >= m_items.size())
+	if (index >= GetItemsCount())
 	{
 		throw CInvalidPositionException();
 	}

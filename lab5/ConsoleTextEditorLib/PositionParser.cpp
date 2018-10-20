@@ -9,13 +9,13 @@ namespace
 const auto END_POSITION_STRING_VALUE = "end";
 }
 
-command::Position ParsePosition(string_view str)
+input_command::Position ParsePosition(string_view str)
 {
 	if (str == END_POSITION_STRING_VALUE)
 	{
-		return command::END_POSITION;
+		return input_command::END_POSITION;
 	}
-	return command::Position(stoul(string(str)));
+	return input_command::Position(stoul(string(str)));
 }
 
 }

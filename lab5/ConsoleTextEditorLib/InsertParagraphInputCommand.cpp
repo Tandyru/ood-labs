@@ -5,7 +5,7 @@
 namespace input_command
 {
 
-InsertParagraphInputCommand::InsertParagraphInputCommand(command::Position position, string text)
+InsertParagraphInputCommand::InsertParagraphInputCommand(Position position, string text)
 	: InputCommand(InputCommandType::InsertParagraph)
 	, position(position)
 	, text(text)

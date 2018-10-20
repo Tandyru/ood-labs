@@ -5,7 +5,7 @@
 namespace input_command
 {
 
-ResizeImageInputCommand::ResizeImageInputCommand(command::Position position, unsigned int width, unsigned int height)
+ResizeImageInputCommand::ResizeImageInputCommand(Position position, unsigned int width, unsigned int height)
 	: InputCommand(InputCommandType::ResizeImage)
 	, position(position)
 	, width(width)

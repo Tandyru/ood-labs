@@ -1,6 +1,8 @@
 #pragma once
 #include "IDocument.h"
 #include "InvalidPositionException.h"
+#include "DocumentImpl.h"
+#include "CommandHistory.h"
 
 namespace document
 {
@@ -38,24 +40,13 @@ public:
 	void Save(const Path& path)const override;
 
 private:
-	template<typename OI>
-	inline shared_ptr<OI> InsertItem(optional<size_t> position, const function<shared_ptr<OI>()>& itemFactory)
-	{
-		if (position && *position > m_items.size())
-		{
-			throw CInvalidPositionException();
-		}
-		const auto it = position ? next(m_items.cbegin(), *position) : m_items.cend();
-		const auto content = itemFactory();
-		m_items.emplace(it, make_shared<CDocumentItem>(content));
-		return content;
-	}
-
+	void CheckPosition(optional<size_t> position)const;
 	void CheckIndex(size_t index)const;
 
 private:
-	vector<shared_ptr<CDocumentItem>> m_items;
 	string m_title;
+	impl::CDocumentImpl m_impl;
+	command::CCommandHistory m_commandHistory;
 };
 
 }

@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #include "Command.h"
 
+namespace document
+{
 namespace command
 {
 
-using namespace document;
-
-CCommand::CCommand(CommandType type, const IDocument & document)
+CCommand::CCommand(CommandType type, document::impl::IDocumentImpl& document)
 	: m_document(document)
 {
 }
 
+}
 }

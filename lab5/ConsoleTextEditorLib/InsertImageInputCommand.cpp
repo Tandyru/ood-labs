@@ -5,7 +5,7 @@
 namespace input_command
 {
 
-InsertImageInputCommand::InsertImageInputCommand(command::Position position, unsigned int width, unsigned int height, string path)
+InsertImageInputCommand::InsertImageInputCommand(Position position, unsigned int width, unsigned int height, string path)
 	: InputCommand(InputCommandType::InsertImage)
 	, position(position)
 	, width(width)

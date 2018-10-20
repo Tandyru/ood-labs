@@ -7,9 +7,9 @@ namespace input_command
 
 struct DeleteItemInputCommand : public InputCommand
 {
-	command::Position position = command::END_POSITION;
+	Position position = END_POSITION;
 
-	DeleteItemInputCommand(command::Position position);
+	DeleteItemInputCommand(Position position);
 
 	void Execute(IInputCommandExecutor& executor) override;
 

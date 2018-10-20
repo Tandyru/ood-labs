@@ -5,7 +5,7 @@
 namespace input_command
 {
 
-ReplaceTextInputCommand::ReplaceTextInputCommand(command::Position position, const string & text)
+ReplaceTextInputCommand::ReplaceTextInputCommand(Position position, const string & text)
 	: InputCommand(InputCommandType::ReplaceText)
 	, position(position)
 	, text(text)

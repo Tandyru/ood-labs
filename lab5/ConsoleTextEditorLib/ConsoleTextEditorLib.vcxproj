@@ -158,11 +158,13 @@
     <ClInclude Include="DeleteItemInputCommand.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="DocumentCommandFactory.h" />
+    <ClInclude Include="DocumentImpl.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IDocumentCommandFactory.h" />
+    <ClInclude Include="IDocumentImpl.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InputCommand.h" />
@@ -203,6 +205,7 @@
     <ClCompile Include="DeleteItemInputCommand.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="DocumentCommandFactory.cpp" />
+    <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="Image.cpp" />

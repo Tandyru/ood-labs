@@ -1,20 +1,24 @@
 #pragma once
 #include "Command.h"
-#include "InsertParagraphInputCommand.h"
+#include "DocumentItemPosition.h"
 
+namespace document
+{
 namespace command
 {
 
 class CInsertParagraphCommand : public CCommand
 {
 public:
-	CInsertParagraphCommand(unique_ptr<input_command::InsertParagraphInputCommand>&& inputCommand, const document::IDocument& document);
+	CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, const string& text);
 
-	void Accept() override;
+	void Execute() override;
 	void Unexecute() override;
 
 private:
-	const unique_ptr<input_command::InsertParagraphInputCommand> m_inputCommand;
+	optional<size_t> m_position;
+	string m_text;
 };
 
+}
 }

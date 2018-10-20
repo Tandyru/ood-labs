@@ -4,6 +4,6 @@
 namespace command_parser
 {
 
-command::Position ParsePosition(string_view str);
+input_command::Position ParsePosition(string_view str);
 
 }

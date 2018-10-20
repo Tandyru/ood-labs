@@ -13,7 +13,7 @@ unique_ptr<input_command::InputCommand> ParseReplaceTextCommand(string_view inpu
 {
 	return ParseCommand(input, R"e(^(\w+)\s+(\d+)\s+)e", 2, [](const cmatch& match) {
 		const string positionStr = match[2];
-		const command::Position position = ParsePosition(positionStr);
+		const Position position = ParsePosition(positionStr);
 		const string text = match.suffix();
 		return make_unique<ReplaceTextInputCommand>(position, text);
 	}, "Invalid 'ReplaceText' command string format");

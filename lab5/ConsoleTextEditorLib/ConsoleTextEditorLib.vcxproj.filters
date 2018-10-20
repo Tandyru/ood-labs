@@ -22,11 +22,11 @@
     <Filter Include="input_command">
       <UniqueIdentifier>{ed2e4c29-43f4-462e-9905-7577e5f4e095}</UniqueIdentifier>
     </Filter>
-    <Filter Include="command">
-      <UniqueIdentifier>{b32a2c77-b788-47d9-84c6-d23d866225d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{435f9ff6-3b92-40d6-ba45-9a97cf2e7ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="document\command">
+      <UniqueIdentifier>{b32a2c77-b788-47d9-84c6-d23d866225d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,16 +58,13 @@
       <Filter>document</Filter>
     </ClInclude>
     <ClInclude Include="CommandType.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="MapEnum.h">
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="InsertParagraphInputCommand.h">
       <Filter>input_command</Filter>
-    </ClInclude>
-    <ClInclude Include="DocumentItemPosition.h">
-      <Filter>command</Filter>
     </ClInclude>
     <ClInclude Include="InsertParagraphCommandParser.h">
       <Filter>command_parser</Filter>
@@ -127,10 +124,10 @@
       <Filter>document</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="CommandHistory.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="InputCommandType.h">
       <Filter>input_command</Filter>
@@ -145,18 +142,27 @@
       <Filter>input_command</Filter>
     </ClInclude>
     <ClInclude Include="ReplaceTextCommand.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="InsertParagraphCommand.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="IDocumentCommandFactory.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="DocumentCommandFactory.h">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="IInputCommandExecutor.h">
+      <Filter>input_command</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocumentImpl.h">
+      <Filter>document</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentImpl.h">
+      <Filter>document</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItemPosition.h">
       <Filter>input_command</Filter>
     </ClInclude>
   </ItemGroup>
@@ -186,7 +192,7 @@
       <Filter>command_parser</Filter>
     </ClCompile>
     <ClCompile Include="CommandType.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="ReplaceTextCommandParser.cpp">
       <Filter>command_parser</Filter>
@@ -213,10 +219,10 @@
       <Filter>document</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="CommandHistory.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="InputCommandType.cpp">
       <Filter>input_command</Filter>
@@ -252,13 +258,16 @@
       <Filter>input_command</Filter>
     </ClCompile>
     <ClCompile Include="ReplaceTextCommand.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="InsertParagraphCommand.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="DocumentCommandFactory.cpp">
-      <Filter>command</Filter>
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentImpl.cpp">
+      <Filter>document</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

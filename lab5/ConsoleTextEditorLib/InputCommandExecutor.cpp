@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "InputCommandExecutor.h"
+#include "InvalidPositionException.h"
+#include "ConstDocumentItem.h"
 
 namespace input_command
 {
@@ -29,7 +31,7 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 		}
 		else
 		{
-			// TODO: say cannot undo
+			throw exception("Cannot undo.");
 		}
 		break;
 	case InputCommandType::Redo:
@@ -39,7 +41,7 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 		}
 		else
 		{
-			// TODO: say cannot undo
+			throw exception("Cannot redo.");
 		}
 		break;
 	default:
@@ -50,9 +52,10 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 namespace
 {
 
-optional<size_t> ConvertPosition(command::Position position)
+optional<size_t> ConvertPosition(Position position)
 {
-	return position != command::END_POSITION ? position : optional<size_t>();
+	//return position != END_POSITION ? position : optional<size_t>();
+	return position;
 }
 
 }
@@ -74,19 +77,38 @@ void CInputCommandExecutor::ExecuteCommand(const SetTitleInputCommand & command)
 
 void CInputCommandExecutor::ExecuteCommand(const ReplaceTextInputCommand & command)
 {
-	// ?? check position?
-	m_document.DeleteItem(command.position);
+	if (command.position == END_POSITION)
+	{
+		throw document::CInvalidPositionException();
+	}
+	m_document.DeleteItem(*command.position);
 	m_document.InsertParagraph(command.text, ConvertPosition(command.position));
 }
 
 void CInputCommandExecutor::ExecuteCommand(const ResizeImageInputCommand & command)
 {
-	// ??
+	auto position = command.position;
+	if (position == END_POSITION)
+	{
+		throw document::CInvalidPositionException();
+	}
+	auto item = m_document.GetItem(*position);
+	auto image = item.GetImage();
+	if (!image)
+	{
+		throw exception("The item in the position is not an image.");
+	}
+	m_document.DeleteItem(*position);
+	m_document.InsertImage(image->GetPath(), command.width, command.height, position);
 }
 
 void CInputCommandExecutor::ExecuteCommand(const DeleteItemInputCommand & command)
 {
-	m_document.DeleteItem(command.position);
+	if (command.position == END_POSITION)
+	{
+		throw document::CInvalidPositionException();
+	}
+	m_document.DeleteItem(*command.position);
 }
 
 void CInputCommandExecutor::ExecuteCommand(const SaveInputCommand & command)

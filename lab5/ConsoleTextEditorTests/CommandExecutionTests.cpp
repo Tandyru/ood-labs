@@ -6,7 +6,6 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-using namespace command;
 using namespace input_command;
 
 namespace ConsoleTextEditorTests
@@ -39,12 +38,12 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestInsertParagraphCommandExecution)
 		{
-			command::Position expectedPosition = 3;
+			Position expectedPosition = 3;
 			const string expectedText = "Text";
 			InsertParagraphInputCommand command(expectedPosition, expectedText);
 			command.Execute(executor);
-			//Assert::IsTrue(bool(document->lastCommandPosition));
-			//Assert::AreEqual(expectedPosition, *document->lastCommandPosition);
+			Assert::IsTrue(bool(document.lastCommandPosition));
+			Assert::IsTrue(expectedPosition == *(document.lastCommandPosition));
 		}
 
 	};

@@ -1,24 +1,26 @@
 #include "stdafx.h"
 #include "InsertParagraphCommand.h"
 
+namespace document
+{
 namespace command
 {
 
-CInsertParagraphCommand::CInsertParagraphCommand(unique_ptr<input_command::InsertParagraphInputCommand>&& inputCommand, const document::IDocument & document)
+CInsertParagraphCommand::CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, const string& text)
 	: CCommand(CommandType::InsertParagraph, document)
-	, m_inputCommand(move(inputCommand))
+	, m_position(position)
+	, m_text(text)
 {
 }
 
-void CInsertParagraphCommand::Accept()
+void CInsertParagraphCommand::Execute()
 {
-	//optional<size_t> position = ;
-
-	//document.InsertParagraph
+	m_document.InsertParagraph(m_text, m_position);
 }
 
 void CInsertParagraphCommand::Unexecute()
 {
 }
 
+}
 }

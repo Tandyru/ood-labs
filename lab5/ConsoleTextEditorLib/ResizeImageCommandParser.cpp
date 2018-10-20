@@ -14,7 +14,7 @@ unique_ptr<InputCommand> ParseResizeImageCommand(string_view input)
 		const string positionStr = match[2];
 		const unsigned int width = stoul(string(match[3]));
 		const unsigned int height = stoul(string(match[4]));
-		const command::Position position = ParsePosition(positionStr);
+		const Position position = ParsePosition(positionStr);
 		return make_unique<ResizeImageInputCommand>(position, width, height);
 	}, "Invalid 'ResizeImage' command string format");
 }

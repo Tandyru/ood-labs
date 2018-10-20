@@ -1,20 +1,21 @@
 #pragma once
 #include "Command.h"
-#include "ReplaceTextInputCommand.h"
 
+namespace document
+{
 namespace command
 {
-
+/*
 class CReplaceTextCommand : public CCommand
 {
 public:
-	CReplaceTextCommand(unique_ptr<input_command::ReplaceTextInputCommand>&& inputCommand, const document::IDocument& document);
+	CReplaceTextCommand(impl::IDocumentImpl& document, size_t position, const string& text);
 
-	void Accept() override;
+	void Execute() override;
 	void Unexecute() override;
 
 private:
-	unique_ptr<input_command::ReplaceTextInputCommand> m_inputCommand;
 };
-
+*/
+}
 }

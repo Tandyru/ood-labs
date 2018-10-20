@@ -8,11 +8,11 @@ namespace input_command
 
 struct ResizeImageInputCommand : public InputCommand
 {
-	command::Position position = command::END_POSITION;
+	Position position = END_POSITION;
 	unsigned int width = 0;
 	unsigned int height = 0;
 
-	ResizeImageInputCommand(command::Position position, unsigned int width, unsigned int height);
+	ResizeImageInputCommand(Position position, unsigned int width, unsigned int height);
 
 	void Execute(IInputCommandExecutor& executor) override;
 

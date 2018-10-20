@@ -7,10 +7,10 @@ namespace input_command
 
 struct InsertParagraphInputCommand : public InputCommand
 {
-	command::Position position = command::END_POSITION;
+	Position position = END_POSITION;
 	string text;
 
-	InsertParagraphInputCommand(command::Position position, string text);
+	InsertParagraphInputCommand(Position position, string text);
 
 	void Execute(IInputCommandExecutor& executor) override;
 
