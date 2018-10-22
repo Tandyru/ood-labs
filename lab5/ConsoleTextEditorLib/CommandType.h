@@ -2,15 +2,17 @@
 
 namespace document
 {
+namespace command
+{
 
 enum class CommandType
 {
 	InsertParagraph = 1,
-	InsertImage, 
-	SetTitle,
-	ReplaceText,
-	ResizeImage,
+	InsertImage,
+	//ReplaceText,
+	//ResizeImage,
 	DeleteItem,
 };
 
+}
 }

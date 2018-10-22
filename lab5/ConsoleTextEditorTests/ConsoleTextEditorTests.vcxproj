@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandExecutionTests.cpp" />
+    <ClCompile Include="CommandHistoryTests.cpp" />
     <ClCompile Include="DocumentMock.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="stdafx.cpp">
