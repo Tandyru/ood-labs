@@ -24,6 +24,9 @@
     <ClInclude Include="DocumentMock.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="DocumentImplMock.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
