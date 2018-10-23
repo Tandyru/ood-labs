@@ -29,6 +29,64 @@ namespace ConsoleTextEditorTests
 			Assert::IsFalse(history.CanRedo());
 		}
 
+		TEST_METHOD(TestStateAfterOneCommandDoUndoRedo)
+		{
+			DoCommand();
+			Assert::IsTrue(history.CanUndo());
+			Assert::IsFalse(history.CanRedo());
+			history.Undo();
+			Assert::IsTrue(history.CanRedo());
+			Assert::IsFalse(history.CanUndo());
+			history.Redo();
+			Assert::IsFalse(history.CanRedo());
+			Assert::IsTrue(history.CanUndo());
+		}
+
+		TEST_METHOD(TestStateAfterTwoCommandsDoUndoRedo)
+		{
+			DoCommand();
+			DoCommand();
+			Assert::IsTrue(history.CanUndo());
+			history.Undo();
+			Assert::IsTrue(history.CanRedo());
+			Assert::IsTrue(history.CanUndo());
+			history.Undo();
+			Assert::IsTrue(history.CanRedo());
+			history.Redo();
+			Assert::IsTrue(history.CanRedo());
+			Assert::IsTrue(history.CanUndo());
+			history.Redo();
+			Assert::IsFalse(history.CanRedo());
+			Assert::IsTrue(history.CanUndo());
+		}
+
+		TEST_METHOD(TestStateAfterDoCommandAfterRedo)
+		{
+			DoCommand();
+			DoCommand();
+			DoCommand();
+			history.Redo();
+			history.Redo();
+			DoCommand();
+			Assert::IsFalse(history.CanRedo());
+			Assert::IsTrue(history.CanUndo());
+		}
+
+		TEST_METHOD(TestStateAfterEraseOldUndoCommands)
+		{
+			const auto MAX_HISTORY_SIZE = 10;
+			for (auto counter = 0; counter < MAX_HISTORY_SIZE + 2; counter++)
+			{
+				DoCommand();
+			}
+			for (auto counter = 0; counter < MAX_HISTORY_SIZE; counter++)
+			{
+				history.Undo();
+			}
+			Assert::IsFalse(history.CanUndo());
+			Assert::IsTrue(history.CanRedo());
+		}
+
 	private:
 		void DoCommand()
 		{

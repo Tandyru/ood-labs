@@ -23,7 +23,7 @@ public:
 
 private:
 	void EraseOldRedoCommands();
-	void DoCommand(const CCommand& command);
+	void DoCommand(CCommand& command);
 	void RemoveOldCommands();
 
 private:

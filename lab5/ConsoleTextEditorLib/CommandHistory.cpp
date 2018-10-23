@@ -13,43 +13,51 @@ const auto MAX_HISTORY_SIZE = 10;
 
 void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 {
-	// TODO: 
-	// erase after current commands
 	EraseOldRedoCommands();
-	// push back command into the history
 	m_history.push_back(move(command));
 	try
 	{
-		// try do the command
-		DoCommand(*(*m_history.rend()));
-		// remove first command if command count > 10
+		DoCommand(*(*m_history.rbegin()));
 		RemoveOldCommands();
+		m_currentPosition = m_history.size();
 	}
-	catch (std::exception& e)
+	catch (std::exception& ex)
 	{
-		// on exception remove command from history and rethrow
-
+		m_history.pop_back();
+		throw ex;
 	}
 }
 
 bool CCommandHistory::CanUndo() const
 {
-	return m_currentPosition > 0; // ?
+	return m_currentPosition > 0;
 }
 
 void CCommandHistory::Undo()
 {
-	// TODO:
+	if (CanUndo())
+	{
+		auto it = m_history.begin() + m_currentPosition - 1;
+		auto& command = **it;
+		command.Execute();
+		m_currentPosition--;
+	}
 }
 
 bool CCommandHistory::CanRedo() const
 {
-	return m_currentPosition < m_history.size(); // ?
+	return m_currentPosition < m_history.size();
 }
 
 void CCommandHistory::Redo()
 {
-	// TODO:
+	if (CanRedo())
+	{
+		auto it = m_history.begin() + m_currentPosition;
+		auto& command = **it;
+		command.Execute();
+		m_currentPosition++;
+	}
 }
 
 void CCommandHistory::EraseOldRedoCommands()
@@ -61,18 +69,17 @@ void CCommandHistory::EraseOldRedoCommands()
 	}
 }
 
-void CCommandHistory::DoCommand(const CCommand & command)
+void CCommandHistory::DoCommand(CCommand & command)
 {
-	// ??
+	command.Execute();
 }
 
 void CCommandHistory::RemoveOldCommands()
 {
 	if (m_history.size() > MAX_HISTORY_SIZE)
 	{
-
+		m_history.erase(m_history.begin(), m_history.begin() + (m_history.size() - MAX_HISTORY_SIZE));
 	}
-	// ??
 }
 
 }

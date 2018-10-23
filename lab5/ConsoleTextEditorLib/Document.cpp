@@ -13,18 +13,15 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 {
 	CheckPosition(position);
 	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, text);
-	size_t index = position ? *position : GetItemsCount();
 	m_commandHistory.Do(move(command));
-	assert(index < GetItemsCount());
-	CheckIndex(index);
-	auto item = m_impl.GetItem(index);
-	return item.GetParagraph();
 }
 
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
 	// TODO: make command and do it
+	//auto command = make_unique<command::CInsertImageCommand>(m_impl, position, text);
+	//m_commandHistory.Do(move(command));
 	/*
 	return InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
 		return make_shared<CImage>(path, width, height);
