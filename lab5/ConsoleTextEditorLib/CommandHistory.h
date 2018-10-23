@@ -22,6 +22,11 @@ public:
 	void Redo();
 
 private:
+	void EraseOldRedoCommands();
+	void DoCommand(const CCommand& command);
+	void RemoveOldCommands();
+
+private:
 	vector<unique_ptr<CCommand>> m_history;
 	size_t m_currentPosition = 0;
 };

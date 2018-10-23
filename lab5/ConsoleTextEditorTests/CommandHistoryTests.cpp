@@ -2,7 +2,7 @@
 #include "CppUnitTest.h"
 #include "../ConsoleTextEditorLib/CommandHistory.h"
 #include "../ConsoleTextEditorLib/InsertParagraphCommand.h"
-#include "DocumentMock.h"
+#include "DocumentImplMock.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,7 +14,7 @@ namespace ConsoleTextEditorTests
 	{
 	public:
 		CCommandHistory history;
-		CDocumentMock document;
+		CDocumentImplMock document;
 
 		TEST_METHOD(TestInitialState)
 		{
