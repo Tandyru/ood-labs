@@ -5,12 +5,40 @@ namespace document
 {
 namespace command
 {
-/*
-CReplaceTextCommand::CReplaceTextCommand(unique_ptr<input_command::ReplaceTextInputCommand>&& inputCommand, const document::IDocument & document)
+
+CReplaceTextCommand::CReplaceTextCommand(impl::IDocumentImpl& document, size_t position, const string& text)
 	: CCommand(CommandType::ReplaceText, document)
-	, m_inputCommand(move(inputCommand))
+	, m_position(position)
+	, m_text(text)
 {
 }
-*/
+
+void CReplaceTextCommand::Execute()
+{
+	CCommand::Execute();
+	auto paragraph = GetParagraph();
+	m_oldText = paragraph->GetText();
+	paragraph->SetText(m_text);
+}
+
+void CReplaceTextCommand::Unexecute()
+{
+	CCommand::Unexecute();
+	auto paragraph = GetParagraph();
+	paragraph->SetText(m_oldText);
+	m_oldText.erase();
+}
+
+shared_ptr<IParagraph> CReplaceTextCommand::GetParagraph()
+{
+	auto item = m_document.GetItem(m_position);
+	auto paragraph = item.GetParagraph();
+	if (!paragraph)
+	{
+		throw std::runtime_error("Invalid document replace text command");
+	}
+	return paragraph;
+}
+
 }
 }

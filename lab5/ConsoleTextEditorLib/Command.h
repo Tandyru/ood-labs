@@ -7,18 +7,25 @@ namespace document
 namespace command
 {
 
+class ICommandVisitor;
+
 class CCommand
 {
 public:
-	CCommand(CommandType type, document::impl::IDocumentImpl& document);
+	CCommand(CommandType type, impl::IDocumentImpl& document);
 	virtual ~CCommand() = default;
 
-	virtual void Execute() = 0;
-	virtual void Unexecute() = 0;
+	virtual void Execute();
+	virtual void Unexecute();
+
+	virtual void Accept(ICommandVisitor & visitor) const;
+
+	impl::IDocumentImpl& GetDocument() const;
 
 protected:
 	CommandType m_type;
 	document::impl::IDocumentImpl& m_document;
+	bool m_executed = false;
 };
 
 }

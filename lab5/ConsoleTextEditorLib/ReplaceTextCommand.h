@@ -5,7 +5,7 @@ namespace document
 {
 namespace command
 {
-/*
+
 class CReplaceTextCommand : public CCommand
 {
 public:
@@ -15,7 +15,13 @@ public:
 	void Unexecute() override;
 
 private:
+	shared_ptr<IParagraph> GetParagraph();
+
+private:
+	size_t m_position;
+	string m_text;
+	string m_oldText;
 };
-*/
+
 }
 }

@@ -14,6 +14,8 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 	CheckPosition(position);
 	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, text);
 	m_commandHistory.Do(move(command));
+	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
+	return lastItem.GetParagraph();
 }
 
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,

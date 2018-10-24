@@ -165,6 +165,21 @@
     <ClInclude Include="DocumentItemPosition.h">
       <Filter>input_command</Filter>
     </ClInclude>
+    <ClInclude Include="DeleteItemCommand.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommandCombiner.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandCombiner.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertImageCommand.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommandVisitor.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -268,6 +283,15 @@
     </ClCompile>
     <ClCompile Include="DocumentImpl.cpp">
       <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteItemCommand.cpp">
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandCombiner.cpp">
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertImageCommand.cpp">
+      <Filter>document\command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ private:
 	void EraseOldRedoCommands();
 	void DoCommand(CCommand& command);
 	void RemoveOldCommands();
+	bool TryCombineWithPrev(CCommand& command);
 
 private:
 	vector<unique_ptr<CCommand>> m_history;

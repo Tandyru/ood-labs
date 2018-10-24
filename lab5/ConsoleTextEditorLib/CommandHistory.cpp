@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CommandHistory.h"
+#include "CommandCombiner.h"
 
 namespace document
 {
@@ -14,10 +15,16 @@ const auto MAX_HISTORY_SIZE = 10;
 void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 {
 	EraseOldRedoCommands();
-	m_history.push_back(move(command));
+	CCommand* cmd = &(*command);
+	if (!TryCombineWithPrev(*cmd))
+	{
+		m_history.push_back(move(command));
+		unique_ptr<CCommand>& cmdPtr = *m_history.rbegin();
+		cmd = &*(cmdPtr);
+	}
 	try
 	{
-		DoCommand(*(*m_history.rbegin()));
+		DoCommand(*cmd);
 		RemoveOldCommands();
 		m_currentPosition = m_history.size();
 	}
@@ -80,6 +87,23 @@ void CCommandHistory::RemoveOldCommands()
 	{
 		m_history.erase(m_history.begin(), m_history.begin() + (m_history.size() - MAX_HISTORY_SIZE));
 	}
+}
+
+bool CCommandHistory::TryCombineWithPrev(CCommand & command)
+{
+	if (m_history.size() > 0 && m_currentPosition == m_history.size())
+	{
+		auto preCommandIt = m_history.rbegin();
+		auto& prevCommand = **preCommandIt;
+		CCommandCombiner combiner;
+		auto combined = combiner.Combine(prevCommand, command);
+		if (combined)
+		{
+			m_history.pop_back();
+			m_history.push_back(move(combined));
+		}
+	}
+	return false;
 }
 
 }

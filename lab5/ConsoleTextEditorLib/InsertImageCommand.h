@@ -7,23 +7,21 @@ namespace document
 namespace command
 {
 
-class CInsertParagraphCommand : public CCommand
+class CInsertImageCommand : public CCommand
 {
 public:
-	CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, const string& text);
+	CInsertImageCommand(impl::IDocumentImpl& document, optional<size_t> position, unsigned int width, unsigned int height, string path);
 
 	void Execute() override;
 	void Unexecute() override;
 
 	void Accept(ICommandVisitor & visitor) const override;
 
-	size_t GetInsertedPosition() const;
-	string GetText() const;
-
 private:
 	optional<size_t> m_position;
-	size_t m_insertedPosition = 0;
-	string m_text;
+	unsigned int m_width;
+	unsigned int m_height;
+	string m_path;
 };
 
 }

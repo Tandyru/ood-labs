@@ -150,10 +150,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandCombiner.h" />
     <ClInclude Include="CommandHistory.h" />
     <ClInclude Include="CommandParser.h" />
     <ClInclude Include="CommandType.h" />
     <ClInclude Include="ConstDocumentItem.h" />
+    <ClInclude Include="DeleteItemCommand.h" />
     <ClInclude Include="DeleteItemCommandParser.h" />
     <ClInclude Include="DeleteItemInputCommand.h" />
     <ClInclude Include="Document.h" />
@@ -162,6 +164,8 @@
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
+    <ClInclude Include="ICommandCombiner.h" />
+    <ClInclude Include="ICommandVisitor.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IDocumentCommandFactory.h" />
     <ClInclude Include="IDocumentImpl.h" />
@@ -172,6 +176,7 @@
     <ClInclude Include="InputCommandParser.h" />
     <ClInclude Include="InputCommandType.h" />
     <ClInclude Include="IInputCommandExecutor.h" />
+    <ClInclude Include="InsertImageCommand.h" />
     <ClInclude Include="InsertImageCommandParser.h" />
     <ClInclude Include="InsertImageInputCommand.h" />
     <ClInclude Include="InsertParagraphCommand.h" />
@@ -197,10 +202,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandCombiner.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="CommandParser.cpp" />
     <ClCompile Include="CommandType.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
+    <ClCompile Include="DeleteItemCommand.cpp" />
     <ClCompile Include="DeleteItemCommandParser.cpp" />
     <ClCompile Include="DeleteItemInputCommand.cpp" />
     <ClCompile Include="Document.cpp" />
@@ -213,6 +220,7 @@
     <ClCompile Include="InputCommandExecutor.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
     <ClCompile Include="InputCommandType.cpp" />
+    <ClCompile Include="InsertImageCommand.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />
     <ClCompile Include="InsertImageInputCommand.cpp" />
     <ClCompile Include="InsertParagraphCommand.cpp" />
