@@ -34,9 +34,18 @@ public:
 	const CInsertImageCommand* insertImageCommand = nullptr;
 };
 
+bool CommandPositionsAreEqual(const CDeleteItemCommand& deleteItem, const CInsertParagraphCommand& insertParagraph)
+{
+	if (!(insertParagraph.GetPosition()))
+	{
+		return deleteItem.GetLastItemDeleted();
+	}
+	return deleteItem.GetPosition() == *insertParagraph.GetPosition();
+}
+
 bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertParagraphCommand& insertParagraph)
 {
-	if (deleteItem.GetPosition() == insertParagraph.GetInsertedPosition())
+	if (CommandPositionsAreEqual(deleteItem, insertParagraph))
 	{
 		auto paragraph = deleteItem.GetDeletedParagraph();
 		if (paragraph)
@@ -52,7 +61,7 @@ bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertImageComman
 	if (deleteItem.GetPosition() == insertImage.GetInsertedPosition())
 	{
 		auto image = deleteItem.GetDeletedImage();
-		if (image)
+		if (image && image->GetPath() == insertImage.GetPath())
 		{
 			return true;
 		}
@@ -72,12 +81,12 @@ bool CCommandCombiner::ShoudCombine(const CCommand & prevCommand, const CCommand
 	if (prevCommandVisitor.deleteItemCommand != nullptr && 
 		nextCommandVisitor.insertParagraphCommand != nullptr)
 	{
-		return ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertParagraphCommand);
+		return command::ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertParagraphCommand);
 	}
 	if (prevCommandVisitor.deleteItemCommand != nullptr &&
 		nextCommandVisitor.insertImageCommand != nullptr)
 	{
-		return ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertImageCommand);
+		return command::ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertImageCommand);
 	}
 	return false;
 }

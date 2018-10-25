@@ -17,6 +17,7 @@ void CDeleteItemCommand::Execute()
 {
 	CCommand::Execute();
 	auto item = m_document.GetItem(m_position);
+	m_lastItemDeleted = m_position == (m_document.GetItemsCount() - 1);
 	m_paragraph = item.GetParagraph();
 	m_image = item.GetImage();
 	m_document.DeleteItem(m_position);
@@ -55,6 +56,12 @@ shared_ptr<IParagraph> CDeleteItemCommand::GetDeletedParagraph() const
 shared_ptr<IImage> CDeleteItemCommand::GetDeletedImage() const
 {
 	return m_image;
+}
+
+bool CDeleteItemCommand::GetLastItemDeleted() const
+{
+	assert(m_executed);
+	return m_lastItemDeleted;
 }
 
 }

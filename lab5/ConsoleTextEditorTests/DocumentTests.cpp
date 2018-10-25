@@ -155,5 +155,18 @@ namespace ConsoleTextEditorTests
 			document.DeleteItem(0);
 			Assert::AreEqual(size_t(0), document.GetItemsCount());
 		}
+
+		TEST_METHOD(TestReplaceText)
+		{
+			document.InsertParagraph("oldText");
+			document.DeleteItem(0);
+			const string expectedText = "newText";
+			document.InsertParagraph(expectedText);
+			Assert::AreEqual(size_t(1), document.GetItemsCount());
+			Assert::IsTrue(document.CanUndo());
+			document.Undo();
+			Assert::IsFalse(document.CanUndo());
+		}
+
 	};
 }

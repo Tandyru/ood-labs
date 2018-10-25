@@ -40,5 +40,10 @@ size_t CInsertImageCommand::GetInsertedPosition() const
 	return m_insertedPosition;
 }
 
+Path CInsertImageCommand::GetPath() const
+{
+	return m_path;
+}
+
 }
 }

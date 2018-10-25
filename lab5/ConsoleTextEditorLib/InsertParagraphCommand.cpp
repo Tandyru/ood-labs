@@ -32,10 +32,15 @@ void CInsertParagraphCommand::Accept(ICommandVisitor & visitor) const
 	visitor.Visit(*this);
 }
 
-size_t CInsertParagraphCommand::GetInsertedPosition() const
+//size_t CInsertParagraphCommand::GetInsertedPosition() const
+//{
+//	assert(m_executed);
+//	return m_insertedPosition;
+//}
+
+optional<size_t> CInsertParagraphCommand::GetPosition() const
 {
-	assert(m_executed);
-	return m_insertedPosition;
+	return m_position;
 }
 
 string CInsertParagraphCommand::GetText() const

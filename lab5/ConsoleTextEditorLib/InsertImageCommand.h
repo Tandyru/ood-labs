@@ -18,6 +18,7 @@ public:
 	void Accept(ICommandVisitor & visitor) const override;
 
 	size_t GetInsertedPosition() const;
+	Path GetPath() const;
 
 private:
 	optional<size_t> m_position;

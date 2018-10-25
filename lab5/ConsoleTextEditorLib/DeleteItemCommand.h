@@ -20,11 +20,13 @@ public:
 	size_t GetPosition() const;
 	shared_ptr<IParagraph> GetDeletedParagraph() const;
 	shared_ptr<IImage> GetDeletedImage() const;
+	bool GetLastItemDeleted() const;
 
 private:
 	size_t m_position;
 	shared_ptr<IParagraph> m_paragraph;
 	shared_ptr<IImage> m_image;
+	bool m_lastItemDeleted = false;
 };
 
 }
