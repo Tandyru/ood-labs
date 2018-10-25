@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CommandCombiner.h"
 #include "ICommandVisitor.h"
-#include "ReplaceTextCommand.h"
+#include "CompositeCommand.h"
 
 namespace document
 {
@@ -34,28 +34,35 @@ public:
 	const CInsertImageCommand* insertImageCommand = nullptr;
 };
 
-unique_ptr<CCommand> Combine(const CDeleteItemCommand& deleteItem, const CInsertParagraphCommand& insertParagraph)
+bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertParagraphCommand& insertParagraph)
 {
 	if (deleteItem.GetPosition() == insertParagraph.GetInsertedPosition())
 	{
 		auto paragraph = deleteItem.GetDeletedParagraph();
 		if (paragraph)
 		{
-			return make_unique<CReplaceTextCommand>(deleteItem.GetDocument(), deleteItem.GetPosition(), insertParagraph.GetText());
+			return true;
 		}
 	}
-	return unique_ptr<CCommand>();
+	return false;
 }
 
-unique_ptr<CCommand> Combine(const CDeleteItemCommand& deleteItem, const CInsertImageCommand& insertImage)
+bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertImageCommand& insertImage)
 {
-	// TODO:
-	return unique_ptr<CCommand>();
+	if (deleteItem.GetPosition() == insertImage.GetInsertedPosition())
+	{
+		auto image = deleteItem.GetDeletedImage();
+		if (image)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 }
 
-unique_ptr<CCommand> CCommandCombiner::Combine(const CCommand & prevCommand, const CCommand & nextCommand) const
+bool CCommandCombiner::ShoudCombine(const CCommand & prevCommand, const CCommand & nextCommand)
 {
 	CCommandVisitor prevCommandVisitor;
 	prevCommand.Accept(prevCommandVisitor);
@@ -65,14 +72,14 @@ unique_ptr<CCommand> CCommandCombiner::Combine(const CCommand & prevCommand, con
 	if (prevCommandVisitor.deleteItemCommand != nullptr && 
 		nextCommandVisitor.insertParagraphCommand != nullptr)
 	{
-		return Combine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertParagraphCommand);
+		return ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertParagraphCommand);
 	}
 	if (prevCommandVisitor.deleteItemCommand != nullptr &&
 		nextCommandVisitor.insertImageCommand != nullptr)
 	{
-		return Combine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertImageCommand);
+		return ShoudCombine(*prevCommandVisitor.deleteItemCommand, *nextCommandVisitor.insertImageCommand);
 	}
-	return unique_ptr<CCommand>();
+	return false;
 }
 
 }

@@ -15,7 +15,7 @@ public:
 	CInputCommandExecutor(document::IDocument& document, ostream& out,
 		const HelpCommandHandler& helpHandler);
 	CInputCommandExecutor(const CInputCommandExecutor&) = delete;
-
+	
 	// IInputCommandExecutor
 	void ExecuteCommand(InputCommandType type) override;
 	void ExecuteCommand(const InsertParagraphInputCommand& command) override;

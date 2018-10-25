@@ -1,11 +1,20 @@
 #include "stdafx.h"
 #include "Document.h"
 #include "InsertParagraphCommand.h"
+#include "InsertImageCommand.h"
+#include "DeleteItemCommand.h"
+#include "CommandCombiner.h"
 
 namespace document
 {
 
+using namespace command;
+
 CDocument::CDocument()
+//: m_commandHistory(std::bind(&(CCommandCombiner::ShoudCombine)))
+	: m_commandHistory([](const CCommand& cmd1, const CCommand& cmd2) {
+		return command::CCommandCombiner::ShoudCombine(cmd1, cmd2);
+	})
 {
 }
 
@@ -21,15 +30,11 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
-	// TODO: make command and do it
-	//auto command = make_unique<command::CInsertImageCommand>(m_impl, position, text);
-	//m_commandHistory.Do(move(command));
-	/*
-	return InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
-		return make_shared<CImage>(path, width, height);
-	});
-	*/
-	return shared_ptr<IImage>();
+	CheckPosition(position);
+	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, width, height, path);
+	m_commandHistory.Do(move(command));
+	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
+	return lastItem.GetImage();
 }
 
 size_t CDocument::GetItemsCount()const
@@ -52,7 +57,8 @@ CDocumentItem CDocument::GetItem(size_t index)
 void CDocument::DeleteItem(size_t index)
 {
 	CheckIndex(index);
-	// TODO: make command and do it
+	auto command = make_unique<command::CDeleteItemCommand>(m_impl, index);
+	m_commandHistory.Do(move(command));
 }
 
 string CDocument::GetTitle()const

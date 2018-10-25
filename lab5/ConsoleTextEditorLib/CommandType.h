@@ -9,9 +9,8 @@ enum class CommandType
 {
 	InsertParagraph = 1,
 	InsertImage,
-	ReplaceText,
-	ResizeImage,
 	DeleteItem,
+	Composite,
 };
 
 }

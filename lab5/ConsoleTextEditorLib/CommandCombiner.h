@@ -1,16 +1,16 @@
 #pragma once
-#include "ICommandCombiner.h"
+#include "Command.h"
 
 namespace document
 {
 namespace command
 {
 
-class CCommandCombiner : public ICommandCombiner
+class CCommandCombiner
 {
 public:
 	// Inherited via ICommandCombiner
-	virtual unique_ptr<CCommand> Combine(const CCommand & prevCommand, const CCommand & nextCommand) const override;
+	static bool ShoudCombine(const CCommand & prevCommand, const CCommand & nextCommand);
 };
 
 }

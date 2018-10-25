@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CommandHistory.h"
-#include "CommandCombiner.h"
+#include "CompositeCommand.h"
 
 namespace document
 {
@@ -12,19 +12,33 @@ namespace
 const auto MAX_HISTORY_SIZE = 10;
 }
 
+CCommandHistory::CCommandHistory(const ShouldCombine & shouldCombine)
+	: m_shouldCombine(shouldCombine)
+{
+}
+
 void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 {
 	EraseOldRedoCommands();
-	CCommand* cmd = &(*command);
-	if (!TryCombineWithPrev(*cmd))
+	if (ShoudCombineWithPrev(*command))
+	{
+		unique_ptr<CCommand>& lastCommand = *(m_history.rbegin());
+		lastCommand->Unexecute();
+		CCompositeCommand::Commands commands;
+		commands.push_back(move(lastCommand));
+		commands.push_back(move(command));
+		auto compositeCommand = make_unique<CCompositeCommand>(command->GetDocument(), move(commands));
+		m_history.pop_back();
+		m_history.push_back(move(compositeCommand));
+	}
+	else
 	{
 		m_history.push_back(move(command));
-		unique_ptr<CCommand>& cmdPtr = *m_history.rbegin();
-		cmd = &*(cmdPtr);
 	}
+	CCommand& cmd = **m_history.rbegin();
 	try
 	{
-		DoCommand(*cmd);
+		DoCommand(cmd);
 		RemoveOldCommands();
 		m_currentPosition = m_history.size();
 	}
@@ -46,7 +60,7 @@ void CCommandHistory::Undo()
 	{
 		auto it = m_history.begin() + m_currentPosition - 1;
 		auto& command = **it;
-		command.Execute();
+		command.Unexecute();
 		m_currentPosition--;
 	}
 }
@@ -89,19 +103,13 @@ void CCommandHistory::RemoveOldCommands()
 	}
 }
 
-bool CCommandHistory::TryCombineWithPrev(CCommand & command)
+bool CCommandHistory::ShoudCombineWithPrev(CCommand & command)
 {
-	if (m_history.size() > 0 && m_currentPosition == m_history.size())
+	if (m_shouldCombine && m_history.size() > 0 && m_currentPosition == m_history.size())
 	{
 		auto preCommandIt = m_history.rbegin();
 		auto& prevCommand = **preCommandIt;
-		CCommandCombiner combiner;
-		auto combined = combiner.Combine(prevCommand, command);
-		if (combined)
-		{
-			m_history.pop_back();
-			m_history.push_back(move(combined));
-		}
+		return m_shouldCombine(prevCommand, command);
 	}
 	return false;
 }

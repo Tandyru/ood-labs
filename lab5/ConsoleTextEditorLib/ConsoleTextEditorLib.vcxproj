@@ -154,12 +154,12 @@
     <ClInclude Include="CommandHistory.h" />
     <ClInclude Include="CommandParser.h" />
     <ClInclude Include="CommandType.h" />
+    <ClInclude Include="CompositeCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
     <ClInclude Include="DeleteItemCommand.h" />
     <ClInclude Include="DeleteItemCommandParser.h" />
     <ClInclude Include="DeleteItemInputCommand.h" />
     <ClInclude Include="Document.h" />
-    <ClInclude Include="DocumentCommandFactory.h" />
     <ClInclude Include="DocumentImpl.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
@@ -188,7 +188,6 @@
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="Paragraph.h" />
     <ClInclude Include="PositionParser.h" />
-    <ClInclude Include="ReplaceTextCommand.h" />
     <ClInclude Include="ReplaceTextCommandParser.h" />
     <ClInclude Include="ReplaceTextInputCommand.h" />
     <ClInclude Include="ResizeImageCommandParser.h" />
@@ -206,12 +205,12 @@
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="CommandParser.cpp" />
     <ClCompile Include="CommandType.cpp" />
+    <ClCompile Include="CompositeCommand.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
     <ClCompile Include="DeleteItemCommand.cpp" />
     <ClCompile Include="DeleteItemCommandParser.cpp" />
     <ClCompile Include="DeleteItemInputCommand.cpp" />
     <ClCompile Include="Document.cpp" />
-    <ClCompile Include="DocumentCommandFactory.cpp" />
     <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
@@ -228,7 +227,6 @@
     <ClCompile Include="InsertParagraphInputCommand.cpp" />
     <ClCompile Include="Paragraph.cpp" />
     <ClCompile Include="PositionParser.cpp" />
-    <ClCompile Include="ReplaceTextCommand.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />
     <ClCompile Include="ReplaceTextInputCommand.cpp" />
     <ClCompile Include="ResizeImageCommandParser.cpp" />

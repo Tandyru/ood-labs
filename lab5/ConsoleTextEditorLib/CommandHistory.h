@@ -9,7 +9,8 @@ namespace command
 class CCommandHistory
 {
 public:
-	CCommandHistory() = default;
+	using ShouldCombine = function<bool(CCommand&, CCommand&)>;
+	CCommandHistory(const ShouldCombine& shouldCombine = ShouldCombine());
 
 	CCommandHistory(const CCommandHistory&) = delete;
 
@@ -25,9 +26,10 @@ private:
 	void EraseOldRedoCommands();
 	void DoCommand(CCommand& command);
 	void RemoveOldCommands();
-	bool TryCombineWithPrev(CCommand& command);
+	bool ShoudCombineWithPrev(CCommand& command);
 
 private:
+	ShouldCombine m_shouldCombine;
 	vector<unique_ptr<CCommand>> m_history;
 	size_t m_currentPosition = 0;
 };

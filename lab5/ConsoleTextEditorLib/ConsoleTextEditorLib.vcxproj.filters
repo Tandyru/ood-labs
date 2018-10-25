@@ -141,16 +141,10 @@
     <ClInclude Include="HelpCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
-    <ClInclude Include="ReplaceTextCommand.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
     <ClInclude Include="InsertParagraphCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="IDocumentCommandFactory.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
-    <ClInclude Include="DocumentCommandFactory.h">
       <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="IInputCommandExecutor.h">
@@ -178,6 +172,9 @@
       <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="ICommandVisitor.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositeCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
   </ItemGroup>
@@ -272,13 +269,7 @@
     <ClCompile Include="InsertImageInputCommand.cpp">
       <Filter>input_command</Filter>
     </ClCompile>
-    <ClCompile Include="ReplaceTextCommand.cpp">
-      <Filter>document\command</Filter>
-    </ClCompile>
     <ClCompile Include="InsertParagraphCommand.cpp">
-      <Filter>document\command</Filter>
-    </ClCompile>
-    <ClCompile Include="DocumentCommandFactory.cpp">
       <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="DocumentImpl.cpp">
@@ -291,6 +282,9 @@
       <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="InsertImageCommand.cpp">
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositeCommand.cpp">
       <Filter>document\command</Filter>
     </ClCompile>
   </ItemGroup>
