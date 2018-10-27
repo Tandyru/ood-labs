@@ -164,6 +164,7 @@
     <ClCompile Include="CommandHistoryTests.cpp" />
     <ClCompile Include="DocumentMock.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
+    <ClCompile Include="IntegrationTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

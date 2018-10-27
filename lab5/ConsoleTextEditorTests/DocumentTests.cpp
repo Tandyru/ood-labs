@@ -140,6 +140,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsFalse(bool(item.GetParagraph()));
 			Assert::AreEqual(string(expectedPath), image->GetPath().string());
 			Assert::AreEqual(expectedWidth, image->GetWidth());
+			Assert::AreEqual(expectedHeight, image->GetHeight());
 		}
 
 		TEST_METHOD(TestGetItemInvalidIndex)
@@ -158,15 +159,33 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestReplaceText)
 		{
+			const string expectedOldText = "oldText";
 			document.InsertParagraph("oldText");
 			document.DeleteItem(0);
 			const string expectedText = "newText";
 			document.InsertParagraph(expectedText);
 			Assert::AreEqual(size_t(1), document.GetItemsCount());
 			Assert::IsTrue(document.CanUndo());
-			document.Undo();
+			document.Undo(); // undo "replace text" command
+			Assert::IsTrue(document.CanUndo());
+			const auto paragraph = document.GetItem(0).GetParagraph();
+			Assert::AreEqual(string(expectedOldText), paragraph->GetText());
+			document.Undo(); // undo "insert paragraph" command
 			Assert::IsFalse(document.CanUndo());
 		}
 
+		TEST_METHOD(TestResizeImage)
+		{
+			Path imagePath = "image/path";
+			document.InsertImage(imagePath, 300, 200);
+			document.DeleteItem(0);
+			document.InsertImage(imagePath, 600, 400);
+			Assert::AreEqual(size_t(1), document.GetItemsCount());
+			Assert::IsTrue(document.CanUndo());
+			document.Undo(); // undo "resize image" command
+			Assert::IsTrue(document.CanUndo());
+			document.Undo(); // undo "insert image" command
+			Assert::IsFalse(document.CanUndo());
+		}
 	};
 }

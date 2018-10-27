@@ -24,10 +24,11 @@ void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 	{
 		unique_ptr<CCommand>& lastCommand = *(m_history.rbegin());
 		lastCommand->Unexecute();
+		auto& document = lastCommand->GetDocument();
 		CCompositeCommand::Commands commands;
 		commands.push_back(move(lastCommand));
 		commands.push_back(move(command));
-		auto compositeCommand = make_unique<CCompositeCommand>(command->GetDocument(), move(commands));
+		auto compositeCommand = make_unique<CCompositeCommand>(document, move(commands));
 		m_history.pop_back();
 		m_history.push_back(move(compositeCommand));
 	}

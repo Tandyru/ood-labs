@@ -177,6 +177,12 @@
     <ClInclude Include="CompositeCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
+    <ClInclude Include="InputCommandsReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentDumper.h">
+      <Filter>document</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -286,6 +292,12 @@
     </ClCompile>
     <ClCompile Include="CompositeCommand.cpp">
       <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCommandsReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentDumper.cpp">
+      <Filter>document</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

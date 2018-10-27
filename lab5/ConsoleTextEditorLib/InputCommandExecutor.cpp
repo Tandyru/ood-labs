@@ -2,6 +2,7 @@
 #include "InputCommandExecutor.h"
 #include "InvalidPositionException.h"
 #include "ConstDocumentItem.h"
+#include "DocumentDumper.h"
 
 namespace input_command
 {
@@ -22,7 +23,7 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 		m_helpHandler(m_out);
 		break;
 	case InputCommandType::List:
-		// TODO:
+		DumpDocument(m_document, m_out);
 		break;
 	case InputCommandType::Undo:
 		if (m_document.CanUndo())

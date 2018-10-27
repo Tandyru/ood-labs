@@ -160,6 +160,7 @@
     <ClInclude Include="DeleteItemCommandParser.h" />
     <ClInclude Include="DeleteItemInputCommand.h" />
     <ClInclude Include="Document.h" />
+    <ClInclude Include="DocumentDumper.h" />
     <ClInclude Include="DocumentImpl.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandExecutor.h" />
     <ClInclude Include="InputCommandParser.h" />
+    <ClInclude Include="InputCommandsReader.h" />
     <ClInclude Include="InputCommandType.h" />
     <ClInclude Include="IInputCommandExecutor.h" />
     <ClInclude Include="InsertImageCommand.h" />
@@ -211,6 +213,7 @@
     <ClCompile Include="DeleteItemCommandParser.cpp" />
     <ClCompile Include="DeleteItemInputCommand.cpp" />
     <ClCompile Include="Document.cpp" />
+    <ClCompile Include="DocumentDumper.cpp" />
     <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandExecutor.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
+    <ClCompile Include="InputCommandsReader.cpp" />
     <ClCompile Include="InputCommandType.cpp" />
     <ClCompile Include="InsertImageCommand.cpp" />
     <ClCompile Include="InsertImageCommandParser.cpp" />

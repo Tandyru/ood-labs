@@ -43,6 +43,15 @@ bool CommandPositionsAreEqual(const CDeleteItemCommand& deleteItem, const CInser
 	return deleteItem.GetPosition() == *insertParagraph.GetPosition();
 }
 
+bool CommandPositionsAreEqual(const CDeleteItemCommand& deleteItem, const CInsertImageCommand& insertImage)
+{
+	if (!(insertImage.GetPosition()))
+	{
+		return deleteItem.GetLastItemDeleted();
+	}
+	return deleteItem.GetPosition() == *insertImage.GetPosition();
+}
+
 bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertParagraphCommand& insertParagraph)
 {
 	if (CommandPositionsAreEqual(deleteItem, insertParagraph))
@@ -58,7 +67,7 @@ bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertParagraphCo
 
 bool ShoudCombine(const CDeleteItemCommand& deleteItem, const CInsertImageCommand& insertImage)
 {
-	if (deleteItem.GetPosition() == insertImage.GetInsertedPosition())
+	if (CommandPositionsAreEqual(deleteItem, insertImage))
 	{
 		auto image = deleteItem.GetDeletedImage();
 		if (image && image->GetPath() == insertImage.GetPath())

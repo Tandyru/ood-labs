@@ -33,11 +33,16 @@ void CInsertImageCommand::Accept(ICommandVisitor & visitor) const
 {
 	visitor.Visit(*this);
 }
-
+/*
 size_t CInsertImageCommand::GetInsertedPosition() const
 {
 	assert(m_executed);
 	return m_insertedPosition;
+}
+*/
+optional<size_t> CInsertImageCommand::GetPosition() const
+{
+	return m_position;
 }
 
 Path CInsertImageCommand::GetPath() const
