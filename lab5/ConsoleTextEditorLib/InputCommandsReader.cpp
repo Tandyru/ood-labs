@@ -6,12 +6,25 @@
 using namespace input_command;
 using namespace command_parser;
 
-void ReadInputCommands(istream & input, const std::function<void(unique_ptr<input_command::InputCommand>&&)>& handler)
+void ReadInputCommands(istream & input, ostream & out, const InputCommandHandler& handler, const InputCommandErrorHandler& errorHandler)
 {
+	auto outputPrompt = [&out] {
+		out << ">";
+	};
+
+	outputPrompt();
 	string readline;
 	while (getline(input, readline))
 	{
-		auto inputCommand = ParseInputCommand(readline);
-		handler(move(inputCommand));
+		try
+		{
+			auto inputCommand = ParseInputCommand(readline);
+			handler(move(inputCommand));
+		}
+		catch (const exception& ex)
+		{
+			errorHandler(ex);
+		}
+		outputPrompt();
 	}
 }

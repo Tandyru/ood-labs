@@ -2,7 +2,7 @@
 #include "SaveInputCommand.h"
 #include "HelpCommandExecutor.h"
 
-namespace imput_command
+namespace input_command
 {
 
 void ShowCommandHelp(ostream& out)

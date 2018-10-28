@@ -67,7 +67,15 @@ unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input)
 	string str(input);
 	if (regex_search(str.c_str(), match, re) && match.size() > 1) {
 		const string name = match[1];
-		auto type = StringMapEnum(cmdNameMap, name);
+		InputCommandType type;
+		try 
+		{
+			type = StringMapEnum(cmdNameMap, name);
+		}
+		catch (const exception& ex) 
+		{
+			throw exception("Unknown command");
+		}
 		return ParseInputCommand(input, type);
 	}
 	throw std::exception("Invalid command string format");

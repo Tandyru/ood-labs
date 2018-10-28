@@ -17,7 +17,6 @@ public:
 
 	void Accept(ICommandVisitor & visitor) const override;
 
-	//size_t GetInsertedPosition() const;
 	optional<size_t> GetPosition() const;
 	string GetText() const;
 

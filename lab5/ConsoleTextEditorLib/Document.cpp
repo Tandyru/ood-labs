@@ -105,7 +105,7 @@ void CDocument::CheckPosition(optional<size_t> position) const
 
 void CDocument::CheckIndex(size_t index)const
 {
-	if (index >= GetItemsCount())
+	if (index > GetItemsCount())
 	{
 		throw CInvalidPositionException();
 	}

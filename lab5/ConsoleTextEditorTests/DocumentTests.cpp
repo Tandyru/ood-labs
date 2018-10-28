@@ -125,6 +125,19 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(string(expectedText), paragraph->GetText());
 		}
 
+		TEST_METHOD(TestInsertParagraphIntoNonendPosition)
+		{
+			const auto secondParagraphText = "First paragraph";
+			document.InsertParagraph("Second paragraph");
+			const auto firstParagraphText = "First paragraph";
+			document.InsertParagraph(firstParagraphText, 0);
+			Assert::AreEqual(size_t(2), document.GetItemsCount());
+			const CConstDocumentItem item = document.GetItem(0);
+			const auto paragraph = item.GetParagraph();
+			Assert::IsTrue(bool(paragraph));
+			Assert::AreEqual(string(firstParagraphText), paragraph->GetText());
+		}
+
 		TEST_METHOD(TestInsertImage)
 		{
 			const auto expectedPath = "image/file/path";
@@ -165,11 +178,13 @@ namespace ConsoleTextEditorTests
 			const string expectedText = "newText";
 			document.InsertParagraph(expectedText);
 			Assert::AreEqual(size_t(1), document.GetItemsCount());
+			const auto paragraph = document.GetItem(0).GetParagraph();
+			Assert::AreEqual(string(expectedText), paragraph->GetText());
 			Assert::IsTrue(document.CanUndo());
 			document.Undo(); // undo "replace text" command
 			Assert::IsTrue(document.CanUndo());
-			const auto paragraph = document.GetItem(0).GetParagraph();
-			Assert::AreEqual(string(expectedOldText), paragraph->GetText());
+			const auto paragraph2 = document.GetItem(0).GetParagraph();
+			Assert::AreEqual(string(expectedOldText), paragraph2->GetText());
 			document.Undo(); // undo "insert paragraph" command
 			Assert::IsFalse(document.CanUndo());
 		}
