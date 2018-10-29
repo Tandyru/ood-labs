@@ -1,6 +1,7 @@
 #pragma once 
 #include "Color.h"
 #include "ShapeType.h"
+#include "ICanvas.h"
 
 namespace shape
 {
@@ -15,7 +16,10 @@ namespace shape
 
 		shape::ShapeType GetType() const;
 
-		bool operator==(const CShape& shape) const;
+		virtual void Draw(ICanvas& canvas) = 0;
+
+		virtual bool operator==(const CShape& shape) const;
+
 	private:
 		shape::ShapeType m_type;
 		const Color m_color;

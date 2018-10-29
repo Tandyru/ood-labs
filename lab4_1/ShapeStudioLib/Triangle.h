@@ -12,7 +12,9 @@ namespace shape
 		Point GetVertex2() const;
 		Point GetVertex3() const;
 
-		bool operator==(const CTriangle& triangle) const;
+		void Draw(ICanvas& canvas) override;
+
+		bool operator==(const CShape& shape) const override;
 	private:
 		const Point m_vertex1;
 		const Point m_vertex2;

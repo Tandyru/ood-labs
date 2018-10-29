@@ -26,9 +26,23 @@ namespace shape
 		return m_verticalRadius;
 	}
 
-	bool CEllipse::operator==(const CEllipse& ellipse) const
+	void CEllipse::Draw(ICanvas & canvas)
 	{
-		return CShape::operator==(ellipse) &&
+		canvas.SetColor(GetColor());
+		auto center = GetCenter();
+		auto hRadius = GetHorizontalRadius();
+		auto vRadius = GetVerticalRadius();
+		canvas.DrawEllipse({ center.x - hRadius, center.y - vRadius }, hRadius * 2, vRadius * 2);
+	}
+
+	bool CEllipse::operator==(const CShape& shape) const
+	{
+		if (!CShape::operator==(shape))
+		{
+			return false;
+		}
+		const CEllipse& ellipse = dynamic_cast<const CEllipse&>(shape);
+		return 
 			m_center == ellipse.m_center &&
 			m_horizontalRadius == ellipse.m_horizontalRadius &&
 			m_verticalRadius == ellipse.m_verticalRadius;

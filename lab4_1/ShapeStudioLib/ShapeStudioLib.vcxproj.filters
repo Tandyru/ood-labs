@@ -132,28 +132,10 @@
     <ClInclude Include="IPainter.h">
       <Filter>painter</Filter>
     </ClInclude>
-    <ClInclude Include="RectanglePainter.h">
-      <Filter>painter</Filter>
-    </ClInclude>
     <ClInclude Include="Painter.h">
       <Filter>painter</Filter>
     </ClInclude>
-    <ClInclude Include="ShapePainterFactory.h">
-      <Filter>painter</Filter>
-    </ClInclude>
     <ClInclude Include="ShapePainter.h">
-      <Filter>painter</Filter>
-    </ClInclude>
-    <ClInclude Include="TrianglePainter.h">
-      <Filter>painter</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapePainters.h">
-      <Filter>painter</Filter>
-    </ClInclude>
-    <ClInclude Include="EllipsePainter.h">
-      <Filter>painter</Filter>
-    </ClInclude>
-    <ClInclude Include="RegularPolygonPainter.h">
       <Filter>painter</Filter>
     </ClInclude>
   </ItemGroup>
@@ -203,22 +185,7 @@
     <ClCompile Include="RegularPolygonSerializer.cpp">
       <Filter>shape_serializers</Filter>
     </ClCompile>
-    <ClCompile Include="RectanglePainter.cpp">
-      <Filter>painter</Filter>
-    </ClCompile>
     <ClCompile Include="Painter.cpp">
-      <Filter>painter</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapePainterFactory.cpp">
-      <Filter>painter</Filter>
-    </ClCompile>
-    <ClCompile Include="TrianglePainter.cpp">
-      <Filter>painter</Filter>
-    </ClCompile>
-    <ClCompile Include="EllipsePainter.cpp">
-      <Filter>painter</Filter>
-    </ClCompile>
-    <ClCompile Include="RegularPolygonPainter.cpp">
       <Filter>painter</Filter>
     </ClCompile>
   </ItemGroup>

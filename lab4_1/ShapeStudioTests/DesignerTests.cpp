@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../ShapeStudioLib/Designer.h"
+#include "../ShapeStudioLib/Rectangle.h"
+#include "../ShapeStudioLib/Ellipse.h"
 #include "../ShapeStudioLib/UnknownShapeTypeException.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -16,11 +18,11 @@ namespace ShapeStudioTests
 			{
 				if (descr == "rectangle")
 				{
-					return make_unique<shape::CShape>(Color::Black, shape::ShapeType::Rectangle);
+					return make_unique<shape::CRectangle>(Color::Black, shape::Point{ 10, 20 }, shape::Point{ 30, 40 });
 				}
 				if (descr == "ellipse")
 				{
-					return make_unique<shape::CShape>(Color::Black, shape::ShapeType::Ellipse);
+					return make_unique<shape::CEllipse>(Color::Black, shape::Point{ 50, 60 }, 70, 80);
 				}
 				throw UnknownShapeTypeException(descr);
 			}

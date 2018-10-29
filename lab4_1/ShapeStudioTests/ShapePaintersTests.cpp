@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../ShapeStudioLib/ShapePainters.h"
 #include "../ShapeStudioLib/Shapes.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace shape;
-using namespace painter;
 
 namespace ShapeStudioTests
 {		
@@ -43,8 +41,7 @@ namespace ShapeStudioTests
 			shape::CRectangle rectangle(expectedColor, { 10, 20 }, { 30, 40 });
 
 			CanvasMock canvas;
-			auto painter = painter::CreateRectanglePainter(rectangle);
-			painter(canvas);
+			rectangle.Draw(canvas);
 
 			Assert::IsTrue(canvas.color == expectedColor);
 			Assert::IsTrue(canvas.drawLineCount == 4);
@@ -57,8 +54,7 @@ namespace ShapeStudioTests
 			shape::CTriangle rectangle(expectedColor, { 10, 20 }, { 30, 40 }, { 50, 60 });
 
 			CanvasMock canvas;
-			auto painter = painter::CreateTrianglePainter(rectangle);
-			painter(canvas);
+			rectangle.Draw(canvas);
 
 			Assert::IsTrue(canvas.color == expectedColor);
 			Assert::IsTrue(canvas.drawLineCount == 3);
@@ -71,8 +67,7 @@ namespace ShapeStudioTests
 			shape::CEllipse ellipse(expectedColor, { 10, 20 }, 30, 40);
 
 			CanvasMock canvas;
-			auto painter = painter::CreateEllipsePainter(ellipse);
-			painter(canvas);
+			ellipse.Draw(canvas);
 
 			Assert::IsTrue(canvas.color == expectedColor);
 			Assert::IsTrue(canvas.drawLineCount == 0);
@@ -87,8 +82,7 @@ namespace ShapeStudioTests
 			shape::CRegularPolygon polygon(expectedColor, expectedVertexCount, { 10, 20 }, 30);
 
 			CanvasMock canvas;
-			auto painter = painter::CreateRegularPolygonPainter(polygon);
-			painter(canvas);
+			polygon.Draw(canvas);
 
 			Assert::IsTrue(canvas.color == expectedColor);
 			Assert::IsTrue(canvas.drawLineCount == expectedVertexCount);

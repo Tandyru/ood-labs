@@ -12,7 +12,9 @@ namespace shape
 		double GetHorizontalRadius() const;
 		double GetVerticalRadius() const;
 
-		bool operator==(const CEllipse& triangle) const;
+		void Draw(ICanvas& canvas) override;
+
+		bool operator==(const CShape& shape) const override;
 	private:
 		const Point m_center;
 		const double m_horizontalRadius;

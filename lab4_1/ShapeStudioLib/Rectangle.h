@@ -11,7 +11,9 @@ namespace shape
 		Point GetLeftTop() const;
 		Point GetRightBottom() const;
 
-		bool operator==(const CRectangle& Rectangle) const;
+		void Draw(ICanvas& canvas) override;
+
+		bool operator==(const CShape& shape) const override;
 	private:
 		const Point m_leftTop;
 		const Point m_rightBottom;

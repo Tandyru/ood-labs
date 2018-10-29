@@ -151,16 +151,13 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorSerializer.h" />
     <ClInclude Include="Ellipse.h" />
-    <ClInclude Include="EllipsePainter.h" />
     <ClInclude Include="EllipseSerializer.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IDesigner.h" />
     <ClInclude Include="IPainter.h" />
     <ClInclude Include="Painter.h" />
     <ClInclude Include="PictureDraft.h" />
-    <ClInclude Include="RectanglePainter.h" />
     <ClInclude Include="RegularPolygon.h" />
-    <ClInclude Include="RegularPolygonPainter.h" />
     <ClInclude Include="RegularPolygonSerializer.h" />
     <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="IShapeFactory.h" />
@@ -177,15 +174,12 @@
     <ClInclude Include="RectangleSerializer.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapePainter.h" />
-    <ClInclude Include="ShapePainterFactory.h" />
-    <ClInclude Include="ShapePainters.h" />
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="ShapeSerializers.h" />
     <ClInclude Include="ShapeType.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
-    <ClInclude Include="TrianglePainter.h" />
     <ClInclude Include="TriangleSerializer.h" />
     <ClInclude Include="UnknownShapeTypeException.h" />
   </ItemGroup>
@@ -193,20 +187,16 @@
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="ColorSerializer.cpp" />
     <ClCompile Include="Ellipse.cpp" />
-    <ClCompile Include="EllipsePainter.cpp" />
     <ClCompile Include="EllipseSerializer.cpp" />
     <ClCompile Include="Painter.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
-    <ClCompile Include="RectanglePainter.cpp" />
     <ClCompile Include="RegularPolygon.cpp" />
-    <ClCompile Include="RegularPolygonPainter.cpp" />
     <ClCompile Include="RegularPolygonSerializer.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="PointSerializer.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RectangleSerializer.cpp" />
     <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="ShapePainterFactory.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -214,7 +204,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="TrianglePainter.cpp" />
     <ClCompile Include="TriangleSerializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

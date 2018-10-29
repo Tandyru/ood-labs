@@ -26,10 +26,34 @@ namespace shape
 		return m_radius;
 	}
 
-	bool CRegularPolygon::operator==(const CRegularPolygon& polygon) const
+	void CRegularPolygon::Draw(ICanvas & canvas)
 	{
-		return CShape::operator==(polygon) &&
-			m_vertexCount == polygon.m_vertexCount &&
+		canvas.SetColor(GetColor());
+		auto vertexCount = GetVertexCount();
+		auto center = GetCenter();
+		auto radius = GetRadius();
+		auto pi = acos(-1);
+		auto calcVertex = [&](decltype(vertexCount) index) -> Point {
+			auto x = center.x + radius * cos(2 * pi * index / vertexCount);
+			auto y = center.y + radius * sin(2 * pi * index / vertexCount);
+			return { x, y };
+		};
+		for (decltype(vertexCount) idx = 0; idx < vertexCount; idx++)
+		{
+			auto vertex1 = calcVertex(idx);
+			auto vertex2 = calcVertex(idx + 1);
+			canvas.DrawLine(vertex1, vertex2);
+		}
+	}
+
+	bool CRegularPolygon::operator==(const CShape& shape) const
+	{
+		if (!CShape::operator==(shape))
+		{
+			return false;
+		}
+		auto polygon = dynamic_cast<const CRegularPolygon&>(shape);
+		return m_vertexCount == polygon.m_vertexCount &&
 			m_center == polygon.m_center &&
 			m_radius == polygon.m_radius;
 	}

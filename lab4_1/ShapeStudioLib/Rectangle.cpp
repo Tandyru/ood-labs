@@ -20,11 +20,28 @@ namespace shape
 		return m_rightBottom;
 	}
 
-	bool CRectangle::operator==(const CRectangle& Rectangle) const
+	void CRectangle::Draw(ICanvas & canvas)
 	{
-		return CShape::operator==(Rectangle) &&
-			m_leftTop == Rectangle.m_leftTop &&
-			m_rightBottom == Rectangle.m_rightBottom;
+		canvas.SetColor(GetColor());
+		const auto leftTop = GetLeftTop();
+		const auto rightBottom = GetRightBottom();
+		const shape::Point rightTop{ rightBottom.x, leftTop.y };
+		const shape::Point leftBottom{ leftTop.x, rightBottom.y };
+		canvas.DrawLine(leftTop, rightTop);
+		canvas.DrawLine(rightTop, rightBottom);
+		canvas.DrawLine(rightBottom, leftBottom);
+		canvas.DrawLine(leftBottom, leftTop);
+	}
+
+	bool CRectangle::operator==(const CShape& shape) const
+	{
+		if (!CShape::operator==(shape))
+		{
+			return false;
+		}
+		const CRectangle& rectangle = dynamic_cast<const CRectangle&>(shape);
+		return m_leftTop == rectangle.m_leftTop &&
+			m_rightBottom == rectangle.m_rightBottom;
 	}
 
 }

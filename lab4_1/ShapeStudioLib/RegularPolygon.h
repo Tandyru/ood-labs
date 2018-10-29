@@ -12,7 +12,9 @@ namespace shape
 		Point GetCenter() const;
 		double GetRadius() const;
 
-		bool operator==(const CRegularPolygon& polygon) const;
+		void Draw(ICanvas& canvas) override;
+
+		bool operator==(const CShape& shape) const override;
 	private:
 		const unsigned int m_vertexCount;
 		const Point m_center;
