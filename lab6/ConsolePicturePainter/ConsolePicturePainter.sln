@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsolePicturePainter", "ConsolePicturePainter.vcxproj", "{C14FC985-C673-4C49-973A-FB516D94A226}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Debug|x64.ActiveCfg = Debug|x64
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Debug|x64.Build.0 = Debug|x64
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Debug|x86.ActiveCfg = Debug|Win32
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Debug|x86.Build.0 = Debug|Win32
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Release|x64.ActiveCfg = Release|x64
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Release|x64.Build.0 = Release|x64
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Release|x86.ActiveCfg = Release|Win32
+		{C14FC985-C673-4C49-973A-FB516D94A226}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70944356-EAD1-4B4A-8C68-40F77899C1FC}
+	EndGlobalSection
+EndGlobal
