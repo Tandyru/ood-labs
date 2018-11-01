@@ -8,11 +8,8 @@ CPictureDraft::CPictureDraft(vector<unique_ptr<shape::CShape>>&& shapes)
 {
 	for (auto& shape : shapes)
 	{
-		m_shapes.push_back(/*shared_ptr<shape::CShape>(*/move(shape)/*)*/);
+		m_shapes.push_back(move(shape));
 	}
-	//std::transform(shapes.begin(), shapes.end(), m_shapes.begin(), [](std::unique_ptr<shape::CShape>& shape) {
-	//	return std::move(shape);
-	//});
 }
 
 size_t CPictureDraft::GetShapeCount() const
