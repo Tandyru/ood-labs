@@ -47,6 +47,14 @@ public:
 
 	void Draw(graphics_lib::ICanvas & canvas)const override
 	{
+		const auto leftTop = m_leftTop;
+		const auto rightBottom = Point{ leftTop.x + m_width, leftTop.y + m_height };
+		const Point rightTop{ rightBottom.x, leftTop.y };
+		const Point leftBottom{ leftTop.x, rightBottom.y };
+		//canvas.DrawLine(leftTop, rightTop);
+		//canvas.DrawLine(rightTop, rightBottom);
+		//canvas.DrawLine(rightBottom, leftBottom);
+		//canvas.DrawLine(leftBottom, leftTop);
 		// TODO: написать код рисования прямоугольника на холсте
 	}
 private:
