@@ -12,7 +12,8 @@ void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
 	CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
 	CRectangle rectangle({ 30, 40 }, 18, 24);
 
-	// TODO: нарисовать прямоугольник и треугольник при помощи painter
+	painter.Draw(triangle);
+	painter.Draw(rectangle);
 }
 
 void PaintPictureOnCanvas()
@@ -22,14 +23,45 @@ void PaintPictureOnCanvas()
 	PaintPicture(painter);
 }
 
+class CanvasAdapter : public graphics_lib::ICanvas
+{
+	using CPoint = modern_graphics_lib::CPoint;
+public:
+	CanvasAdapter(modern_graphics_lib::CModernGraphicsRenderer & renderer)
+		: m_renderer(renderer)
+		, m_lineBegin(0, 0)
+	{
+		m_renderer.BeginDraw();
+	}
+
+	~CanvasAdapter()
+	{
+		m_renderer.EndDraw();
+	}
+
+	void MoveTo(int x, int y) override
+	{
+		m_lineBegin = CPoint(x, y);
+	}
+
+	void LineTo(int x, int y) override
+	{
+		const CPoint lineEnd(x, y);
+		m_renderer.DrawLine(m_lineBegin, lineEnd);
+		m_lineBegin = lineEnd;
+	}
+private:
+	modern_graphics_lib::CModernGraphicsRenderer & m_renderer;
+	CPoint m_lineBegin;
+};
+
 void PaintPictureOnModernGraphicsRenderer()
 {
 	modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
-	(void)&renderer; // устраняем предупреждение о неиспользуемой переменной
 
-	// TODO: при помощи существующей функции PaintPicture() нарисовать
-	// картину на renderer
-	// Подсказка: используйте паттерн "Адаптер"
+	CanvasAdapter adapter(renderer);
+	shape_drawing_lib::CCanvasPainter painter(adapter);
+	PaintPicture(painter);
 }
 
 }

@@ -23,26 +23,33 @@ class CTriangle : public ICanvasDrawable
 {
 public:
 	CTriangle(const Point & p1, const Point & p2, const Point & p3)
+		: vertex1(p1)
+		, vertex2(p2)
+		, vertex3(p3)
 	{
-		// TODO: написать код конструктора
 	}
 
 	void Draw(graphics_lib::ICanvas & canvas)const override
 	{
-		// TODO: написать код рисовани€ треугольника на холсте
+		canvas.MoveTo(vertex1.x, vertex1.y);
+		canvas.LineTo(vertex2.x, vertex2.y);
+		canvas.LineTo(vertex3.x, vertex3.y);
+		canvas.LineTo(vertex1.x, vertex1.y);
 	}
 private:
-	// TODO: дописать приватную часть
+	const Point vertex1;
+	const Point vertex2;
+	const Point vertex3;
 };
 
 class CRectangle : public ICanvasDrawable
 {
 public:
 	CRectangle(const Point & leftTop, int width, int height)
+		: m_leftTop(leftTop)
+		, m_width(width)
+		, m_height(height)
 	{
-		m_leftTop = leftTop;
-		m_width = width;
-		m_height = height;
 	}
 
 	void Draw(graphics_lib::ICanvas & canvas)const override
@@ -51,16 +58,16 @@ public:
 		const auto rightBottom = Point{ leftTop.x + m_width, leftTop.y + m_height };
 		const Point rightTop{ rightBottom.x, leftTop.y };
 		const Point leftBottom{ leftTop.x, rightBottom.y };
-		//canvas.DrawLine(leftTop, rightTop);
-		//canvas.DrawLine(rightTop, rightBottom);
-		//canvas.DrawLine(rightBottom, leftBottom);
-		//canvas.DrawLine(leftBottom, leftTop);
-		// TODO: написать код рисовани€ пр€моугольника на холсте
+		canvas.MoveTo(leftTop.x, leftTop.y);
+		canvas.LineTo(rightTop.x, rightTop.y);
+		canvas.LineTo(rightBottom.x, rightBottom.y);
+		canvas.LineTo(leftBottom.x, leftBottom.y);
+		canvas.LineTo(leftTop.x, leftTop.y);
 	}
 private:
-	Point m_leftTop; 
-	int m_width;
-	int m_height;
+	const Point m_leftTop; 
+	const int m_width;
+	const int m_height;
 };
 
 // ’удожник, способный рисовать ICanvasDrawable-объекты на ICanvas
