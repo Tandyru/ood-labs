@@ -9,6 +9,7 @@
 #include "ResizeImageCommandParser.h"
 #include "DeleteItemCommandParser.h"
 #include "SaveCommandParser.h"
+#include "Exception.h"
 
 namespace command_parser
 {
@@ -40,7 +41,7 @@ unique_ptr<InputCommand> ParseInputCommand(string_view input, InputCommandType t
 	case InputCommandType::Save:
 		return ParseSaveCommand(input);
 	}
-	throw std::exception("Command parser is not implemented");
+	throw Exception("Command parser is not implemented");
 }
 
 }
@@ -72,13 +73,13 @@ unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input)
 		{
 			type = StringMapEnum(cmdNameMap, name);
 		}
-		catch (const exception& ex) 
+		catch (const exception&) 
 		{
-			throw exception("Unknown command");
+			throw Exception("Unknown command");
 		}
 		return ParseInputCommand(input, type);
 	}
-	throw std::exception("Invalid command string format");
+	throw Exception("Invalid command string format");
 }
 
 }

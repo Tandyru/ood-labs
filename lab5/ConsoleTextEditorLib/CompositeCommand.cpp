@@ -7,7 +7,7 @@ namespace command
 {
 
 CCompositeCommand::CCompositeCommand(impl::IDocumentImpl & document, Commands && commands)
-	: CCommand(CommandType::Composite, document)
+	: m_document(document)
 	, m_commands(move(commands))
 {
 }

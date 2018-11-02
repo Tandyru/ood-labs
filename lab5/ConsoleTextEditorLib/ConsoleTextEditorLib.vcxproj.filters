@@ -57,9 +57,6 @@
     <ClInclude Include="Document.h">
       <Filter>document</Filter>
     </ClInclude>
-    <ClInclude Include="CommandType.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
     <ClInclude Include="MapEnum.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -165,9 +162,6 @@
     <ClInclude Include="ICommandCombiner.h">
       <Filter>document\command</Filter>
     </ClInclude>
-    <ClInclude Include="CommandCombiner.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
     <ClInclude Include="InsertImageCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
@@ -182,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="DocumentDumper.h">
       <Filter>document</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SetTitleCommand.h">
+      <Filter>document\command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="CommandParser.cpp">
       <Filter>command_parser</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandType.cpp">
-      <Filter>document\command</Filter>
     </ClCompile>
     <ClCompile Include="ReplaceTextCommandParser.cpp">
       <Filter>command_parser</Filter>
@@ -284,9 +281,6 @@
     <ClCompile Include="DeleteItemCommand.cpp">
       <Filter>document\command</Filter>
     </ClCompile>
-    <ClCompile Include="CommandCombiner.cpp">
-      <Filter>document\command</Filter>
-    </ClCompile>
     <ClCompile Include="InsertImageCommand.cpp">
       <Filter>document\command</Filter>
     </ClCompile>
@@ -298,6 +292,12 @@
     </ClCompile>
     <ClCompile Include="DocumentDumper.cpp">
       <Filter>document</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SetTitleCommand.cpp">
+      <Filter>document\command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

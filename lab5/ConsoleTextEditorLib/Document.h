@@ -44,7 +44,6 @@ private:
 	void CheckIndex(size_t index)const;
 
 private:
-	string m_title;
 	impl::CDocumentImpl m_impl;
 	command::CCommandHistory m_commandHistory;
 };

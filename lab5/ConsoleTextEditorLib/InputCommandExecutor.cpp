@@ -3,6 +3,7 @@
 #include "InvalidPositionException.h"
 #include "ConstDocumentItem.h"
 #include "DocumentDumper.h"
+#include "Exception.h"
 
 namespace input_command
 {
@@ -32,7 +33,7 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 		}
 		else
 		{
-			throw exception("Cannot undo.");
+			throw Exception("Cannot undo.");
 		}
 		break;
 	case InputCommandType::Redo:
@@ -42,7 +43,7 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 		}
 		else
 		{
-			throw exception("Cannot redo.");
+			throw Exception("Cannot redo.");
 		}
 		break;
 	default:

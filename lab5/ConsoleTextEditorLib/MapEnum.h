@@ -1,6 +1,7 @@
 #pragma once
 #include <utility>
 #include <string>
+#include "Exception.h"
 
 template<typename T1, typename T2, unsigned int SZ>
 T2 MapEnum(const std::pair<T1, T2> (&map)[SZ], T1 value)
@@ -12,7 +13,7 @@ T2 MapEnum(const std::pair<T1, T2> (&map)[SZ], T1 value)
 			return item.second;
 		}
 	}
-	throw std::exception("Invalid enum value");
+	throw Exception("Invalid enum value");
 }
 
 template<typename T1, typename T2, unsigned int SZ>
@@ -25,7 +26,7 @@ T2 StringMapEnum(const std::pair<T1, T2> (&map)[SZ], const std::string& value)
 			return item.second;
 		}
 	}
-	throw std::exception("Invalid enum value");
+	throw Exception("Invalid enum value");
 }
 
 template<typename T1, typename T2, unsigned int SZ>
@@ -38,7 +39,7 @@ T1 ReverseMapEnum(const std::pair<T1, T2> (&map)[SZ], T2 value)
 			return item.first;
 		}
 	}
-	throw std::exception("Invalid enum value");
+	throw Exception("Invalid enum value");
 }
 
 template<typename T1, typename T2, unsigned int SZ>
@@ -51,5 +52,5 @@ T1 ReverseStringMapEnum(const std::pair<T1, T2> (&map)[SZ], const std::string& v
 			return item.first;
 		}
 	}
-	throw std::exception("Invalid enum value");
+	throw Exception("Invalid enum value");
 }

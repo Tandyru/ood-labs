@@ -6,11 +6,6 @@ namespace document
 namespace command
 {
 
-CCommand::CCommand(CommandType type, document::impl::IDocumentImpl& document)
-	: m_document(document)
-{
-}
-
 void CCommand::Execute()
 {
 	if (m_executed)
@@ -28,16 +23,6 @@ void CCommand::Unexecute()
 	}
 	m_executed = false;
 }
-
-void CCommand::Accept(ICommandVisitor & visitor) const
-{
-}
-
-impl::IDocumentImpl & CCommand::GetDocument() const
-{
-	return m_document;
-}
-
 
 }
 }

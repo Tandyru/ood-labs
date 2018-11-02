@@ -202,5 +202,16 @@ namespace ConsoleTextEditorTests
 			document.Undo(); // undo "insert image" command
 			Assert::IsFalse(document.CanUndo());
 		}
+
+		TEST_METHOD(TestSetTitle)
+		{
+			const string expectedTitle = "Test Title";
+			document.SetTitle(expectedTitle);
+			Assert::AreEqual(expectedTitle, document.GetTitle());
+			Assert::IsTrue(document.CanUndo());
+			document.Undo();
+			Assert::AreEqual(string(), document.GetTitle());
+		}
+
 	};
 }

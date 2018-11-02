@@ -17,6 +17,7 @@ public:
 	void Unexecute() override;
 
 private:
+	impl::IDocumentImpl & m_document;
 	Commands m_commands;
 };
 

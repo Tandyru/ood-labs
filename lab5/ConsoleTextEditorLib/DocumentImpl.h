@@ -28,6 +28,10 @@ public:
 
 	void DeleteItem(size_t index) override;
 
+	void SetTitle(const string& title);
+
+	string GetTitle() const;
+
 private:
 	template<typename OI>
 	inline shared_ptr<OI> InsertItem(optional<size_t> position, const function<shared_ptr<OI>()>& itemFactory)
@@ -46,6 +50,7 @@ private:
 
 private:
 	vector<shared_ptr<CDocumentItem>> m_items;
+	string m_title;
 };
 
 }

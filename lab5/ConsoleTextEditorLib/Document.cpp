@@ -3,7 +3,7 @@
 #include "InsertParagraphCommand.h"
 #include "InsertImageCommand.h"
 #include "DeleteItemCommand.h"
-#include "CommandCombiner.h"
+#include "SetTitleCommand.h"
 
 namespace document
 {
@@ -11,10 +11,6 @@ namespace document
 using namespace command;
 
 CDocument::CDocument()
-//: m_commandHistory(std::bind(&(CCommandCombiner::ShoudCombine)))
-	: m_commandHistory([](const CCommand& cmd1, const CCommand& cmd2) {
-		return command::CCommandCombiner::ShoudCombine(cmd1, cmd2);
-	})
 {
 }
 
@@ -63,12 +59,13 @@ void CDocument::DeleteItem(size_t index)
 
 string CDocument::GetTitle()const
 {
-	return m_title;
+	return m_impl.GetTitle();
 }
 
 void CDocument::SetTitle(const string & title)
 {
-	m_title = title;
+	auto command = make_unique<command::CSetTitleCommand>(m_impl, title);
+	m_commandHistory.Do(move(command));
 }
 
 bool CDocument::CanUndo()const

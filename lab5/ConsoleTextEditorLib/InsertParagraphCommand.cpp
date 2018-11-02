@@ -8,7 +8,7 @@ namespace command
 {
 
 CInsertParagraphCommand::CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, const string& text)
-	: CCommand(CommandType::InsertParagraph, document)
+	: m_document(document)
 	, m_position(position)
 	, m_text(text)
 {
@@ -25,11 +25,6 @@ void CInsertParagraphCommand::Unexecute()
 {
 	CCommand::Unexecute();
 	m_document.DeleteItem(m_insertedPosition);
-}
-
-void CInsertParagraphCommand::Accept(ICommandVisitor & visitor) const
-{
-	visitor.Visit(*this);
 }
 
 optional<size_t> CInsertParagraphCommand::GetPosition() const

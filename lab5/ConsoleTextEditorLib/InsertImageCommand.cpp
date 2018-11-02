@@ -8,7 +8,7 @@ namespace command
 {
 
 CInsertImageCommand::CInsertImageCommand(impl::IDocumentImpl & document, optional<size_t> position, unsigned int width, unsigned int height, Path path)
-	: CCommand(CommandType::InsertImage, document)
+	: m_document(document)
 	, m_position(position)
 	, m_width(width)
 	, m_height(height)
@@ -27,11 +27,6 @@ void CInsertImageCommand::Unexecute()
 {
 	CCommand::Unexecute();
 	m_document.DeleteItem(m_insertedPosition);
-}
-
-void CInsertImageCommand::Accept(ICommandVisitor & visitor) const
-{
-	visitor.Visit(*this);
 }
 
 optional<size_t> CInsertImageCommand::GetPosition() const

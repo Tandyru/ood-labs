@@ -44,6 +44,16 @@ public:
 		itemCount--;
 	}
 
+	void SetTitle(const string& title) override
+	{
+		this->title = title;
+	}
+
+	string GetTitle() const override
+	{
+		return title;
+	}
+
 public:
 	string lastCommandText;
 	Path lastCommandPath;
@@ -51,4 +61,5 @@ public:
 	int lastCommandWidth = 0;
 	int lastCommandHeight = 0;
 	size_t itemCount = 0;
+	string title;
 };

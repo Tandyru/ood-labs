@@ -8,7 +8,7 @@ namespace command
 {
 
 CDeleteItemCommand::CDeleteItemCommand(impl::IDocumentImpl& document, size_t position)
-	: CCommand(CommandType::DeleteItem, document)
+	: m_document(document)
 	, m_position(position)
 {
 }
@@ -36,11 +36,6 @@ void CDeleteItemCommand::Unexecute()
 		m_document.InsertImage(m_image->GetPath(), m_image->GetWidth(), m_image->GetHeight(), m_position);
 		m_image.reset();
 	}
-}
-
-void CDeleteItemCommand::Accept(ICommandVisitor & visitor) const
-{
-	visitor.Visit(*this);
 }
 
 size_t CDeleteItemCommand::GetPosition() const

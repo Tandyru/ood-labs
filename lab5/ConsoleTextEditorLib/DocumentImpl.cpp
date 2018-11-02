@@ -51,6 +51,16 @@ void CDocumentImpl::DeleteItem(size_t index)
 	m_items.erase(m_items.begin() + index);
 }
 
+void CDocumentImpl::SetTitle(const string & title)
+{
+	m_title = title;
+}
+
+string CDocumentImpl::GetTitle() const
+{
+	return m_title;
+}
+
 void CDocumentImpl::CheckIndex(size_t index)const
 {
 	if (index >= m_items.size())

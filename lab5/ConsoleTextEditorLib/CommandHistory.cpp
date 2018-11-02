@@ -12,34 +12,17 @@ namespace
 const auto MAX_HISTORY_SIZE = 10;
 }
 
-CCommandHistory::CCommandHistory(const ShouldCombine & shouldCombine)
-	: m_shouldCombine(shouldCombine)
+CCommandHistory::CCommandHistory()
 {
 }
 
 void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 {
 	EraseOldRedoCommands();
-	if (ShoudCombineWithPrev(*command))
-	{
-		unique_ptr<CCommand>& lastCommand = *(m_history.rbegin());
-		lastCommand->Unexecute();
-		auto& document = lastCommand->GetDocument();
-		CCompositeCommand::Commands commands;
-		commands.push_back(move(lastCommand));
-		commands.push_back(move(command));
-		auto compositeCommand = make_unique<CCompositeCommand>(document, move(commands));
-		m_history.pop_back();
-		m_history.push_back(move(compositeCommand));
-	}
-	else
-	{
-		m_history.push_back(move(command));
-	}
-	CCommand& cmd = **m_history.rbegin();
+	m_history.push_back(move(command));
 	try
 	{
-		DoCommand(cmd);
+		DoCommand(**m_history.rbegin());
 		RemoveOldCommands();
 		m_currentPosition = m_history.size();
 	}
@@ -102,17 +85,6 @@ void CCommandHistory::RemoveOldCommands()
 	{
 		m_history.erase(m_history.begin(), m_history.begin() + (m_history.size() - MAX_HISTORY_SIZE));
 	}
-}
-
-bool CCommandHistory::ShoudCombineWithPrev(CCommand & command)
-{
-	if (m_shouldCombine && m_history.size() > 0 && m_currentPosition == m_history.size())
-	{
-		auto preCommandIt = m_history.rbegin();
-		auto& prevCommand = **preCommandIt;
-		return m_shouldCombine(prevCommand, command);
-	}
-	return false;
 }
 
 }

@@ -24,6 +24,9 @@ public:
 
 	virtual void DeleteItem(size_t index) = 0;
 
+	virtual void SetTitle(const string& title) = 0;
+	virtual string GetTitle() const = 0;
+
 	virtual ~IDocumentImpl() = default;
 };
 

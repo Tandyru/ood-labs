@@ -15,12 +15,11 @@ public:
 	void Execute() override;
 	void Unexecute() override;
 
-	void Accept(ICommandVisitor & visitor) const override;
-
 	optional<size_t> GetPosition() const;
 	Path GetPath() const;
 
 private:
+	impl::IDocumentImpl& m_document;
 	optional<size_t> m_position;
 	size_t m_insertedPosition = 0;
 	unsigned int m_width;

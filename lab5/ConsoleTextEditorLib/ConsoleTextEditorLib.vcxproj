@@ -150,10 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
-    <ClInclude Include="CommandCombiner.h" />
     <ClInclude Include="CommandHistory.h" />
     <ClInclude Include="CommandParser.h" />
-    <ClInclude Include="CommandType.h" />
     <ClInclude Include="CompositeCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
     <ClInclude Include="DeleteItemCommand.h" />
@@ -164,6 +162,7 @@
     <ClInclude Include="DocumentImpl.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
+    <ClInclude Include="Exception.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="ICommandCombiner.h" />
     <ClInclude Include="ICommandVisitor.h" />
@@ -196,6 +195,7 @@
     <ClInclude Include="ResizeImageInputCommand.h" />
     <ClInclude Include="SaveCommandParser.h" />
     <ClInclude Include="SaveInputCommand.h" />
+    <ClInclude Include="SetTitleCommand.h" />
     <ClInclude Include="SetTitleCommandParser.h" />
     <ClInclude Include="SetTitleInputCommand.h" />
     <ClInclude Include="stdafx.h" />
@@ -203,10 +203,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="CommandCombiner.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="CommandParser.cpp" />
-    <ClCompile Include="CommandType.cpp" />
     <ClCompile Include="CompositeCommand.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
     <ClCompile Include="DeleteItemCommand.cpp" />
@@ -216,6 +214,7 @@
     <ClCompile Include="DocumentDumper.cpp" />
     <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="Exception.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputCommand.cpp" />
@@ -237,6 +236,7 @@
     <ClCompile Include="ResizeImageInputCommand.cpp" />
     <ClCompile Include="SaveCommandParser.cpp" />
     <ClCompile Include="SaveInputCommand.cpp" />
+    <ClCompile Include="SetTitleCommand.cpp" />
     <ClCompile Include="SetTitleCommandParser.cpp" />
     <ClCompile Include="SetTitleInputCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
