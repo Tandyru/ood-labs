@@ -15,7 +15,8 @@ enum class InputCommandType
 	Help,
 	Undo,
 	Redo,
-	Save
+	Save,
+	Exit
 };
 
 bool IsNonargCommand(InputCommandType type);

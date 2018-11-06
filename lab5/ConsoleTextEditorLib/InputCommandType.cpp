@@ -12,6 +12,7 @@ bool IsNonargCommand(InputCommandType type)
 		InputCommandType::Help,
 		InputCommandType::Undo,
 		InputCommandType::Redo,
+		InputCommandType::Exit,
 	};
 	return IsValueInArray(type, nonargCommands);
 }

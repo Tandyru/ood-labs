@@ -162,6 +162,7 @@
     <ClInclude Include="DocumentImpl.h" />
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
+    <ClInclude Include="DocumentResources.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="ICommandCombiner.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="IDocumentImpl.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageResource.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandExecutor.h" />
     <ClInclude Include="InputCommandParser.h" />
@@ -185,20 +187,26 @@
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="InvalidPositionException.h" />
     <ClInclude Include="IParagraph.h" />
+    <ClInclude Include="IResource.h" />
     <ClInclude Include="IsValueInArray.h" />
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="Paragraph.h" />
     <ClInclude Include="PositionParser.h" />
+    <ClInclude Include="ReplaceTextCommand.h" />
     <ClInclude Include="ReplaceTextCommandParser.h" />
     <ClInclude Include="ReplaceTextInputCommand.h" />
+    <ClInclude Include="ResizeImageCommand.h" />
     <ClInclude Include="ResizeImageCommandParser.h" />
     <ClInclude Include="ResizeImageInputCommand.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SaveCommandParser.h" />
     <ClInclude Include="SaveInputCommand.h" />
     <ClInclude Include="SetTitleCommand.h" />
     <ClInclude Include="SetTitleCommandParser.h" />
     <ClInclude Include="SetTitleInputCommand.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -214,9 +222,11 @@
     <ClCompile Include="DocumentDumper.cpp" />
     <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="DocumentResources.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageResource.cpp" />
     <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandExecutor.cpp" />
     <ClCompile Include="InputCommandParser.cpp" />
@@ -230,10 +240,14 @@
     <ClCompile Include="InsertParagraphInputCommand.cpp" />
     <ClCompile Include="Paragraph.cpp" />
     <ClCompile Include="PositionParser.cpp" />
+    <ClCompile Include="ReplaceTextCommand.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />
     <ClCompile Include="ReplaceTextInputCommand.cpp" />
+    <ClCompile Include="ResizeImageCommand.cpp" />
     <ClCompile Include="ResizeImageCommandParser.cpp" />
     <ClCompile Include="ResizeImageInputCommand.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SaveCommandParser.cpp" />
     <ClCompile Include="SaveInputCommand.cpp" />
     <ClCompile Include="SetTitleCommand.cpp" />
@@ -245,6 +259,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,7 @@
 #include "InvalidPositionException.h"
 #include "DocumentImpl.h"
 #include "CommandHistory.h"
+#include "DocumentResources.h"
 
 namespace document
 {
@@ -43,9 +44,18 @@ private:
 	void CheckPosition(optional<size_t> position)const;
 	void CheckIndex(size_t index)const;
 
+	shared_ptr<IParagraph> CreateParagraph(const string & text);
+
+	shared_ptr<IImage> CreateImage(shared_ptr<resources::IResource> path, unsigned int width, unsigned int height);
+
+	void OnBeforeParagraphTextChange(const IParagraph & paragraph, const string & newText);
+	void OnBeforeResizeImage(const IImage & image, unsigned int width, unsigned int height);
+
 private:
 	impl::CDocumentImpl m_impl;
 	command::CCommandHistory m_commandHistory;
+	bool m_commandExecuting = false;
+	resources::CDocumentResources m_resources;
 };
 
 }

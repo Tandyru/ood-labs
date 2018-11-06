@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "InsertParagraphCommand.h"
-#include "ICommandVisitor.h"
 
 namespace document
 {

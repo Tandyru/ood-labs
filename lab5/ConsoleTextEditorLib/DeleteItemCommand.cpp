@@ -33,7 +33,7 @@ void CDeleteItemCommand::Unexecute()
 	}
 	else if (m_image)
 	{
-		m_document.InsertImage(m_image->GetPath(), m_image->GetWidth(), m_image->GetHeight(), m_position);
+		m_document.InsertImage(m_image, m_position);
 		m_image.reset();
 	}
 }

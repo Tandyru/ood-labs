@@ -16,7 +16,16 @@ string CParagraph::GetText() const
 
 void CParagraph::SetText(const string & text)
 {
+	if (m_onBeforeTextChange)
+	{
+		m_onBeforeTextChange(*this, text);
+	}
 	m_text = text;
+}
+
+void CParagraph::SetOnBeforeTextChange(const BeforeTextChangeHandler & handler)
+{
+	m_onBeforeTextChange = handler;
 }
 
 }

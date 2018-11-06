@@ -8,6 +8,7 @@
 #include "../ConsoleTextEditorLib/InvalidPositionException.h"
 #include "../ConsoleTextEditorLib/InputCommandExecutor.h"
 #include "../ConsoleTextEditorLib/InputCommandsReader.h"
+#include "../ConsoleTextEditorLib/StringUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -22,6 +23,7 @@ namespace ConsoleTextEditorTests
 		CDocument document;
 		stringstream out;
 		CInputCommandExecutor executor;
+		string imageFilePath = "../../ConsoleTextEditorTests/res/lamp.jpg";
 
 		IntegrationTests()
 			: executor(document, out, [](ostream&) {})
@@ -46,7 +48,6 @@ namespace ConsoleTextEditorTests
 		{
 			const string firstParagraphText = "First paragraph text";
 			const string firstParagraphNewText = "First paragraph new text";
-			const string imageFilePath = R"(c:\image\file\path.png)";
 			const int secondParagraphPosition = 1;
 			const int imageWidth = 640;
 			const int imageHeight = 480;
@@ -55,20 +56,26 @@ namespace ConsoleTextEditorTests
 				"InsertImage end 320 240 " + imageFilePath + "\n" +
 				"InsertParagraph " + to_string(secondParagraphPosition) + " To be deleted paragraph" + "\n" +
 				"ResizeImage 2 " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + "\n" +
-				"DeleteItem " + std::to_string(secondParagraphPosition) + "\n" +
-				"ReplaceText 0 " + firstParagraphNewText + "\n" + 
-				"Undo\nUndo\nUndo\nUndo\nUndo\nUndo\n" +
-				"Redo\nRedo\nRedo\nRedo\nRedo\nRedo\n";
+				//"DeleteItem " + std::to_string(secondParagraphPosition) + "\n" +
+				//"ReplaceText 0 " + firstParagraphNewText + "\n" + 
+				"";
+				//"Undo\nUndo\nUndo\nUndo\nUndo\nUndo\n" +
+				//"Redo\nRedo\nRedo\nRedo\nRedo\nRedo\n";
 			stringstream in(inputCommands);
 			stringstream prompt;
 			ReadInputCommands(in, prompt, [&](unique_ptr<input_command::InputCommand>&& inputCommand) {
 				inputCommand->Execute(executor);
 			}, [](auto) {});
 			executor.ExecuteCommand(InputCommandType::List);
+			Assert::AreEqual(size_t(2), document.GetItemsCount());
+			auto item = document.GetItem(1);
+			auto image = item.GetImage();
+			Assert::IsTrue(bool(image));
+			auto imageSavePath = image->GetPath();
 			string expectedOutput = "Title: \n";
 				expectedOutput += 
 					"0. Paragraph: " + firstParagraphNewText + "\n" +
-					"1. Image: " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + imageFilePath + "\n";
+					"1. Image: " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + w2s(imageSavePath.native().c_str()) + "\n";
 			Assert::AreEqual(expectedOutput, out.str());
 		}
 

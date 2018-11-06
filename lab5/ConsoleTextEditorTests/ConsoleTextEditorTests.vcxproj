@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="DocumentImplMock.h" />
     <ClInclude Include="DocumentMock.h" />
+    <ClInclude Include="ResourceMock.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -163,8 +164,10 @@
     <ClCompile Include="CommandExecutionTests.cpp" />
     <ClCompile Include="CommandHistoryTests.cpp" />
     <ClCompile Include="DocumentMock.cpp" />
+    <ClCompile Include="DocumentResourcesTests.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="IntegrationTests.cpp" />
+    <ClCompile Include="ResourceMock.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

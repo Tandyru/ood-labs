@@ -1,5 +1,6 @@
 #pragma once
 #include "IImage.h"
+#include "IResource.h"
 
 namespace document
 {
@@ -8,7 +9,9 @@ class CImage
 	: public IImage
 {
 public:
-	CImage(Path path, int width, int height);
+	using BeforeResizeHandler = std::function<void(const IImage&, unsigned int, unsigned int)>;
+
+	CImage(shared_ptr<resources::IResource> resource, int width, int height);
 
 	// IImage
 	Path GetPath()const override;
@@ -18,10 +21,13 @@ public:
 
 	void Resize(int width, int height) override;
 
+	void SetOnBeforeResize(const BeforeResizeHandler & handler);
+
 private:
 	int m_width;
 	int m_height;
-	Path m_path;
+	shared_ptr<resources::IResource> m_resource;
+	BeforeResizeHandler m_onBeforeResize;
 };
 
 }

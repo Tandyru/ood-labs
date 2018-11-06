@@ -4,6 +4,7 @@
 #include "ConstDocumentItem.h"
 #include "DocumentDumper.h"
 #include "Exception.h"
+#include "ExitException.h"
 
 namespace input_command
 {
@@ -46,6 +47,8 @@ void CInputCommandExecutor::ExecuteCommand(InputCommandType type)
 			throw Exception("Cannot redo.");
 		}
 		break;
+	case InputCommandType::Exit:
+		throw ExitException();
 	default:
 		throw runtime_error("ExecuteNonArgCommand is called for a command with argument(s) or no handler for the command.");
 	}
@@ -83,8 +86,13 @@ void CInputCommandExecutor::ExecuteCommand(const ReplaceTextInputCommand & comma
 	{
 		throw document::CInvalidPositionException();
 	}
-	m_document.DeleteItem(*command.position);
-	m_document.InsertParagraph(command.text, ConvertPosition(command.position));
+	auto item = m_document.GetItem(*command.position);
+	auto paragraph = item.GetParagraph();
+	if (!paragraph)
+	{
+		throw Exception("Cannot replace text of non-paragraph item.");
+	}
+	paragraph->SetText(command.text);
 }
 
 void CInputCommandExecutor::ExecuteCommand(const ResizeImageInputCommand & command)

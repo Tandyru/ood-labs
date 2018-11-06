@@ -2,6 +2,7 @@
 #include "IParagraph.h"
 #include "IImage.h"
 #include "DocumentItem.h"
+#include "IResource.h"
 
 namespace document
 {
@@ -14,8 +15,10 @@ public:
 	virtual shared_ptr<IParagraph> InsertParagraph(const string& text,
 		optional<size_t> position = optional<size_t>()) = 0;
 
-	virtual shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
+	virtual shared_ptr<IImage> InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 		optional<size_t> position = optional<size_t>()) = 0;
+
+	virtual void InsertImage(shared_ptr<IImage> image, size_t position) = 0;
 
 	virtual size_t GetItemsCount()const = 0;
 
@@ -26,6 +29,9 @@ public:
 
 	virtual void SetTitle(const string& title) = 0;
 	virtual string GetTitle() const = 0;
+
+	virtual size_t GetParagraphPosition(const IParagraph & paragraph) const = 0;
+	virtual size_t GetImagePosition(const IImage & paragraph) const = 0;
 
 	virtual ~IDocumentImpl() = default;
 };

@@ -9,7 +9,11 @@ namespace command
 class CCommandHistory
 {
 public:
-	CCommandHistory();
+	using CommandExecutionBegin = std::function<void(void)>;
+	using CommandExecutionEnd = std::function<void(void)>;
+
+	CCommandHistory(const CommandExecutionBegin& commandExecutionBegin = CommandExecutionBegin(), 
+		const CommandExecutionEnd& commandExecutionEnd = CommandExecutionEnd());
 
 	CCommandHistory(const CCommandHistory&) = delete;
 
@@ -24,12 +28,15 @@ public:
 private:
 	void EraseOldRedoCommands();
 	void DoCommand(CCommand& command);
+	void UndoCommand(CCommand& command);
 	void RemoveOldCommands();
-	bool ShoudCombineWithPrev(CCommand& command);
 
 private:
 	vector<unique_ptr<CCommand>> m_history;
 	size_t m_currentPosition = 0;
+
+	CommandExecutionBegin m_commandExecutionBegin;
+	CommandExecutionEnd m_commandExecutionEnd;
 };
 
 }

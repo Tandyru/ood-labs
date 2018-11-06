@@ -8,7 +8,7 @@ class CDocumentImplMock : public IDocumentImpl
 {
 public:
 	// Inherited via IDocumentImpl
-	virtual shared_ptr<IParagraph> InsertParagraph(const string & text, optional<size_t> position = optional<size_t>()) override
+	shared_ptr<IParagraph> InsertParagraph(const string & text, optional<size_t> position = optional<size_t>()) override
 	{
 		lastCommandText = text;
 		lastCommandPosition = position;
@@ -16,12 +16,19 @@ public:
 		return shared_ptr<IParagraph>();
 	}
 
-	virtual shared_ptr<IImage> InsertImage(const Path & path, int width, int height, optional<size_t> position = optional<size_t>()) override
+	shared_ptr<IImage> InsertImage(shared_ptr<resources::IResource> resource, int width, int height, 
+		optional<size_t> position = optional<size_t>()) override
 	{
-		lastCommandPath = path;
+		lastCommandResource = resource;
 		lastCommandWidth = width;
 		lastCommandHeight = height;
+		lastCommandPosition = position;
 		return shared_ptr<IImage>();
+	}
+
+	void InsertImage(shared_ptr<IImage> image, size_t position) override
+	{
+		lastCommandPosition = position;
 	}
 
 	virtual size_t GetItemsCount() const override
@@ -54,9 +61,19 @@ public:
 		return title;
 	}
 
+	size_t GetParagraphPosition(const IParagraph & paragraph) const override
+	{
+		return 0;
+	}
+
+	size_t GetImagePosition(const IImage & image) const override
+	{
+		return 0;
+	}
+
 public:
 	string lastCommandText;
-	Path lastCommandPath;
+	shared_ptr<resources::IResource> lastCommandResource;
 	optional<size_t> lastCommandPosition;
 	int lastCommandWidth = 0;
 	int lastCommandHeight = 0;

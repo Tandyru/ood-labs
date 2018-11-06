@@ -4,8 +4,8 @@
 namespace document
 {
 
-CImage::CImage(Path path, int width, int height)
-	: m_path(path)
+CImage::CImage(shared_ptr<resources::IResource> resource, int width, int height)
+	: m_resource(resource)
 	, m_width(width)
 	, m_height(height)
 {
@@ -13,7 +13,7 @@ CImage::CImage(Path path, int width, int height)
 
 Path CImage::GetPath() const
 {
-	return m_path;
+	return m_resource->GetSavePath();
 }
 
 int CImage::GetWidth() const
@@ -28,8 +28,17 @@ int CImage::GetHeight() const
 
 void CImage::Resize(int width, int height)
 {
+	if (m_onBeforeResize)
+	{
+		m_onBeforeResize(*this, width, height);
+	}
 	m_width = width;
 	m_height = height;
+}
+
+void CImage::SetOnBeforeResize(const BeforeResizeHandler & handler)
+{
+	m_onBeforeResize = handler;
 }
 
 }

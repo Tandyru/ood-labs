@@ -27,6 +27,9 @@
     <ClInclude Include="DocumentImplMock.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceMock.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +51,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IntegrationTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentResourcesTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceMock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

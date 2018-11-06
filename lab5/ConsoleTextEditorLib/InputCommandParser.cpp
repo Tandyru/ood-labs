@@ -61,6 +61,7 @@ unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input)
 		{ "Undo", InputCommandType::Undo },
 		{ "Redo", InputCommandType::Redo },
 		{ "Save", InputCommandType::Save },
+		{ "Exit", InputCommandType::Exit },
 	};
 
 	regex re(R"e(^(\w+))e");

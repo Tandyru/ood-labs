@@ -12,7 +12,10 @@ namespace
 const auto MAX_HISTORY_SIZE = 10;
 }
 
-CCommandHistory::CCommandHistory()
+CCommandHistory::CCommandHistory(const CommandExecutionBegin& commandExecutionBegin, 
+	const CommandExecutionEnd& commandExecutionEnd)
+	: m_commandExecutionBegin(commandExecutionBegin)
+	, m_commandExecutionEnd(commandExecutionEnd)
 {
 }
 
@@ -44,7 +47,7 @@ void CCommandHistory::Undo()
 	{
 		auto it = m_history.begin() + m_currentPosition - 1;
 		auto& command = **it;
-		command.Unexecute();
+		UndoCommand(command);
 		m_currentPosition--;
 	}
 }
@@ -60,7 +63,7 @@ void CCommandHistory::Redo()
 	{
 		auto it = m_history.begin() + m_currentPosition;
 		auto& command = **it;
-		command.Execute();
+		DoCommand(command);
 		m_currentPosition++;
 	}
 }
@@ -74,9 +77,54 @@ void CCommandHistory::EraseOldRedoCommands()
 	}
 }
 
+namespace 
+{
+class BeginEndHandlerCaller
+{
+public:
+	BeginEndHandlerCaller(const CCommandHistory::CommandExecutionBegin& commandExecutionBegin,
+		const CCommandHistory::CommandExecutionEnd& commandExecutionEnd)
+		: m_commandExecutionEnd(commandExecutionEnd)
+	{
+		if (commandExecutionBegin)
+		{
+			try
+			{
+				commandExecutionBegin();
+			} 
+			catch (...)
+			{
+			}
+		}
+	}
+	~BeginEndHandlerCaller()
+	{
+		if (m_commandExecutionEnd)
+		{
+			try
+			{
+				m_commandExecutionEnd();
+			}
+			catch (...)
+			{
+			}
+		}
+	}
+private:
+	CCommandHistory::CommandExecutionEnd m_commandExecutionEnd;
+};
+}
+
 void CCommandHistory::DoCommand(CCommand & command)
 {
+	BeginEndHandlerCaller beginEndCaller(m_commandExecutionBegin, m_commandExecutionEnd);
 	command.Execute();
+}
+
+void CCommandHistory::UndoCommand(CCommand & command)
+{
+	BeginEndHandlerCaller beginEndCaller(m_commandExecutionBegin, m_commandExecutionEnd);
+	command.Unexecute();
 }
 
 void CCommandHistory::RemoveOldCommands()

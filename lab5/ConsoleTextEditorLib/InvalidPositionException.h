@@ -1,15 +1,15 @@
 #pragma once
-#include <exception>
+#include "Exception.h"
 
 namespace document
 {
 
 class CInvalidPositionException
-	: public std::exception
+	: public Exception
 {
 public:
 	inline CInvalidPositionException() 
-		: std::exception("Invalid position exception")
+		: Exception("Invalid position exception")
 	{
 	}
 };

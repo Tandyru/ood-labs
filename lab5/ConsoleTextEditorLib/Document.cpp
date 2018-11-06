@@ -4,13 +4,23 @@
 #include "InsertImageCommand.h"
 #include "DeleteItemCommand.h"
 #include "SetTitleCommand.h"
+#include "ReplaceTextCommand.h"
+#include "ResizeImageCommand.h"
 
 namespace document
 {
 
 using namespace command;
+using namespace std::placeholders;
 
 CDocument::CDocument()
+	: m_impl(std::bind(&CDocument::CreateParagraph, this, _1), 
+		std::bind(&CDocument::CreateImage, this, _1, _2, _3))
+	, m_commandHistory([this] {
+		m_commandExecuting = true;
+	}, [this] {
+		m_commandExecuting = false;
+	})
 {
 }
 
@@ -23,11 +33,19 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 	return lastItem.GetParagraph();
 }
 
+namespace
+{
+
+
+}
+
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
 	CheckPosition(position);
-	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, width, height, path);
+	const auto saveNamePrefix = "image";
+	auto resource = m_resources.AddResource(path, saveNamePrefix);
+	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, width, height, move(resource));
 	m_commandHistory.Do(move(command));
 	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
 	return lastItem.GetImage();
@@ -82,6 +100,7 @@ bool CDocument::CanRedo()const
 {
 	return m_commandHistory.CanRedo();
 }
+
 void CDocument::Redo()
 {
 	m_commandHistory.Redo();
@@ -105,6 +124,40 @@ void CDocument::CheckIndex(size_t index)const
 	if (index > GetItemsCount())
 	{
 		throw CInvalidPositionException();
+	}
+}
+
+shared_ptr<IParagraph> CDocument::CreateParagraph(const string& text)
+{
+	auto paragraph = make_shared<CParagraph>(text);
+	paragraph->SetOnBeforeTextChange(bind(&CDocument::OnBeforeParagraphTextChange, this, _1, _2));
+	return paragraph;
+}
+
+shared_ptr<IImage> CDocument::CreateImage(shared_ptr<resources::IResource> resource, unsigned int width, unsigned int height)
+{
+	auto image = make_shared<CImage>(resource, width, height);
+	image->SetOnBeforeResize(bind(&CDocument::OnBeforeResizeImage, this, _1, _2, _3));
+	return image;
+}
+
+void CDocument::OnBeforeParagraphTextChange(const IParagraph & paragraph, const string & newText)
+{
+	if (!m_commandExecuting)
+	{
+		auto position = m_impl.GetParagraphPosition(paragraph);
+		auto command = make_unique<command::CReplaceTextCommand>(m_impl, position, newText);
+		m_commandHistory.Do(move(command));
+	}
+}
+
+void CDocument::OnBeforeResizeImage(const IImage & image, unsigned int width, unsigned int height)
+{
+	if (!m_commandExecuting)
+	{
+		auto position = m_impl.GetImagePosition(image);
+		auto command = make_unique<command::CResizeImageCommand>(m_impl, position, width, height);
+		m_commandHistory.Do(move(command));
 	}
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "IResource.h"
 
 namespace document
 {

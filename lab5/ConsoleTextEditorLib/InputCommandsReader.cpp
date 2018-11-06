@@ -2,6 +2,7 @@
 #include "InputCommandsReader.h"
 #include "InputCommandParser.h"
 #include <istream>
+#include "ExitException.h"
 
 using namespace input_command;
 using namespace command_parser;
@@ -20,6 +21,10 @@ void ReadInputCommands(istream & input, ostream & out, const InputCommandHandler
 		{
 			auto inputCommand = ParseInputCommand(readline);
 			handler(move(inputCommand));
+		}
+		catch (const ExitException&)
+		{
+			break;
 		}
 		catch (const exception& ex)
 		{

@@ -28,6 +28,9 @@
     <Filter Include="document\command">
       <UniqueIdentifier>{b32a2c77-b788-47d9-84c6-d23d866225d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{cfb91158-a106-4f3a-bb4d-197c4f7f7fd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -183,6 +186,30 @@
     <ClInclude Include="SetTitleCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
+    <ClInclude Include="ReplaceTextCommand.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeImageCommand.h">
+      <Filter>document\command</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageResource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentResources.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="IResource.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -298,6 +325,27 @@
     </ClCompile>
     <ClCompile Include="SetTitleCommand.cpp">
       <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaceTextCommand.cpp">
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageCommand.cpp">
+      <Filter>document\command</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResource.cpp">
+      <Filter>resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>resources</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentResources.cpp">
+      <Filter>resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>resources</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

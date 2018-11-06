@@ -8,7 +8,9 @@ namespace document
 namespace impl
 {
 
-CDocumentImpl::CDocumentImpl()
+CDocumentImpl::CDocumentImpl(const ParagraphFactory & paragraphFactory, const ImageFactory & imageFactory)
+	: m_paragraphFactory(paragraphFactory)
+	, m_imageFactory(imageFactory)
 {
 }
 
@@ -16,15 +18,22 @@ shared_ptr<IParagraph> CDocumentImpl::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
 	return InsertItem<IParagraph>(position, [&]() -> shared_ptr<IParagraph> {
-		return make_shared<CParagraph>(text);
+		return m_paragraphFactory(text);
 	});
 }
 
-shared_ptr<IImage> CDocumentImpl::InsertImage(const Path& path, int width, int height,
+shared_ptr<IImage> CDocumentImpl::InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 	optional<size_t> position)
 {
 	return InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
-		return make_shared<CImage>(path, width, height);
+		return m_imageFactory(resource, width, height);
+	});
+}
+
+void CDocumentImpl::InsertImage(shared_ptr<IImage> image, size_t position)
+{
+	InsertItem<IImage>(position, [&]() -> shared_ptr<IImage> {
+		return image;
 	});
 }
 
@@ -67,6 +76,49 @@ void CDocumentImpl::CheckIndex(size_t index)const
 	{
 		throw CInvalidPositionException();
 	}
+}
+
+size_t CDocumentImpl::GetItemPosition(const std::function<bool(const CConstDocumentItem&)>& pred) const
+{
+	for (size_t index = 0; index < m_items.size(); index++)
+	{
+		auto item = m_items[index];
+		if (pred(*item))
+		{
+			return index;
+		}
+	}
+	throw std::logic_error("Document item not found");
+}
+
+size_t CDocumentImpl::GetParagraphPosition(const IParagraph & paragraph) const
+{
+	return GetItemPosition([&](const CConstDocumentItem& item) {
+		auto paragraphOfItem = item.GetParagraph();
+		if (paragraphOfItem)
+		{
+			if (paragraphOfItem.get() == &paragraph)
+			{
+				return true;
+			}
+		}
+		return false;
+	});
+}
+
+size_t CDocumentImpl::GetImagePosition(const IImage & image) const
+{
+	return GetItemPosition([&](const CConstDocumentItem& item) {
+		auto imageOfItem = item.GetImage();
+		if (imageOfItem)
+		{
+			if (imageOfItem.get() == &image)
+			{
+				return true;
+			}
+		}
+		return false;
+	});
 }
 
 }

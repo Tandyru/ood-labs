@@ -7,12 +7,13 @@ namespace document
 namespace command
 {
 
-CInsertImageCommand::CInsertImageCommand(impl::IDocumentImpl & document, optional<size_t> position, unsigned int width, unsigned int height, Path path)
+CInsertImageCommand::CInsertImageCommand(impl::IDocumentImpl & document, optional<size_t> position, 
+	unsigned int width, unsigned int height, unique_ptr<resources::IResource>&& resource)
 	: m_document(document)
 	, m_position(position)
 	, m_width(width)
 	, m_height(height)
-	, m_path(path)
+	, m_resource(move(resource))
 {
 }
 
@@ -20,7 +21,7 @@ void CInsertImageCommand::Execute()
 {
 	CCommand::Execute();
 	m_insertedPosition = m_position ? *m_position : m_document.GetItemsCount();
-	m_document.InsertImage(m_path, m_width, m_height, m_position);
+	m_document.InsertImage(m_resource, m_width, m_height, m_position);
 }
 
 void CInsertImageCommand::Unexecute()
@@ -36,7 +37,12 @@ optional<size_t> CInsertImageCommand::GetPosition() const
 
 Path CInsertImageCommand::GetPath() const
 {
-	return m_path;
+	return m_resource->GetFilePath();
+}
+
+shared_ptr<resources::IResource> CInsertImageCommand::GetResource() const
+{
+	return m_resource;
 }
 
 }

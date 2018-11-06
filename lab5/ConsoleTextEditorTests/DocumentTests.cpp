@@ -6,10 +6,13 @@
 #include "../ConsoleTextEditorLib/DocumentItem.h"
 #include "../ConsoleTextEditorLib/Document.h"
 #include "../ConsoleTextEditorLib/InvalidPositionException.h"
+#include "ResourceMock.h"
+#pragma warning(disable: 4834)
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 using namespace document;
+using namespace resources;
 
 namespace ConsoleTextEditorTests
 {		
@@ -17,23 +20,23 @@ namespace ConsoleTextEditorTests
 	{
 	public:
 		CDocument document;
+		shared_ptr<resources::IResource> resource;
+		string imagePath = "../../ConsoleTextEditorTests/res/lamp.jpg";
 
 		TEST_METHOD(TestImageConstruction)
 		{
-			Path expectedPath = "image/file/path";
 			int expectedWidth = 300;
 			int expectedHeight = 200;
 
-			CImage image(expectedPath, expectedWidth, expectedHeight);
+			CImage image(resource, expectedWidth, expectedHeight);
 
-			Assert::IsTrue(expectedPath == image.GetPath());
 			Assert::AreEqual(expectedWidth, image.GetWidth());
 			Assert::AreEqual(expectedHeight, image.GetHeight());
 		}
 
 		TEST_METHOD(TestImageResize)
 		{
-			CImage image("image/file/path", 300, 200);
+			CImage image(resource, 300, 200);
 
 			int expectedWidth = 400;
 			int expectedHeight = 350;
@@ -66,7 +69,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestConstDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>("image/file/path", 300, 200);
+			auto image = make_shared<CImage>(resource, 300, 200);
 
 			CConstDocumentItem item(image);
 
@@ -86,7 +89,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>("image/file/path", 300, 200);
+			auto image = make_shared<CImage>(resource, 300, 200);
 
 			CDocumentItem item(image);
 
@@ -140,7 +143,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestInsertImage)
 		{
-			const auto expectedPath = "image/file/path";
+			const auto expectedPath = imagePath;
 			const auto expectedWidth = 300;
 			const auto expectedHeight = 200;
 
@@ -151,7 +154,8 @@ namespace ConsoleTextEditorTests
 			const auto image = item.GetImage();
 			Assert::IsTrue(bool(image));
 			Assert::IsFalse(bool(item.GetParagraph()));
-			Assert::AreEqual(string(expectedPath), image->GetPath().string());
+			Assert::AreNotEqual(string(expectedPath), image->GetPath().string());
+			filesystem::exists(image->GetPath());
 			Assert::AreEqual(expectedWidth, image->GetWidth());
 			Assert::AreEqual(expectedHeight, image->GetHeight());
 		}
@@ -174,9 +178,10 @@ namespace ConsoleTextEditorTests
 		{
 			const string expectedOldText = "oldText";
 			document.InsertParagraph("oldText");
-			document.DeleteItem(0);
 			const string expectedText = "newText";
-			document.InsertParagraph(expectedText);
+			auto item = document.GetItem(0);
+			auto paragraph0 = item.GetParagraph();
+			paragraph0->SetText(expectedText);
 			Assert::AreEqual(size_t(1), document.GetItemsCount());
 			const auto paragraph = document.GetItem(0).GetParagraph();
 			Assert::AreEqual(string(expectedText), paragraph->GetText());
@@ -191,10 +196,10 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestResizeImage)
 		{
-			Path imagePath = "image/path";
 			document.InsertImage(imagePath, 300, 200);
-			document.DeleteItem(0);
-			document.InsertImage(imagePath, 600, 400);
+			auto item = document.GetItem(0);
+			auto image = item.GetImage();
+			image->Resize(600, 400);
 			Assert::AreEqual(size_t(1), document.GetItemsCount());
 			Assert::IsTrue(document.CanUndo());
 			document.Undo(); // undo "resize image" command
@@ -213,5 +218,10 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(string(), document.GetTitle());
 		}
 
+		TEST_METHOD(TestImageResource)
+		{
+			document.InsertImage(imagePath, 300, 200);
+
+		}
 	};
 }
