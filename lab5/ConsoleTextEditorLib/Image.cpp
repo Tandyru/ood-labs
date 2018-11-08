@@ -13,7 +13,7 @@ CImage::CImage(shared_ptr<resources::IResource> resource, int width, int height)
 
 Path CImage::GetPath() const
 {
-	return m_resource->GetSavePath();
+	return m_resource->GetFilePath();
 }
 
 int CImage::GetWidth() const

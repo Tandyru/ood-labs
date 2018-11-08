@@ -31,6 +31,9 @@
     <Filter Include="resources">
       <UniqueIdentifier>{cfb91158-a106-4f3a-bb4d-197c4f7f7fd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="document\html">
+      <UniqueIdentifier>{c5f7f24a-c0f2-4287-a0fc-4c8b15354628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -210,6 +213,9 @@
     <ClInclude Include="StringUtils.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="DocumentToHtmlConvertor.h">
+      <Filter>document\html</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentToHtmlConvertor.cpp">
+      <Filter>document\html</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

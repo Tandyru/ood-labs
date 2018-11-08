@@ -56,11 +56,10 @@ namespace ConsoleTextEditorTests
 				"InsertImage end 320 240 " + imageFilePath + "\n" +
 				"InsertParagraph " + to_string(secondParagraphPosition) + " To be deleted paragraph" + "\n" +
 				"ResizeImage 2 " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + "\n" +
-				//"DeleteItem " + std::to_string(secondParagraphPosition) + "\n" +
-				//"ReplaceText 0 " + firstParagraphNewText + "\n" + 
-				"";
-				//"Undo\nUndo\nUndo\nUndo\nUndo\nUndo\n" +
-				//"Redo\nRedo\nRedo\nRedo\nRedo\nRedo\n";
+				"DeleteItem " + std::to_string(secondParagraphPosition) + "\n" +
+				"ReplaceText 0 " + firstParagraphNewText + "\n" + 
+				"Undo\nUndo\nUndo\nUndo\nUndo\nUndo\n" +
+				"Redo\nRedo\nRedo\nRedo\nRedo\nRedo\n";
 			stringstream in(inputCommands);
 			stringstream prompt;
 			ReadInputCommands(in, prompt, [&](unique_ptr<input_command::InputCommand>&& inputCommand) {

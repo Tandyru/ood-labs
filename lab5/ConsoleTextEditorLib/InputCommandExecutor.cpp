@@ -108,8 +108,7 @@ void CInputCommandExecutor::ExecuteCommand(const ResizeImageInputCommand & comma
 	{
 		throw exception("The item in the position is not an image.");
 	}
-	m_document.DeleteItem(*position);
-	m_document.InsertImage(image->GetPath(), command.width, command.height, position);
+	image->Resize(command.width, command.height);
 }
 
 void CInputCommandExecutor::ExecuteCommand(const DeleteItemInputCommand & command)

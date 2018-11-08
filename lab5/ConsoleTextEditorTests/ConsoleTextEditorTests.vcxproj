@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DocumentImplMock.h" />
+    <ClInclude Include="DocumentImageItemMock.h" />
     <ClInclude Include="DocumentMock.h" />
     <ClInclude Include="ResourceMock.h" />
     <ClInclude Include="stdafx.h" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="CommandExecutionTests.cpp" />
     <ClCompile Include="CommandHistoryTests.cpp" />
+    <ClCompile Include="DocumentImageItemMock.cpp" />
     <ClCompile Include="DocumentMock.cpp" />
     <ClCompile Include="DocumentResourcesTests.cpp" />
     <ClCompile Include="DocumentTests.cpp" />

@@ -25,4 +25,5 @@ public:
 	string lastCommandText;
 	string lastCommandPath;
 	optional<size_t> lastCommandPosition;
+	unique_ptr<CDocumentItem> item;
 };

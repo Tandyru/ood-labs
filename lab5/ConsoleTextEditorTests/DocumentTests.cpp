@@ -130,7 +130,6 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestInsertParagraphIntoNonendPosition)
 		{
-			const auto secondParagraphText = "First paragraph";
 			document.InsertParagraph("Second paragraph");
 			const auto firstParagraphText = "First paragraph";
 			document.InsertParagraph(firstParagraphText, 0);
@@ -139,6 +138,20 @@ namespace ConsoleTextEditorTests
 			const auto paragraph = item.GetParagraph();
 			Assert::IsTrue(bool(paragraph));
 			Assert::AreEqual(string(firstParagraphText), paragraph->GetText());
+		}
+
+		TEST_METHOD(TestInsertParagraphBeforeImage)
+		{
+			const auto firstParagraphText = "First paragraph";
+			const auto secondParagraphText = "Second paragraph";
+			document.InsertParagraph(firstParagraphText);
+			document.InsertImage(imagePath, 300, 200);
+			document.InsertParagraph("Second paragraph", 1);
+			Assert::AreEqual(size_t(3), document.GetItemsCount());
+			const CConstDocumentItem item = document.GetItem(1);
+			const auto paragraph = item.GetParagraph();
+			Assert::IsTrue(bool(paragraph));
+			Assert::AreEqual(string(secondParagraphText), paragraph->GetText());
 		}
 
 		TEST_METHOD(TestInsertImage)
@@ -155,9 +168,26 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(bool(image));
 			Assert::IsFalse(bool(item.GetParagraph()));
 			Assert::AreNotEqual(string(expectedPath), image->GetPath().string());
-			filesystem::exists(image->GetPath());
+			Assert::IsTrue(filesystem::exists(image->GetPath()));
 			Assert::AreEqual(expectedWidth, image->GetWidth());
 			Assert::AreEqual(expectedHeight, image->GetHeight());
+		}
+
+		TEST_METHOD(TestImageFileLifeCicle)
+		{
+			document.InsertImage(imagePath, 320, 240);
+			Path tmpImagePath;
+			{
+				const CConstDocumentItem item = document.GetItem(0);
+				const auto image = item.GetImage();
+				Assert::IsTrue(bool(image));
+				tmpImagePath = image->GetPath();
+			}
+			Assert::IsTrue(filesystem::exists(tmpImagePath));
+			document.Undo();
+			Assert::IsTrue(filesystem::exists(tmpImagePath));
+			document.InsertParagraph("text");
+			Assert::IsTrue(!filesystem::exists(tmpImagePath));
 		}
 
 		TEST_METHOD(TestGetItemInvalidIndex)

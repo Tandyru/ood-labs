@@ -163,6 +163,7 @@
     <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentItemPosition.h" />
     <ClInclude Include="DocumentResources.h" />
+    <ClInclude Include="DocumentToHtmlConvertor.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="ICommandCombiner.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="DocumentImpl.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="DocumentResources.cpp" />
+    <ClCompile Include="DocumentToHtmlConvertor.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="Image.cpp" />

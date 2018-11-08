@@ -21,12 +21,12 @@ size_t CDocumentMock::GetItemsCount() const
 
 CConstDocumentItem CDocumentMock::GetItem(size_t index) const
 {
-	return CConstDocumentItem(shared_ptr<IImage>());
+	return *item;
 }
 
 CDocumentItem CDocumentMock::GetItem(size_t index)
 {
-	return CDocumentItem(shared_ptr<IImage>());
+	return *item;
 }
 
 void CDocumentMock::DeleteItem(size_t index)

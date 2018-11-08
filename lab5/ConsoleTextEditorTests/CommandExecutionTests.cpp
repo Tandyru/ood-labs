@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "DocumentMock.h"
+#include "DocumentImageItemMock.h"
 #include "../ConsoleTextEditorLib/InputCommandExecutor.h"
 #include "../ConsoleTextEditorLib/InsertParagraphInputCommand.h"
 
@@ -44,6 +45,19 @@ namespace ConsoleTextEditorTests
 			command.Execute(executor);
 			Assert::IsTrue(bool(document.lastCommandPosition));
 			Assert::IsTrue(expectedPosition == *(document.lastCommandPosition));
+		}
+
+		TEST_METHOD(TestResizeImageCommandExecution)
+		{
+			document.item = make_unique<DocumentImageItemMock>();
+
+			const Position expectedPosition = 3;
+			const unsigned int expectedWidth = 640;
+			const unsigned int expectedHeight = 480;
+			ResizeImageInputCommand command(expectedPosition, expectedWidth, expectedHeight);
+			command.Execute(executor);
+			Assert::AreEqual(int(expectedWidth), document.item->GetImage()->GetWidth());
+			Assert::AreEqual(int(expectedHeight), document.item->GetImage()->GetHeight());
 		}
 
 	};

@@ -33,12 +33,6 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 	return lastItem.GetParagraph();
 }
 
-namespace
-{
-
-
-}
-
 shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int height,
 	optional<size_t> position)
 {
