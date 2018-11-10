@@ -216,6 +216,9 @@
     <ClInclude Include="DocumentToHtmlConvertor.h">
       <Filter>document\html</Filter>
     </ClInclude>
+    <ClInclude Include="HtmlUtils.h">
+      <Filter>document\html</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -354,6 +357,9 @@
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="DocumentToHtmlConvertor.cpp">
+      <Filter>document\html</Filter>
+    </ClCompile>
+    <ClCompile Include="HtmlUtils.cpp">
       <Filter>document\html</Filter>
     </ClCompile>
   </ItemGroup>
