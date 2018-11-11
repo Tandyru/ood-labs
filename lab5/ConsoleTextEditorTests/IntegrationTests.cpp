@@ -9,11 +9,13 @@
 #include "../ConsoleTextEditorLib/InputCommandExecutor.h"
 #include "../ConsoleTextEditorLib/InputCommandsReader.h"
 #include "../ConsoleTextEditorLib/StringUtils.h"
+#include "../ConsoleTextEditorLib/FileUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 using namespace document;
 using namespace input_command;
+using namespace filesystem;
 
 namespace ConsoleTextEditorTests
 {		
@@ -76,6 +78,31 @@ namespace ConsoleTextEditorTests
 					"0. Paragraph: " + firstParagraphNewText + "\n" +
 					"1. Image: " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + w2s(imageSavePath.native().c_str()) + "\n";
 			Assert::AreEqual(expectedOutput, out.str());
+		}
+
+		TEST_METHOD(TestSaveDocument)
+		{
+			const string paragraphText = "First paragraph text";
+			const string inputCommands =
+				"InsertParagraph end " + paragraphText + "\n" +
+				"InsertImage end 320 240 " + imageFilePath + "\n" + 
+				"InsertImage end 640 480 " + imageFilePath + "\n";
+			stringstream in(inputCommands);
+			stringstream prompt;
+			ReadInputCommands(in, prompt, [&](unique_ptr<input_command::InputCommand>&& inputCommand) {
+				inputCommand->Execute(executor);
+			}, [](auto) {});
+			Path tempDirectoryPath = temp_directory_path() / GetUniqueFileName();
+			create_directory(tempDirectoryPath);
+			string htmlFileName = "output.html";
+			Path htmlFilePath = tempDirectoryPath / htmlFileName;
+			string htmlFilePathStr = w2s(htmlFilePath.native().c_str());
+			SaveInputCommand saveCommand(htmlFilePathStr);
+			executor.ExecuteCommand(saveCommand);
+			Assert::IsTrue(exists(htmlFilePath));
+			Assert::IsTrue(exists(tempDirectoryPath / "images" / "image1.jpg"));
+			Assert::IsTrue(exists(tempDirectoryPath / "images" / "image2.jpg"));
+			remove_all(tempDirectoryPath);
 		}
 
 	};

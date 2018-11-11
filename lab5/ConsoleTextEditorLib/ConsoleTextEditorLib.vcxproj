@@ -165,6 +165,7 @@
     <ClInclude Include="DocumentResources.h" />
     <ClInclude Include="DocumentToHtmlConvertor.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="FileUtils.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="HtmlUtils.h" />
     <ClInclude Include="ICommandCombiner.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="DocumentResources.cpp" />
     <ClCompile Include="DocumentToHtmlConvertor.cpp" />
     <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="HtmlUtils.cpp" />
     <ClCompile Include="Image.cpp" />

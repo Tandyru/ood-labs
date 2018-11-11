@@ -6,6 +6,7 @@
 #include "SetTitleCommand.h"
 #include "ReplaceTextCommand.h"
 #include "ResizeImageCommand.h"
+#include "DocumentToHtmlConvertor.h"
 
 namespace document
 {
@@ -102,7 +103,7 @@ void CDocument::Redo()
 
 void CDocument::Save(const Path& path)const
 {
-	// TODO:
+	html::ConvertDocumentToHtml(m_impl, path);
 }
 
 void CDocument::CheckPosition(optional<size_t> position) const

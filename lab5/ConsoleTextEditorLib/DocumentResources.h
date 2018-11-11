@@ -16,9 +16,6 @@ public:
 	Path GetDirectoryPath() const;
 
 private:
-	static string GetUniqueFileName();
-
-private:
 	Path m_tempDirectoryPath;
 	string m_saveFolderName;
 	unsigned int m_nextResourceNameSuffix = 1;

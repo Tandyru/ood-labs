@@ -4,9 +4,9 @@
 namespace resources
 {
 
-CResource::CResource(const Path& path, const Path& savePath)
+CResource::CResource(const Path& path/*, const Path& savePath*/)
 	: m_path(path)
-	, m_savePath(savePath)
+	//, m_savePath(savePath)
 {
 }
 
@@ -20,9 +20,9 @@ Path CResource::GetFilePath() const
 	return m_path;
 }
 
-Path CResource::GetSavePath() const
-{
-	return m_savePath;
-}
+//Path CResource::GetSavePath() const
+//{
+//	return m_savePath;
+//}
 
 }

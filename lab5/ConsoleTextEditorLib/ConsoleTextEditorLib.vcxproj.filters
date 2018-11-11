@@ -219,6 +219,9 @@
     <ClInclude Include="HtmlUtils.h">
       <Filter>document\html</Filter>
     </ClInclude>
+    <ClInclude Include="FileUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -361,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="HtmlUtils.cpp">
       <Filter>document\html</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
