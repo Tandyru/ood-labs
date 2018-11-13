@@ -42,10 +42,34 @@
     <ClInclude Include="Color.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="IGroup.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ILineStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Group.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="IFillStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Group.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

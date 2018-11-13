@@ -11,5 +11,7 @@ struct Color
 	unsigned char a = 0;
 };
 
+const Color NONE_COLOR;
+
 }
 
