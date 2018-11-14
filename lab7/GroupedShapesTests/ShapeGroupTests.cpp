@@ -14,8 +14,8 @@ namespace GroupedShapesTests
 		shared_ptr<CGroup> group;
 
 		ShapeGroupTests()
-			: group(make_shared<CGroup>())
 		{
+			group = make_shared<CGroup>();
 		}
 
 		TEST_METHOD(TestGetGroupReturnsNonNull)

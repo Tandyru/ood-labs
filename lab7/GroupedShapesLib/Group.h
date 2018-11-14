@@ -4,7 +4,7 @@
 namespace shape
 {
 
-class CGroup : enable_shared_from_this<CGroup>, public IGroup
+class CGroup : public enable_shared_from_this<CGroup>, public IGroup
 {
 public:
 	// Inherited via IShape
