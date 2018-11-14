@@ -10,13 +10,16 @@ class CTriangle : public CShape
 public:
 	CTriangle(Point vertex1, Point vertex2, Point vertex3);
 
-	// IShape
+	// Inherited via IShape
+	Rect GetFrame() const override;
+	void SetFrame(Rect rect) override;
+
 	void Draw(ICanvas & canvas) const override;
 
 private:
-	Point vertex1;
-	Point vertex2;
-	Point vertex3;
+	Point m_vertex1;
+	Point m_vertex2;
+	Point m_vertex3;
 };
 
 }
