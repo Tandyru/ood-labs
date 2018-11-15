@@ -1,5 +1,6 @@
 #pragma once
 #include "IGroup.h"
+#include <vector>
 
 namespace shape
 {
@@ -20,6 +21,9 @@ public:
 	shared_ptr<IShape> GetShapeAtIndex(size_t index) const override;
 	void InsertShapeAtIndex(shared_ptr<IShape> shape, size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
+
+private:
+	vector<shared_ptr<IShape>> m_shapes;
 };
 
 }

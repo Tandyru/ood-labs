@@ -16,6 +16,8 @@ shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index) const
 
 void CGroup::InsertShapeAtIndex(shared_ptr<IShape> shape, size_t index)
 {
+
+	//m_shapes.insert()
 }
 
 void CGroup::RemoveShapeAtIndex(size_t index)
