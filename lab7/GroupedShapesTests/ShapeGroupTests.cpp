@@ -24,11 +24,13 @@ namespace GroupedShapesTests
 			Assert::IsTrue(bool(group->GetGroup()));
 		}
 
-		TEST_METHOD(TestInsertShape)
+		TEST_METHOD(TestInsertShapeIntoEnd)
 		{
 			auto shape = CreateShape();
 			group->InsertShapeAtIndex(shape, 0);
-			Assert::AreEqual(size_t(1), group->GetShapeCount());
+			shape = CreateShape();
+			group->InsertShapeAtIndex(shape, 1);
+			Assert::AreEqual(size_t(2), group->GetShapeCount());
 		}
 
 		TEST_METHOD(TestInsertShapeIntoIncorrectPosition)
@@ -46,10 +48,37 @@ namespace GroupedShapesTests
 			Assert::IsTrue(exception);
 		}
 
-//		size_t GetShapeCount() const override;
-//		shared_ptr<IShape> GetShapeAtIndex(size_t index) const override;
-//		void InsertShapeAtIndex(shared_ptr<IShape> shape, size_t index) override;
-//		void RemoveShapeAtIndex(size_t index) override;
+		TEST_METHOD(TestGetShape)
+		{
+			auto shape = CreateShape();
+			group->InsertShapeAtIndex(shape, 0);
+			group->GetShapeAtIndex(0);
+			Assert::IsTrue(true);
+		}
+
+		TEST_METHOD(TestGetShapeAtIncorrectIndex)
+		{
+			auto shape = CreateShape();
+			group->InsertShapeAtIndex(shape, 0);
+			bool exception = false;
+			try
+			{
+				group->GetShapeAtIndex(1);
+			}
+			catch (...)
+			{
+				exception = true;
+			}
+			Assert::IsTrue(exception);
+		}
+
+		TEST_METHOD(TestRemoveShapeAtIndex)
+		{
+			auto shape = CreateShape();
+			group->InsertShapeAtIndex(shape, 0);
+			group->RemoveShapeAtIndex(0);
+			Assert::AreEqual(size_t(0), group->GetShapeCount());
+		}
 
 		shared_ptr<IShape> CreateShape() const
 		{

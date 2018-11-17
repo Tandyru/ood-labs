@@ -1,10 +1,14 @@
 #include "stdafx.h"
 #include "Shape.h"
+#include "LineStyle.h"
 
 namespace shape
 {
 
-
+CShape::CShape()
+	: m_lineStyle(make_shared<CLineStyle>())
+{
+}
 
 Rect CShape::GetFrame() const
 {
@@ -22,7 +26,7 @@ shared_ptr<IGroup> CShape::GetGroup()
 
 shared_ptr<ILineStyle> CShape::GetLineStyle()
 {
-	return shared_ptr<ILineStyle>();
+	return m_lineStyle;
 }
 
 shared_ptr<IFillStyle> CShape::GetFillStyle()

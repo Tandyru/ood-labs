@@ -7,6 +7,8 @@ namespace shape
 class CShape : public IShape
 {
 public:
+	CShape();
+
 	// Inherited via IShape
 	Rect GetFrame() const override;
 	void SetFrame(Rect rect) override;
@@ -14,6 +16,8 @@ public:
 	shared_ptr<ILineStyle> GetLineStyle() override;
 	shared_ptr<IFillStyle> GetFillStyle() override;
 
+private:
+	shared_ptr<ILineStyle> m_lineStyle;
 };
 
 }

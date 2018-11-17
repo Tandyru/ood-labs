@@ -57,6 +57,9 @@
     <ClInclude Include="Triangle.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="LineStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,6 +72,9 @@
       <Filter>shapes</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="LineStyle.cpp">
       <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>

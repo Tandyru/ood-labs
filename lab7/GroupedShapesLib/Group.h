@@ -23,6 +23,9 @@ public:
 	void RemoveShapeAtIndex(size_t index) override;
 
 private:
+	void CheckIndex(size_t index) const;
+
+private:
 	vector<shared_ptr<IShape>> m_shapes;
 };
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "ColorToWstring.h"
 #include "../GroupedShapesLib/Triangle.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -45,5 +46,21 @@ namespace GroupedShapesTests
 			Assert::AreEqual(newRect.right, resultRect.right);
 			Assert::AreEqual(newRect.bottom, resultRect.bottom);
 		}
+
+		TEST_METHOD(TestLineStyle)
+		{
+			ILineStyle::ThicknessType expectedThickness = 2;
+			Color expectedColor = { 127, 127, 127, 127 };
+			auto shape = make_shared<CTriangle>(Point(), Point(), Point());
+			auto lineStyle = shape->GetLineStyle();
+			lineStyle->SetLineThickness(expectedThickness);
+			lineStyle->SetColor(expectedColor);
+			auto lineStyle2 = shape->GetLineStyle();
+			shape.reset();
+			Assert::AreEqual(expectedThickness, lineStyle2->GetLineThickness());
+			Assert::AreEqual(expectedColor, lineStyle2->GetColor());
+		}
+
+
 	};
 }
