@@ -60,6 +60,12 @@
     <ClInclude Include="LineStyle.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +81,12 @@
       <Filter>shapes</Filter>
     </ClCompile>
     <ClCompile Include="LineStyle.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
       <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>
