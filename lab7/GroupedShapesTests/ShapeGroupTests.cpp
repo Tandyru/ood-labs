@@ -12,9 +12,13 @@ namespace GroupedShapesTests
 	TEST_CLASS(ShapeGroupTests)
 	{
 	public:
+		const Color color1;
+		const Color color2;
 		shared_ptr<CGroup> group;
 
 		ShapeGroupTests()
+			: color1({121, 1, 123, 124})
+			, color2({2, 134, 135, 255})
 		{
 			group = make_shared<CGroup>();
 		}
@@ -80,9 +84,28 @@ namespace GroupedShapesTests
 			Assert::AreEqual(size_t(0), group->GetShapeCount());
 		}
 
+		TEST_METHOD(TestGetGroupLineStyle)
+		{
+			auto shape = CreateShape();
+			auto lineStyle1 = shape->GetLineStyle();
+
+		}
+
 		shared_ptr<IShape> CreateShape() const
 		{
 			return make_shared<CTriangle>(Point(), Point(), Point());
+		}
+
+		void SetLineStyle1(shared_ptr<ILineStyle> style)
+		{
+			style->SetColor(color1);
+			style->SetLineThickness(1.2);
+		}
+
+		void SetLineStyle2(shared_ptr<ILineStyle> style)
+		{
+			style->SetColor(color2);
+			style->SetLineThickness(2.2);
 		}
 	};
 }
