@@ -156,6 +156,7 @@
     <ClInclude Include="ColorToWstring.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="ThicknessToWstring.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShapeGroupTests.cpp" />

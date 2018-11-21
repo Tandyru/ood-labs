@@ -4,10 +4,12 @@
 namespace shape
 {
 
-class CLineStyle : public ILineStyle
+class IGroup;
+
+class CGroupLineStyle : public ILineStyle
 {
 public:
-	const size_t DEFAULT_LINE_THICKNESS = 1;
+	CGroupLineStyle(weak_ptr<IGroup> group);
 
 	void SetColor(const ColorType& color) override;
 	ColorType GetColor() const override;
@@ -16,8 +18,7 @@ public:
 	ILineStyle::ThicknessType GetLineThickness() const override;
 
 private:
-	ColorType m_color;
-	ThicknessType m_thickness;
+	weak_ptr<IGroup> m_group;
 };
 
 }

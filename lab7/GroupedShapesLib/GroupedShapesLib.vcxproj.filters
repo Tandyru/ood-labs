@@ -66,6 +66,9 @@
     <ClInclude Include="Ellipse.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="GroupLineStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -87,6 +90,9 @@
       <Filter>shapes</Filter>
     </ClCompile>
     <ClCompile Include="Ellipse.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupLineStyle.cpp">
       <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>

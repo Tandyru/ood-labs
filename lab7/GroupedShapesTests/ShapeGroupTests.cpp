@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "ColorToWstring.h"
+#include "ThicknessToWstring.h"
 #include "../GroupedShapesLib/Group.h"
 #include "../GroupedShapesLib/Triangle.h"
+#include "../GroupedShapesLib/Rectangle.h"
+#include "../GroupedShapesLib/Ellipse.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -87,13 +91,36 @@ namespace GroupedShapesTests
 		TEST_METHOD(TestGetGroupLineStyle)
 		{
 			auto shape = CreateShape();
-			auto lineStyle1 = shape->GetLineStyle();
+			SetLineStyle1(shape->GetLineStyle());
+			group->InsertShapeAtIndex(shape, 0);
 
+			auto rectangle = CreateRectangle();
+			SetLineStyle2(rectangle->GetLineStyle());
+			group->InsertShapeAtIndex(rectangle, 0);
+
+			auto ellipse = CreateEllipse();
+			SetLineStyle2(ellipse->GetLineStyle());
+			group->InsertShapeAtIndex(ellipse, 0);
+
+			auto lineStyle = group->GetLineStyle();
+			Assert::AreEqual(ILineStyle::ColorType(), lineStyle->GetColor());
+			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetLineThickness());
+			// ??
 		}
 
 		shared_ptr<IShape> CreateShape() const
 		{
 			return make_shared<CTriangle>(Point(), Point(), Point());
+		}
+
+		shared_ptr<IShape> CreateRectangle() const
+		{
+			return make_shared<CRectangle>(0, 0, 100, 100);
+		}
+
+		shared_ptr<IShape> CreateEllipse() const
+		{
+			return make_shared<CEllipse>(Point(), 100, 50);
 		}
 
 		void SetLineStyle1(shared_ptr<ILineStyle> style)

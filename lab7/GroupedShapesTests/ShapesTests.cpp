@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "ColorToWstring.h"
+#include "ThicknessToWstring.h"
 #include "../GroupedShapesLib/Triangle.h"
 #include "../GroupedShapesLib/Rectangle.h"
 #include "../GroupedShapesLib/Ellipse.h"
@@ -109,7 +110,7 @@ namespace GroupedShapesTests
 			auto lineStyle2 = shape->GetLineStyle();
 			shape.reset();
 			Assert::AreEqual(expectedThickness, lineStyle2->GetLineThickness());
-			Assert::AreEqual(expectedColor, lineStyle2->GetColor());
+			Assert::AreEqual(expectedColor, *lineStyle2->GetColor());
 		}
 
 

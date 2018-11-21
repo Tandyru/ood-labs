@@ -4,17 +4,17 @@
 namespace shape
 {
 
-void CLineStyle::SetColor(Color color)
+void CLineStyle::SetColor(const ColorType& color)
 {
 	m_color = color;
 }
 
-Color CLineStyle::GetColor() const
+CLineStyle::ColorType CLineStyle::GetColor() const
 {
 	return m_color;
 }
 
-void CLineStyle::SetLineThickness(ILineStyle::ThicknessType thickness)
+void CLineStyle::SetLineThickness(const ILineStyle::ThicknessType& thickness)
 {
 	m_thickness = thickness;
 }
