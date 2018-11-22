@@ -90,6 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Color.h" />
     <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="FillStyle.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="GroupLineStyle.h" />
     <ClInclude Include="ICanvas.h" />
@@ -168,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="FillStyle.cpp" />
     <ClCompile Include="Group.cpp" />
     <ClCompile Include="GroupLineStyle.cpp" />
     <ClCompile Include="LineStyle.cpp" />

@@ -14,8 +14,8 @@ public:
 	void SetColor(const ColorType& color) override;
 	ColorType GetColor() const override;
 
-	void SetLineThickness(const ILineStyle::ThicknessType& thickness) override;
-	ILineStyle::ThicknessType GetLineThickness() const override;
+	void SetThickness(const ILineStyle::ThicknessType& thickness) override;
+	ILineStyle::ThicknessType GetThickness() const override;
 
 private:
 	weak_ptr<IGroup> m_group;

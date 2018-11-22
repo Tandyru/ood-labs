@@ -1,5 +1,6 @@
 #pragma once
 #include "IGroup.h"
+#include "ILineStyle.h"
 #include <vector>
 
 namespace shape
@@ -8,6 +9,7 @@ namespace shape
 class CGroup : public enable_shared_from_this<CGroup>, public IGroup
 {
 public:
+
 	// Inherited via IShape
 	Rect GetFrame() const override;
 	void SetFrame(Rect rect) override;
@@ -27,6 +29,7 @@ private:
 
 private:
 	vector<shared_ptr<IShape>> m_shapes;
+	shared_ptr<ILineStyle> m_lineStyle;
 };
 
 }

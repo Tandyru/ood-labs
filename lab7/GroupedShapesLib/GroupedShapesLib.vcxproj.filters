@@ -69,6 +69,9 @@
     <ClInclude Include="GroupLineStyle.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="FillStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -94,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="GroupLineStyle.cpp">
       <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="FillStyle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

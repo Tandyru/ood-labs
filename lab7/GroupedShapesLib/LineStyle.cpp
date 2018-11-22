@@ -14,12 +14,12 @@ CLineStyle::ColorType CLineStyle::GetColor() const
 	return m_color;
 }
 
-void CLineStyle::SetLineThickness(const ILineStyle::ThicknessType& thickness)
+void CLineStyle::SetThickness(const ILineStyle::ThicknessType& thickness)
 {
 	m_thickness = thickness;
 }
 
-ILineStyle::ThicknessType CLineStyle::GetLineThickness() const
+ILineStyle::ThicknessType CLineStyle::GetThickness() const
 {
 	return m_thickness;
 }

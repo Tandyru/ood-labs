@@ -18,11 +18,15 @@ namespace GroupedShapesTests
 	public:
 		const Color color1;
 		const Color color2;
+		const ILineStyle::ThicknessType lineThickness1;
+		const ILineStyle::ThicknessType lineThickness2;
 		shared_ptr<CGroup> group;
 
 		ShapeGroupTests()
 			: color1({121, 1, 123, 124})
 			, color2({2, 134, 135, 255})
+			, lineThickness1(1.2)
+			, lineThickness2(2.3)
 		{
 			group = make_shared<CGroup>();
 		}
@@ -88,7 +92,14 @@ namespace GroupedShapesTests
 			Assert::AreEqual(size_t(0), group->GetShapeCount());
 		}
 
-		TEST_METHOD(TestGetGroupLineStyle)
+		TEST_METHOD(TestGetInitialLineStyle)
+		{
+			auto lineStyle = group->GetLineStyle();
+			Assert::AreEqual(ILineStyle::ColorType(), lineStyle->GetColor());
+			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetThickness());
+		}
+
+		TEST_METHOD(TestGetLineStyle)
 		{
 			auto shape = CreateShape();
 			SetLineStyle1(shape->GetLineStyle());
@@ -104,7 +115,26 @@ namespace GroupedShapesTests
 
 			auto lineStyle = group->GetLineStyle();
 			Assert::AreEqual(ILineStyle::ColorType(), lineStyle->GetColor());
-			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetLineThickness());
+			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetThickness());
+
+			SetLineStyle1(group->GetLineStyle());
+
+			Assert::IsTrue(IsLineStyle1(group->GetLineStyle()));
+			Assert::IsTrue(IsLineStyle1(rectangle->GetLineStyle()));
+			Assert::IsTrue(IsLineStyle1(ellipse->GetLineStyle()));
+
+			group.reset();
+			Assert::AreEqual(ILineStyle::ColorType(), lineStyle->GetColor());
+			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetThickness());
+		}
+
+		TEST_METHOD(TestGetFrame)
+		{
+			// ??
+		}
+
+		TEST_METHOD(TestSetFrame)
+		{
 			// ??
 		}
 
@@ -126,13 +156,18 @@ namespace GroupedShapesTests
 		void SetLineStyle1(shared_ptr<ILineStyle> style)
 		{
 			style->SetColor(color1);
-			style->SetLineThickness(1.2);
+			style->SetThickness(lineThickness1);
+		}
+
+		bool IsLineStyle1(const shared_ptr<ILineStyle>& style)
+		{
+			return style->GetColor() == color1 && style->GetThickness() == lineThickness1;
 		}
 
 		void SetLineStyle2(shared_ptr<ILineStyle> style)
 		{
 			style->SetColor(color2);
-			style->SetLineThickness(2.2);
+			style->SetThickness(lineThickness2);
 		}
 	};
 }

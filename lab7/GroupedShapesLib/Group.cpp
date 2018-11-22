@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Group.h"
+#include "GroupLineStyle.h"
 
 namespace shape
 {
@@ -20,7 +21,7 @@ size_t CGroup::GetShapeCount() const
 shared_ptr<IShape> CGroup::GetShapeAtIndex(size_t index) const
 {
 	CheckIndex(index);
-	return shared_ptr<IShape>();
+	return m_shapes[index];
 }
 
 void CGroup::InsertShapeAtIndex(shared_ptr<IShape> shape, size_t index)
@@ -53,9 +54,11 @@ void CGroup::SetFrame(Rect rect)
 
 shared_ptr<ILineStyle> CGroup::GetLineStyle()
 {
-	// TODO:
-	throw runtime_error("Not implemented");
-	return shared_ptr<ILineStyle>();
+	if (!m_lineStyle)
+	{
+		m_lineStyle = make_shared<CGroupLineStyle>(shared_from_this());
+	}
+	return m_lineStyle;
 }
 
 shared_ptr<IFillStyle> CGroup::GetFillStyle()

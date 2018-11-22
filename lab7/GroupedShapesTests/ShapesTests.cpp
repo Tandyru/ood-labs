@@ -105,11 +105,11 @@ namespace GroupedShapesTests
 			Color expectedColor = { 127, 127, 127, 127 };
 			auto shape = make_shared<CTriangle>(Point(), Point(), Point());
 			auto lineStyle = shape->GetLineStyle();
-			lineStyle->SetLineThickness(expectedThickness);
+			lineStyle->SetThickness(expectedThickness);
 			lineStyle->SetColor(expectedColor);
 			auto lineStyle2 = shape->GetLineStyle();
 			shape.reset();
-			Assert::AreEqual(expectedThickness, lineStyle2->GetLineThickness());
+			Assert::AreEqual(expectedThickness, lineStyle2->GetThickness());
 			Assert::AreEqual(expectedColor, *lineStyle2->GetColor());
 		}
 
