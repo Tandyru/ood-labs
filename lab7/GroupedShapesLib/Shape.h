@@ -18,6 +18,7 @@ public:
 
 private:
 	shared_ptr<ILineStyle> m_lineStyle;
+	shared_ptr<IFillStyle> m_fillStyle;
 };
 
 }

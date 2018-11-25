@@ -72,6 +72,15 @@
     <ClInclude Include="FillStyle.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="GroupFillStyle.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupUtils.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorOptional.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,7 +108,10 @@
       <Filter>shapes</Filter>
     </ClCompile>
     <ClCompile Include="FillStyle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupFillStyle.cpp">
+      <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

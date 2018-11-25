@@ -1,5 +1,5 @@
 #pragma once
-#include "Color.h"
+#include "ColorOptional.h"
 
 namespace shape
 {
@@ -8,7 +8,7 @@ class ILineStyle
 {
 public:
 	typedef optional<double> ThicknessType;
-	typedef optional<Color> ColorType;
+	typedef ColorOptional ColorType;
 
 	virtual void SetColor(const ColorType& color) = 0;
 	virtual ColorType GetColor() const = 0;
@@ -19,22 +19,5 @@ public:
 	virtual ~ILineStyle() = default;
 };
 
-inline bool operator==(const ILineStyle::ColorType& color1, const ILineStyle::ColorType& color2)
-{
-	if (!color1 && !color2)
-	{
-		return true;
-	}
-	if ((!color1 && color2) || (color1 && !color2))
-	{
-		return false;
-	}
-	return *color1 == *color2;
-}
-
-inline bool operator!=(const ILineStyle::ColorType& color1, const ILineStyle::ColorType& color2)
-{
-	return !(color1 == color2);
-}
 
 }

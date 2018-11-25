@@ -1,6 +1,5 @@
 #pragma once
 #include "IGroup.h"
-#include "ILineStyle.h"
 #include <vector>
 
 namespace shape
@@ -30,6 +29,7 @@ private:
 private:
 	vector<shared_ptr<IShape>> m_shapes;
 	shared_ptr<ILineStyle> m_lineStyle;
+	shared_ptr<IFillStyle> m_fillStyle;
 };
 
 }

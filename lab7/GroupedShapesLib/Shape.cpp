@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Shape.h"
 #include "LineStyle.h"
+#include "FillStyle.h"
 
 namespace shape
 {
 
 CShape::CShape()
 	: m_lineStyle(make_shared<CLineStyle>())
+	, m_fillStyle(make_shared<CFillStyle>(Color{ 127, 127, 127, 255 }, true))
 {
 }
 
@@ -31,7 +33,7 @@ shared_ptr<ILineStyle> CShape::GetLineStyle()
 
 shared_ptr<IFillStyle> CShape::GetFillStyle()
 {
-	return shared_ptr<IFillStyle>();
+	return m_fillStyle;
 }
 
 }

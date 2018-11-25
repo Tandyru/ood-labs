@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "ColorToWstring.h"
 #include "ThicknessToWstring.h"
+#include "BoolOptToWstring.h"
 #include "../GroupedShapesLib/Group.h"
 #include "../GroupedShapesLib/Triangle.h"
 #include "../GroupedShapesLib/Rectangle.h"
@@ -126,6 +127,42 @@ namespace GroupedShapesTests
 			group.reset();
 			Assert::AreEqual(ILineStyle::ColorType(), lineStyle->GetColor());
 			Assert::AreEqual(ILineStyle::ThicknessType(), lineStyle->GetThickness());
+		}
+
+		TEST_METHOD(TestEmptyGroupFillStyle)
+		{
+			auto fillStyle = group->GetFillStyle();
+			Assert::IsFalse(bool(fillStyle->GetColor()));
+			Assert::IsFalse(bool(fillStyle->GetFill()));
+		}
+
+		TEST_METHOD(TestGetFillStyle)
+		{
+			auto shape = CreateShape();
+			auto fillStyle = shape->GetFillStyle();
+			fillStyle->SetColor(color1);
+			fillStyle->SetFill(true);
+			group->InsertShapeAtIndex(shape, 0);
+
+			auto rectangle = CreateRectangle();
+			auto fillStyle2 = rectangle->GetFillStyle();
+			fillStyle2->SetColor(color2);
+			fillStyle2->SetFill(false);
+			group->InsertShapeAtIndex(rectangle, 0);
+
+			auto groupFillStyle = group->GetFillStyle();
+			Assert::AreEqual(IFillStyle::ColorType(), groupFillStyle->GetColor());
+			Assert::AreEqual(IFillStyle::FillType(), groupFillStyle->GetFill());
+
+			groupFillStyle->SetColor(color1);
+			groupFillStyle->SetFill(true);
+
+			Assert::AreEqual(IFillStyle::ColorType(color1), groupFillStyle->GetColor());
+			Assert::AreEqual(IFillStyle::FillType(true), groupFillStyle->GetFill());
+
+			group.reset();
+			Assert::AreEqual(IFillStyle::ColorType(), groupFillStyle->GetColor());
+			Assert::AreEqual(IFillStyle::FillType(), groupFillStyle->GetFill());
 		}
 
 		TEST_METHOD(TestGetFrame)

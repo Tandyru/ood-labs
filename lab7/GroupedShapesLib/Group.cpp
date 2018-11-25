@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Group.h"
 #include "GroupLineStyle.h"
+#include "GroupFillStyle.h"
 
 namespace shape
 {
@@ -63,9 +64,11 @@ shared_ptr<ILineStyle> CGroup::GetLineStyle()
 
 shared_ptr<IFillStyle> CGroup::GetFillStyle()
 {
-	// TODO:
-	throw runtime_error("Not implemented");
-	return shared_ptr<IFillStyle>();
+	if (!m_fillStyle)
+	{
+		m_fillStyle = make_shared<CGroupFillStyle>(shared_from_this());
+	}
+	return m_fillStyle;
 }
 
 void CGroup::Draw(ICanvas & canvas) const

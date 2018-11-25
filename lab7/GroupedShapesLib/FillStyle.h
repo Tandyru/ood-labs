@@ -7,20 +7,18 @@ namespace shape
 class CFillStyle : public IFillStyle
 {
 public:
-	//const Color DEFAULT_COLOR = Color{ 0, 0, 0, 255 };
-
-	//CFillStyle();
+	//CFillStyle() = default;
 	CFillStyle(const Color& color, bool fill);
 
 	// Inherited via IFillStyle
-	void SetColor(const Color& color) override;
-	Color GetColor() const override;
-	void SetFill(bool fill) override;
-	bool GetFill() const override;
+	void SetColor(const ColorType& color) override;
+	ColorType GetColor() const override;
+	void SetFill(const FillType& fill) override;
+	IFillStyle::FillType GetFill() const override;
 
 private:
-	Color m_color;
-	bool m_fill;
+	ColorType m_color;
+	FillType m_fill;
 };
 
 }

@@ -113,6 +113,17 @@ namespace GroupedShapesTests
 			Assert::AreEqual(expectedColor, *lineStyle2->GetColor());
 		}
 
-
+		TEST_METHOD(TestFillStyle)
+		{
+			Color expectedColor = { 121, 122, 123, 124 };
+			auto shape = make_shared<CTriangle>(Point(), Point(), Point());
+			auto fillStyle = shape->GetFillStyle();
+			fillStyle->SetColor(expectedColor);
+			fillStyle->SetFill(true);
+			auto fillStyle2 = shape->GetFillStyle();
+			shape.reset();
+			Assert::AreEqual(expectedColor, *fillStyle2->GetColor());
+			Assert::IsTrue(bool(fillStyle2->GetFill()));
+		}
 	};
 }
