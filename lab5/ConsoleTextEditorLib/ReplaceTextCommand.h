@@ -12,13 +12,10 @@ class CReplaceTextCommand : public CCommand
 public:
 	CReplaceTextCommand(impl::IDocumentImpl& document, size_t position, const string& text);
 
-	void Execute() override;
-	void Unexecute() override;
-
-	size_t GetPosition() const;
-	string GetText() const;
-
 private:
+	void ExecuteImpl() override;
+	void UnexecuteImpl() override;
+
 	impl::IDocumentImpl& m_document;
 	size_t m_position;
 	string m_text;

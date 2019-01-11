@@ -13,27 +13,15 @@ CInsertParagraphCommand::CInsertParagraphCommand(impl::IDocumentImpl& document, 
 {
 }
 
-void CInsertParagraphCommand::Execute()
+void CInsertParagraphCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	m_insertedPosition = m_position ? *m_position : m_document.GetItemsCount();
 	m_document.InsertParagraph(m_text, m_insertedPosition);
 }
 
-void CInsertParagraphCommand::Unexecute()
+void CInsertParagraphCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	m_document.DeleteItem(m_insertedPosition);
-}
-
-optional<size_t> CInsertParagraphCommand::GetPosition() const
-{
-	return m_position;
-}
-
-string CInsertParagraphCommand::GetText() const
-{
-	return m_text;
 }
 
 }

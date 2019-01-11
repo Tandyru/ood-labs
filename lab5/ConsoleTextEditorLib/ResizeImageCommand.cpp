@@ -14,9 +14,8 @@ CResizeImageCommand::CResizeImageCommand(impl::IDocumentImpl& document, size_t p
 {
 }
 
-void CResizeImageCommand::Execute()
+void CResizeImageCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	auto item = m_document.GetItem(m_position);
 	auto image = item.GetImage();
 	if (!image)
@@ -28,9 +27,8 @@ void CResizeImageCommand::Execute()
 	image->Resize(m_width, m_height);
 }
 
-void CResizeImageCommand::Unexecute()
+void CResizeImageCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	auto item = m_document.GetItem(m_position);
 	auto image = item.GetImage();
 	if (!image)
@@ -38,21 +36,6 @@ void CResizeImageCommand::Unexecute()
 		throw runtime_error("The attempt to resize of non-image item.");
 	}
 	image->Resize(m_oldWidth, m_oldHeight);
-}
-
-size_t CResizeImageCommand::GetPosition() const
-{
-	return m_position;
-}
-
-unsigned int CResizeImageCommand::GetWidth() const
-{
-	return m_width;
-}
-
-unsigned int CResizeImageCommand::GetHeight() const
-{
-	return m_height;
 }
 
 }

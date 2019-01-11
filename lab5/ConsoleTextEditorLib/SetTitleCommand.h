@@ -12,12 +12,10 @@ class CSetTitleCommand : public CCommand
 public:
 	CSetTitleCommand(impl::IDocumentImpl& document, const string& title);
 
-	void Execute() override;
-	void Unexecute() override;
-
-	string GetTitle() const;
-
 private:
+	void ExecuteImpl() override;
+	void UnexecuteImpl() override;
+
 	impl::IDocumentImpl& m_document;
 	string m_oldTitle;
 	string m_title;

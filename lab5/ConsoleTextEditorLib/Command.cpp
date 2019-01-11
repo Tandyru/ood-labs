@@ -13,6 +13,7 @@ void CCommand::Execute()
 		throw std::runtime_error("Trying to execute the command again");
 	}
 	m_executed = true;
+	ExecuteImpl();
 }
 
 void CCommand::Unexecute()
@@ -22,6 +23,7 @@ void CCommand::Unexecute()
 		throw std::runtime_error("Trying to unexecute nonexecuted command");
 	}
 	m_executed = false;
+	UnexecuteImpl();
 }
 
 }

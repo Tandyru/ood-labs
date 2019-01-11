@@ -147,9 +147,6 @@
     <ClInclude Include="InsertParagraphCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
-    <ClInclude Include="IDocumentCommandFactory.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
     <ClInclude Include="IInputCommandExecutor.h">
       <Filter>input_command</Filter>
     </ClInclude>
@@ -165,13 +162,7 @@
     <ClInclude Include="DeleteItemCommand.h">
       <Filter>document\command</Filter>
     </ClInclude>
-    <ClInclude Include="ICommandCombiner.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
     <ClInclude Include="InsertImageCommand.h">
-      <Filter>document\command</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommandVisitor.h">
       <Filter>document\command</Filter>
     </ClInclude>
     <ClInclude Include="CompositeCommand.h">

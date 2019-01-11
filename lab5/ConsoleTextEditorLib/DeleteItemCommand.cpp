@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "DeleteItemCommand.h"
-#include "ICommandVisitor.h"
 
 namespace document
 {
@@ -13,9 +12,8 @@ CDeleteItemCommand::CDeleteItemCommand(impl::IDocumentImpl& document, size_t pos
 {
 }
 
-void CDeleteItemCommand::Execute()
+void CDeleteItemCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	auto item = m_document.GetItem(m_position);
 	m_lastItemDeleted = m_position == (m_document.GetItemsCount() - 1);
 	m_paragraph = item.GetParagraph();
@@ -23,9 +21,8 @@ void CDeleteItemCommand::Execute()
 	m_document.DeleteItem(m_position);
 }
 
-void CDeleteItemCommand::Unexecute()
+void CDeleteItemCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	if (m_paragraph)
 	{
 		m_document.InsertParagraph(m_paragraph->GetText(), m_position);
@@ -36,27 +33,6 @@ void CDeleteItemCommand::Unexecute()
 		m_document.InsertImage(m_image, m_position);
 		m_image.reset();
 	}
-}
-
-size_t CDeleteItemCommand::GetPosition() const
-{
-	return m_position;
-}
-
-shared_ptr<IParagraph> CDeleteItemCommand::GetDeletedParagraph() const
-{
-	return m_paragraph;
-}
-
-shared_ptr<IImage> CDeleteItemCommand::GetDeletedImage() const
-{
-	return m_image;
-}
-
-bool CDeleteItemCommand::GetLastItemDeleted() const
-{
-	assert(m_executed);
-	return m_lastItemDeleted;
 }
 
 }

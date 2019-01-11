@@ -13,9 +13,8 @@ CReplaceTextCommand::CReplaceTextCommand(impl::IDocumentImpl& document, size_t p
 {
 }
 
-void CReplaceTextCommand::Execute()
+void CReplaceTextCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	auto item = m_document.GetItem(m_position);
 	auto paragraph = item.GetParagraph();
 	if (!paragraph)
@@ -26,9 +25,8 @@ void CReplaceTextCommand::Execute()
 	paragraph->SetText(m_text);
 }
 
-void CReplaceTextCommand::Unexecute()
+void CReplaceTextCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	auto item = m_document.GetItem(m_position);
 	auto paragraph = item.GetParagraph();
 	if (!paragraph)
@@ -36,16 +34,6 @@ void CReplaceTextCommand::Unexecute()
 		throw runtime_error("The attempt to replace text of non-paragraph item.");
 	}
 	paragraph->SetText(m_oldText);
-}
-
-size_t CReplaceTextCommand::GetPosition() const
-{
-	return m_position;
-}
-
-string CReplaceTextCommand::GetText() const
-{
-	return m_text;
 }
 
 }

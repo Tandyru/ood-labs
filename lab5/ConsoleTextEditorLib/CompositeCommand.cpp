@@ -12,7 +12,7 @@ CCompositeCommand::CCompositeCommand(impl::IDocumentImpl & document, Commands &&
 {
 }
 
-void CCompositeCommand::Execute()
+void CCompositeCommand::ExecuteImpl()
 {
 	for (auto& command : m_commands)
 	{
@@ -20,7 +20,7 @@ void CCompositeCommand::Execute()
 	}
 }
 
-void CCompositeCommand::Unexecute()
+void CCompositeCommand::UnexecuteImpl()
 {
 	for (auto it = m_commands.rbegin(); it != m_commands.rend(); it++)
 	{

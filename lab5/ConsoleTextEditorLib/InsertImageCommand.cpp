@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "InsertImageCommand.h"
-#include "ICommandVisitor.h"
 
 namespace document
 {
@@ -17,32 +16,15 @@ CInsertImageCommand::CInsertImageCommand(impl::IDocumentImpl & document, optiona
 {
 }
 
-void CInsertImageCommand::Execute()
+void CInsertImageCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	m_insertedPosition = m_position ? *m_position : m_document.GetItemsCount();
 	m_document.InsertImage(m_resource, m_width, m_height, m_position);
 }
 
-void CInsertImageCommand::Unexecute()
+void CInsertImageCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	m_document.DeleteItem(m_insertedPosition);
-}
-
-optional<size_t> CInsertImageCommand::GetPosition() const
-{
-	return m_position;
-}
-
-Path CInsertImageCommand::GetPath() const
-{
-	return m_resource->GetFilePath();
-}
-
-shared_ptr<resources::IResource> CInsertImageCommand::GetResource() const
-{
-	return m_resource;
 }
 
 }

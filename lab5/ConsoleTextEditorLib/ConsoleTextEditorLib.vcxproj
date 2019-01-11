@@ -168,10 +168,7 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="HtmlUtils.h" />
-    <ClInclude Include="ICommandCombiner.h" />
-    <ClInclude Include="ICommandVisitor.h" />
     <ClInclude Include="IDocument.h" />
-    <ClInclude Include="IDocumentCommandFactory.h" />
     <ClInclude Include="IDocumentImpl.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="Image.h" />

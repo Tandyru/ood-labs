@@ -12,15 +12,10 @@ class CDeleteItemCommand : public CCommand
 public:
 	CDeleteItemCommand(impl::IDocumentImpl& document, size_t);
 
-	void Execute() override;
-	void Unexecute() override;
-
-	size_t GetPosition() const;
-	shared_ptr<IParagraph> GetDeletedParagraph() const;
-	shared_ptr<IImage> GetDeletedImage() const;
-	bool GetLastItemDeleted() const;
-
 private:
+	void ExecuteImpl() override;
+	void UnexecuteImpl() override;
+
 	impl::IDocumentImpl& m_document;
 	size_t m_position;
 	shared_ptr<IParagraph> m_paragraph;

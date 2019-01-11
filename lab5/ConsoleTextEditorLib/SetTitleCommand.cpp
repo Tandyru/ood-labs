@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "SetTitleCommand.h"
-#include "ICommandVisitor.h"
 
 namespace document
 {
@@ -13,22 +12,15 @@ CSetTitleCommand::CSetTitleCommand(impl::IDocumentImpl& document, const string& 
 {
 }
 
-void CSetTitleCommand::Execute()
+void CSetTitleCommand::ExecuteImpl()
 {
-	CCommand::Execute();
 	m_oldTitle = m_document.GetTitle();
 	m_document.SetTitle(m_title);
 }
 
-void CSetTitleCommand::Unexecute()
+void CSetTitleCommand::UnexecuteImpl()
 {
-	CCommand::Unexecute();
 	m_document.SetTitle(m_oldTitle);
-}
-
-string CSetTitleCommand::GetTitle() const
-{
-	return m_title;
 }
 
 }
