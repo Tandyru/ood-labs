@@ -12,10 +12,10 @@ namespace impl
 class IDocumentImpl
 {
 public:
-	virtual shared_ptr<IParagraph> InsertParagraph(const string& text,
+	virtual void InsertParagraph(const string& text,
 		optional<size_t> position = optional<size_t>()) = 0;
 
-	virtual shared_ptr<IImage> InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
+	virtual void InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 		optional<size_t> position = optional<size_t>()) = 0;
 
 	virtual void InsertImage(shared_ptr<IImage> image, size_t position) = 0;

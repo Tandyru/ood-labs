@@ -8,22 +8,20 @@ class CDocumentImplMock : public IDocumentImpl
 {
 public:
 	// Inherited via IDocumentImpl
-	shared_ptr<IParagraph> InsertParagraph(const string & text, optional<size_t> position = optional<size_t>()) override
+	void InsertParagraph(const string & text, optional<size_t> position = optional<size_t>()) override
 	{
 		lastCommandText = text;
 		lastCommandPosition = position;
 		itemCount++;
-		return shared_ptr<IParagraph>();
 	}
 
-	shared_ptr<IImage> InsertImage(shared_ptr<resources::IResource> resource, int width, int height, 
+	void InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 		optional<size_t> position = optional<size_t>()) override
 	{
 		lastCommandResource = resource;
 		lastCommandWidth = width;
 		lastCommandHeight = height;
 		lastCommandPosition = position;
-		return shared_ptr<IImage>();
 	}
 
 	void InsertImage(shared_ptr<IImage> image, size_t position) override

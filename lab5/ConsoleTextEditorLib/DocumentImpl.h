@@ -17,10 +17,10 @@ public:
 
 	CDocumentImpl(const CDocumentImpl&) = delete;
 
-	shared_ptr<IParagraph> InsertParagraph(const string& text,
+	void InsertParagraph(const string& text,
 		optional<size_t> position = optional<size_t>()) override;
 
-	shared_ptr<IImage> InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
+	void InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 		optional<size_t> position = optional<size_t>()) override;
 
 	void InsertImage(shared_ptr<IImage> image, size_t position) override;

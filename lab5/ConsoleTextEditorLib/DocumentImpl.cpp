@@ -14,20 +14,16 @@ CDocumentImpl::CDocumentImpl(const ParagraphFactory & paragraphFactory, const Im
 {
 }
 
-shared_ptr<IParagraph> CDocumentImpl::InsertParagraph(const string& text,
+void CDocumentImpl::InsertParagraph(const string& text,
 	optional<size_t> position)
 {
-	auto paragraph = m_paragraphFactory(text);
-	InsertItem<IParagraph>(position, paragraph);
-	return paragraph;
+	InsertItem<IParagraph>(position, m_paragraphFactory(text));
 }
 
-shared_ptr<IImage> CDocumentImpl::InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
+void CDocumentImpl::InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
 	optional<size_t> position)
 {
-	auto image = m_imageFactory(resource, width, height);
-	InsertItem<IImage>(position, image);
-	return image;
+	InsertItem<IImage>(position, m_imageFactory(resource, width, height));
 }
 
 void CDocumentImpl::InsertImage(shared_ptr<IImage> image, size_t position)
