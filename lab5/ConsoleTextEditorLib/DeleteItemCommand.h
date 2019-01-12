@@ -10,7 +10,7 @@ namespace command
 class CDeleteItemCommand : public CCommand
 {
 public:
-	CDeleteItemCommand(impl::IDocumentImpl& document, size_t);
+	CDeleteItemCommand(impl::IDocumentImpl& document, size_t position);
 
 private:
 	void ExecuteImpl() override;

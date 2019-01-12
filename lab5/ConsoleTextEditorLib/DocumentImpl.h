@@ -41,16 +41,14 @@ public:
 
 private:
 	template<typename OI>
-	inline shared_ptr<OI> InsertItem(optional<size_t> position, const function<shared_ptr<OI>()>& itemFactory)
+	inline void InsertItem(optional<size_t> position, const shared_ptr<OI>& itemContent)
 	{
 		if (position && *position > m_items.size())
 		{
 			throw CInvalidPositionException();
 		}
 		const auto it = position ? next(m_items.cbegin(), *position) : m_items.cend();
-		const auto content = itemFactory();
-		m_items.emplace(it, make_shared<CDocumentItem>(content));
-		return content;
+		m_items.emplace(it, make_shared<CDocumentItem>(itemContent));
 	}
 
 	void CheckIndex(size_t index)const;
