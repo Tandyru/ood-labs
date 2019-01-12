@@ -1,6 +1,8 @@
 #pragma once
 #include "Command.h"
 #include "DocumentItemPosition.h"
+#include "IParagraph.h"
+#include "IImage.h"
 
 namespace document
 {

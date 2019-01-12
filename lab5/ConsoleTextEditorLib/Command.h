@@ -1,12 +1,10 @@
 #pragma once
-#include "IDocumentImpl.h"
 
 namespace document
 {
+
 namespace command
 {
-
-class ICommandVisitor;
 
 class CCommand
 {
@@ -25,4 +23,10 @@ private:
 };
 
 }
+
+namespace impl
+{
+class IDocumentImpl;
+}
+
 }

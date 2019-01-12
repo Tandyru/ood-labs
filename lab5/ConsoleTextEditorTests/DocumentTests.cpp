@@ -28,7 +28,7 @@ namespace ConsoleTextEditorTests
 			int expectedWidth = 300;
 			int expectedHeight = 200;
 
-			CImage image(resource, expectedWidth, expectedHeight);
+			CImage image(resource, expectedWidth, expectedHeight, nullptr, nullptr);
 
 			Assert::AreEqual(expectedWidth, image.GetWidth());
 			Assert::AreEqual(expectedHeight, image.GetHeight());
@@ -36,7 +36,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestImageResize)
 		{
-			CImage image(resource, 300, 200);
+			CImage image(resource, 300, 200, nullptr, nullptr);
 
 			int expectedWidth = 400;
 			int expectedHeight = 350;
@@ -51,7 +51,7 @@ namespace ConsoleTextEditorTests
 		{
 			auto expectedText = "paragraph text"s;
 
-			CParagraph paragraph(expectedText);
+			CParagraph paragraph(expectedText, nullptr, nullptr);
 
 			Assert::AreEqual(expectedText, paragraph.GetText());
 		}
@@ -60,7 +60,7 @@ namespace ConsoleTextEditorTests
 		{
 			auto expectedText = "paragraph text"s;
 
-			CParagraph paragraph("initial text");
+			CParagraph paragraph("initial text", nullptr, nullptr);
 
 			paragraph.SetText(expectedText);
 
@@ -69,7 +69,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestConstDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>(resource, 300, 200);
+			auto image = make_shared<CImage>(resource, 300, 200, nullptr, nullptr);
 
 			CConstDocumentItem item(image);
 
@@ -79,7 +79,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestConstDocumentItemContructionWithParagraph)
 		{
-			auto paragraph = make_shared<CParagraph>("initial text");
+			auto paragraph = make_shared<CParagraph>("initial text", nullptr, nullptr);
 
 			CConstDocumentItem item(paragraph);
 
@@ -89,7 +89,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>(resource, 300, 200);
+			auto image = make_shared<CImage>(resource, 300, 200, nullptr, nullptr);
 
 			CDocumentItem item(image);
 
@@ -99,7 +99,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestDocumentItemContructionWithParagraph)
 		{
-			auto paragraph = make_shared<CParagraph>("initial text");
+			auto paragraph = make_shared<CParagraph>("initial text", nullptr, nullptr);
 
 			CDocumentItem item(paragraph);
 

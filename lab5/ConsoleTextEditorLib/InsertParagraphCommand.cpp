@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "InsertParagraphCommand.h"
+#include "IDocumentImpl.h"
 
 namespace document
 {

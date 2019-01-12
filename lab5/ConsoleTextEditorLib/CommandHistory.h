@@ -1,29 +1,28 @@
 #pragma once
 #include "Command.h"
+#include "ICommandHistory.h"
 
 namespace document
 {
 namespace command
 {
 
-class CCommandHistory
+class CCommandHistory : public ICommandHistory
 {
 public:
-	using CommandExecutionBegin = std::function<void(void)>;
-	using CommandExecutionEnd = std::function<void(void)>;
-
-	CCommandHistory(const CommandExecutionBegin& commandExecutionBegin = CommandExecutionBegin(), 
-		const CommandExecutionEnd& commandExecutionEnd = CommandExecutionEnd());
+	CCommandHistory();
 
 	CCommandHistory(const CCommandHistory&) = delete;
 
-	void Do(unique_ptr<CCommand>&& command);
+	void Do(unique_ptr<CCommand>&& command) override;
 
-	bool CanUndo() const;
-	void Undo();
+	bool ShouldCreateCommand() const override;
 
-	bool CanRedo() const;
-	void Redo();
+	bool CanUndo() const override;
+	void Undo() override;
+
+	bool CanRedo() const override;
+	void Redo() override;
 
 private:
 	void EraseOldRedoCommands();
@@ -34,9 +33,7 @@ private:
 private:
 	vector<unique_ptr<CCommand>> m_history;
 	size_t m_currentPosition = 0;
-
-	CommandExecutionBegin m_commandExecutionBegin;
-	CommandExecutionEnd m_commandExecutionEnd;
+	bool m_commandExecuting = false;
 };
 
 }

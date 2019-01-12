@@ -1,5 +1,7 @@
 #pragma once
 #include "IParagraph.h"
+#include "ICommandHistory.h"
+#include "IParagraphCommandFactory.h"
 
 namespace document
 {
@@ -10,16 +12,17 @@ class CParagraph
 public:
 	using BeforeTextChangeHandler = std::function<void(const IParagraph& paragraph, const string & newText)>;
 
-	CParagraph(const string & text);
+	CParagraph(const string & text, const shared_ptr<command::ICommandHistory> & commandHistory, 
+		const shared_ptr<command::IParagraphCommandFactory> & commandFactory);
 
 	// IParagraph
 	string GetText() const override;
 	void SetText(const string & text) override;
 
-	void SetOnBeforeTextChange(const BeforeTextChangeHandler& handler);
 private:
 	string m_text;
-	BeforeTextChangeHandler m_onBeforeTextChange;
+	shared_ptr<command::ICommandHistory> m_commandHistory;
+	shared_ptr<command::IParagraphCommandFactory> m_commandFactory;
 };
 
 }

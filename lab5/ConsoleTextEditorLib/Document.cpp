@@ -4,9 +4,11 @@
 #include "InsertImageCommand.h"
 #include "DeleteItemCommand.h"
 #include "SetTitleCommand.h"
-#include "ReplaceTextCommand.h"
 #include "ResizeImageCommand.h"
 #include "DocumentToHtmlConvertor.h"
+#include "ParagraphCommandFactory.h"
+#include "ImageCommandFactory.h"
+#include "CommandHistory.h"
 
 namespace document
 {
@@ -17,11 +19,9 @@ using namespace std::placeholders;
 CDocument::CDocument()
 	: m_impl(std::bind(&CDocument::CreateParagraph, this, _1), 
 		std::bind(&CDocument::CreateImage, this, _1, _2, _3))
-	, m_commandHistory([this] {
-		m_commandExecuting = true;
-	}, [this] {
-		m_commandExecuting = false;
-	})
+	, m_commandHistory(make_shared<CCommandHistory>())
+	, m_paragraphCommandFactory(make_shared<CParagraphCommandFactory>(m_impl))
+	, m_imageCommandFactory(make_shared<CImageCommandFactory>(m_impl))
 {
 }
 
@@ -29,7 +29,7 @@ shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<s
 {
 	CheckPosition(position);
 	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, text);
-	m_commandHistory.Do(move(command));
+	m_commandHistory->Do(move(command));
 	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
 	return lastItem.GetParagraph();
 }
@@ -41,7 +41,7 @@ shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int heigh
 	const auto saveNamePrefix = "image";
 	auto resource = m_resources.AddResource(path, saveNamePrefix);
 	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, width, height, move(resource));
-	m_commandHistory.Do(move(command));
+	m_commandHistory->Do(move(command));
 	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
 	return lastItem.GetImage();
 }
@@ -67,7 +67,7 @@ void CDocument::DeleteItem(size_t index)
 {
 	CheckIndex(index);
 	auto command = make_unique<command::CDeleteItemCommand>(m_impl, index);
-	m_commandHistory.Do(move(command));
+	m_commandHistory->Do(move(command));
 }
 
 string CDocument::GetTitle()const
@@ -78,27 +78,27 @@ string CDocument::GetTitle()const
 void CDocument::SetTitle(const string & title)
 {
 	auto command = make_unique<command::CSetTitleCommand>(m_impl, title);
-	m_commandHistory.Do(move(command));
+	m_commandHistory->Do(move(command));
 }
 
 bool CDocument::CanUndo()const
 {
-	return m_commandHistory.CanUndo();
+	return m_commandHistory->CanUndo();
 }
 
 void CDocument::Undo()
 {
-	m_commandHistory.Undo();
+	m_commandHistory->Undo();
 }
 
 bool CDocument::CanRedo()const
 {
-	return m_commandHistory.CanRedo();
+	return m_commandHistory->CanRedo();
 }
 
 void CDocument::Redo()
 {
-	m_commandHistory.Redo();
+	m_commandHistory->Redo();
 }
 
 void CDocument::Save(const Path& path)const
@@ -124,36 +124,12 @@ void CDocument::CheckIndex(size_t index)const
 
 shared_ptr<IParagraph> CDocument::CreateParagraph(const string& text)
 {
-	auto paragraph = make_shared<CParagraph>(text);
-	paragraph->SetOnBeforeTextChange(bind(&CDocument::OnBeforeParagraphTextChange, this, _1, _2));
-	return paragraph;
+	return make_shared<CParagraph>(text, m_commandHistory, m_paragraphCommandFactory);
 }
 
 shared_ptr<IImage> CDocument::CreateImage(shared_ptr<resources::IResource> resource, unsigned int width, unsigned int height)
 {
-	auto image = make_shared<CImage>(resource, width, height);
-	image->SetOnBeforeResize(bind(&CDocument::OnBeforeResizeImage, this, _1, _2, _3));
-	return image;
-}
-
-void CDocument::OnBeforeParagraphTextChange(const IParagraph & paragraph, const string & newText)
-{
-	if (!m_commandExecuting)
-	{
-		auto position = m_impl.GetParagraphPosition(paragraph);
-		auto command = make_unique<command::CReplaceTextCommand>(m_impl, position, newText);
-		m_commandHistory.Do(move(command));
-	}
-}
-
-void CDocument::OnBeforeResizeImage(const IImage & image, unsigned int width, unsigned int height)
-{
-	if (!m_commandExecuting)
-	{
-		auto position = m_impl.GetImagePosition(image);
-		auto command = make_unique<command::CResizeImageCommand>(m_impl, position, width, height);
-		m_commandHistory.Do(move(command));
-	}
+	return make_shared<CImage>(resource, width, height, m_commandHistory, m_imageCommandFactory);
 }
 
 }

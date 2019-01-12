@@ -1,13 +1,18 @@
 #include "stdafx.h"
 #include "Image.h"
+#include "ResizeImageCommand.h"
 
 namespace document
 {
 
-CImage::CImage(shared_ptr<resources::IResource> resource, int width, int height)
+CImage::CImage(shared_ptr<resources::IResource> resource, int width, int height, 
+	const shared_ptr<command::ICommandHistory>& commandHistory,
+	const shared_ptr<command::IImageCommandFactory> & commandFactory)
 	: m_resource(resource)
 	, m_width(width)
 	, m_height(height)
+	, m_commandHistory(commandHistory)
+	, m_commandFactory(commandFactory)
 {
 }
 
@@ -28,17 +33,13 @@ int CImage::GetHeight() const
 
 void CImage::Resize(int width, int height)
 {
-	if (m_onBeforeResize)
+	if (m_commandHistory && m_commandHistory->ShouldCreateCommand())
 	{
-		m_onBeforeResize(*this, width, height);
+		auto command = m_commandFactory->CreateResizeImageCommand(*this, width, height);
+		m_commandHistory->Do(move(command));
 	}
 	m_width = width;
 	m_height = height;
-}
-
-void CImage::SetOnBeforeResize(const BeforeResizeHandler & handler)
-{
-	m_onBeforeResize = handler;
 }
 
 }

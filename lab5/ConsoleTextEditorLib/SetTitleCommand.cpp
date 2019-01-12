@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SetTitleCommand.h"
+#include "IDocumentImpl.h"
 
 namespace document
 {

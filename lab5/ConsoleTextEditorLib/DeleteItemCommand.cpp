@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DeleteItemCommand.h"
+#include "IDocumentImpl.h"
 
 namespace document
 {
@@ -23,7 +24,7 @@ void CDeleteItemCommand::ExecuteImpl()
 
 void CDeleteItemCommand::UnexecuteImpl()
 {
-	if (m_paragraph)
+	if (bool(m_paragraph))
 	{
 		m_document.InsertParagraph(m_paragraph->GetText(), m_position);
 		m_paragraph.reset();

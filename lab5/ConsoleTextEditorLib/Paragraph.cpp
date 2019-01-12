@@ -1,11 +1,16 @@
 #include "stdafx.h"
 #include "Paragraph.h"
+#include "ReplaceTextCommand.h"
 
 namespace document
 {
 
-CParagraph::CParagraph(const string & text)
+CParagraph::CParagraph(const string & text, 
+	const shared_ptr<command::ICommandHistory>& commandHistory,
+	const shared_ptr<command::IParagraphCommandFactory> & commandFactory)
 	: m_text(text)
+	, m_commandHistory(commandHistory)
+	, m_commandFactory(commandFactory)
 {
 }
 
@@ -16,16 +21,12 @@ string CParagraph::GetText() const
 
 void CParagraph::SetText(const string & text)
 {
-	if (m_onBeforeTextChange)
+	if (m_commandHistory && m_commandHistory->ShouldCreateCommand())
 	{
-		m_onBeforeTextChange(*this, text);
+		auto command = m_commandFactory->CreateReplaceTextCommand(*this, text);
+		m_commandHistory->Do(move(command));
 	}
 	m_text = text;
-}
-
-void CParagraph::SetOnBeforeTextChange(const BeforeTextChangeHandler & handler)
-{
-	m_onBeforeTextChange = handler;
 }
 
 }

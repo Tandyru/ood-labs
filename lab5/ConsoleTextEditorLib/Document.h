@@ -2,11 +2,16 @@
 #include "IDocument.h"
 #include "InvalidPositionException.h"
 #include "DocumentImpl.h"
-#include "CommandHistory.h"
+#include "ICommandHistory.h"
 #include "DocumentResources.h"
 
 namespace document
 {
+
+namespace command
+{
+class IParagraphCommandFactory;
+}
 
 class CDocument :
 	public IDocument
@@ -48,14 +53,12 @@ private:
 
 	shared_ptr<IImage> CreateImage(shared_ptr<resources::IResource> path, unsigned int width, unsigned int height);
 
-	void OnBeforeParagraphTextChange(const IParagraph & paragraph, const string & newText);
-	void OnBeforeResizeImage(const IImage & image, unsigned int width, unsigned int height);
-
 private:
 	impl::CDocumentImpl m_impl;
-	command::CCommandHistory m_commandHistory;
-	bool m_commandExecuting = false;
+	shared_ptr<command::ICommandHistory> m_commandHistory;
 	resources::CDocumentResources m_resources;
+	shared_ptr<command::IParagraphCommandFactory> m_paragraphCommandFactory;
+	shared_ptr<command::IImageCommandFactory> m_imageCommandFactory;
 };
 
 }

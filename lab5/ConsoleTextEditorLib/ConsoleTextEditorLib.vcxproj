@@ -168,10 +168,13 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="HelpCommandExecutor.h" />
     <ClInclude Include="HtmlUtils.h" />
+    <ClInclude Include="ICommandHistory.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IDocumentImpl.h" />
     <ClInclude Include="IImage.h" />
+    <ClInclude Include="IImageCommandFactory.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageCommandFactory.h" />
     <ClInclude Include="ImageResource.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandExecutor.h" />
@@ -187,10 +190,12 @@
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="InvalidPositionException.h" />
     <ClInclude Include="IParagraph.h" />
+    <ClInclude Include="IParagraphCommandFactory.h" />
     <ClInclude Include="IResource.h" />
     <ClInclude Include="IsValueInArray.h" />
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="Paragraph.h" />
+    <ClInclude Include="ParagraphCommandFactory.h" />
     <ClInclude Include="PositionParser.h" />
     <ClInclude Include="ReplaceTextCommand.h" />
     <ClInclude Include="ReplaceTextCommandParser.h" />
@@ -229,6 +234,7 @@
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="HtmlUtils.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageCommandFactory.cpp" />
     <ClCompile Include="ImageResource.cpp" />
     <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandExecutor.cpp" />
@@ -242,6 +248,7 @@
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
     <ClCompile Include="InsertParagraphInputCommand.cpp" />
     <ClCompile Include="Paragraph.cpp" />
+    <ClCompile Include="ParagraphCommandFactory.cpp" />
     <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="ReplaceTextCommand.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ReplaceTextCommand.h"
+#include "IDocumentImpl.h"
 
 namespace document
 {

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "InsertImageCommand.h"
+#include "IDocumentImpl.h"
 
 namespace document
 {

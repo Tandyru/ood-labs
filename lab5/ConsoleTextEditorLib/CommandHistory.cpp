@@ -12,10 +12,7 @@ namespace
 const auto MAX_HISTORY_SIZE = 10;
 }
 
-CCommandHistory::CCommandHistory(const CommandExecutionBegin& commandExecutionBegin, 
-	const CommandExecutionEnd& commandExecutionEnd)
-	: m_commandExecutionBegin(commandExecutionBegin)
-	, m_commandExecutionEnd(commandExecutionEnd)
+CCommandHistory::CCommandHistory()
 {
 }
 
@@ -34,6 +31,11 @@ void CCommandHistory::Do(unique_ptr<CCommand>&& command)
 		m_history.pop_back();
 		throw ex;
 	}
+}
+
+bool CCommandHistory::ShouldCreateCommand() const
+{
+	return !m_commandExecuting;
 }
 
 bool CCommandHistory::CanUndo() const
@@ -79,51 +81,36 @@ void CCommandHistory::EraseOldRedoCommands()
 
 namespace 
 {
-class BeginEndHandlerCaller
+
+class CommandExecutionFlagSetter
 {
 public:
-	BeginEndHandlerCaller(const CCommandHistory::CommandExecutionBegin& commandExecutionBegin,
-		const CCommandHistory::CommandExecutionEnd& commandExecutionEnd)
-		: m_commandExecutionEnd(commandExecutionEnd)
+	CommandExecutionFlagSetter(bool & commandExecuting)
+		: m_commandExecuting(commandExecuting)
 	{
-		if (commandExecutionBegin)
-		{
-			try
-			{
-				commandExecutionBegin();
-			} 
-			catch (...)
-			{
-			}
-		}
+		m_commandExecuting = true;
 	}
-	~BeginEndHandlerCaller()
+
+	~CommandExecutionFlagSetter()
 	{
-		if (m_commandExecutionEnd)
-		{
-			try
-			{
-				m_commandExecutionEnd();
-			}
-			catch (...)
-			{
-			}
-		}
+		m_commandExecuting = false;
 	}
+
 private:
-	CCommandHistory::CommandExecutionEnd m_commandExecutionEnd;
+	bool & m_commandExecuting;
 };
+
 }
 
 void CCommandHistory::DoCommand(CCommand & command)
 {
-	BeginEndHandlerCaller beginEndCaller(m_commandExecutionBegin, m_commandExecutionEnd);
+	CommandExecutionFlagSetter flagSetter(m_commandExecuting);
 	command.Execute();
 }
 
 void CCommandHistory::UndoCommand(CCommand & command)
 {
-	BeginEndHandlerCaller beginEndCaller(m_commandExecutionBegin, m_commandExecutionEnd);
+	CommandExecutionFlagSetter flagSetter(m_commandExecuting);
 	command.Unexecute();
 }
 
