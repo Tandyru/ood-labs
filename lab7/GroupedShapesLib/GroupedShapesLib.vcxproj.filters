@@ -81,6 +81,9 @@
     <ClInclude Include="ColorOptional.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Transformations.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -111,6 +114,9 @@
       <Filter>shapes</Filter>
     </ClCompile>
     <ClCompile Include="GroupFillStyle.cpp">
+      <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformations.cpp">
       <Filter>shapes</Filter>
     </ClCompile>
   </ItemGroup>

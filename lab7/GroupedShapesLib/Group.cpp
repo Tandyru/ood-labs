@@ -2,9 +2,12 @@
 #include "Group.h"
 #include "GroupLineStyle.h"
 #include "GroupFillStyle.h"
+#include "Transformations.h"
 
 namespace shape
 {
+
+using namespace transform;
 
 void CGroup::CheckIndex(size_t index) const
 {
@@ -42,15 +45,34 @@ void CGroup::RemoveShapeAtIndex(size_t index)
 
 Rect CGroup::GetFrame() const
 {
-	// TODO:
-	throw runtime_error("Not implemented");
-	return Rect();
+	Rect result;
+
+	bool first = true;
+	for (auto shape : m_shapes)
+	{
+		const auto frame = shape->GetFrame();
+		if (first) 
+		{
+			result = frame;
+		}
+		else
+		{
+			result += frame;
+		}
+		first = false;
+	}
+	return result;
 }
 
 void CGroup::SetFrame(Rect rect)
 {
-	// TODO:
-	throw runtime_error("Not implemented");
+	auto originalFrame = GetFrame();
+
+	for (auto shape : m_shapes)
+	{
+		auto shapeRect = shape->GetFrame();
+		shape->SetFrame(TransformRect(shapeRect, originalFrame, rect));
+	}
 }
 
 shared_ptr<ILineStyle> CGroup::GetLineStyle()

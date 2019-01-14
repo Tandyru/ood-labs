@@ -167,12 +167,41 @@ namespace GroupedShapesTests
 
 		TEST_METHOD(TestGetFrame)
 		{
-			// ??
+			auto rectangle = make_shared<CRectangle>(2, 3, 20, 10);
+			group->InsertShapeAtIndex(rectangle, 0);
+
+			auto triangle = make_shared<CTriangle>(Point{ 2, 20 }, Point{ 12, 12 }, Point{ 24, 20 });
+			group->InsertShapeAtIndex(triangle, 0);
+
+			auto ellipse = make_shared<CEllipse>(Point{ 20, 10 }, 5, 4);
+			group->InsertShapeAtIndex(ellipse, 0);
+
+			auto rect = group->GetFrame();
+			Assert::AreEqual(2.0, rect.left);
+			Assert::AreEqual(3.0, rect.top);
+			Assert::AreEqual(25.0, rect.right);
+			Assert::AreEqual(20.0, rect.bottom);
 		}
 
 		TEST_METHOD(TestSetFrame)
 		{
-			// ??
+			auto rectangle = make_shared<CRectangle>(2, 3, 20, 10);
+			group->InsertShapeAtIndex(rectangle, 0);
+
+			auto triangle = make_shared<CTriangle>(Point{ 2, 20 }, Point{ 12, 12 }, Point{ 24, 20 });
+			group->InsertShapeAtIndex(triangle, 0);
+
+			auto ellipse = make_shared<CEllipse>(Point{ 20, 10 }, 5, 4);
+			group->InsertShapeAtIndex(ellipse, 0);
+
+			Rect expected = Rect{ 8, 6, 100, 40 };
+			group->SetFrame(expected);
+
+			auto rect = group->GetFrame();
+			Assert::AreEqual(expected.left, rect.left);
+			Assert::AreEqual(expected.top, rect.top);
+			Assert::AreEqual(expected.right, rect.right);
+			Assert::AreEqual(expected.bottom, rect.bottom);
 		}
 
 		shared_ptr<IShape> CreateShape() const

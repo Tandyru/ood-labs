@@ -41,13 +41,21 @@ struct Rect
 		return *this;
 	}
 
+	Rect& operator+=(const Rect& rect)
+	{
+		left = min(left, rect.left);
+		right = max(right, rect.right);
+		top = min(top, rect.top);
+		bottom = max(bottom, rect.bottom);
+		return *this;
+	}
 };
 
 /*
 inline Point GetCenter(const Rect& rect)
 {
 	return Point{ (rect.left + rect.right) / 2.0, (rect.top + rect.bottom) / 2.0 };
-}*/
-
+}
+*/
 
 }
