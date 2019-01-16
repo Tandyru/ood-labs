@@ -93,10 +93,8 @@ shared_ptr<IFillStyle> CGroup::GetFillStyle()
 	return m_fillStyle;
 }
 
-void CGroup::Draw(ICanvas & canvas) const
+void CGroup::Draw(ICanvas & canvas)
 {
-	// TODO:
-	throw runtime_error("Not implemented");
 }
 
 shared_ptr<IGroup> CGroup::GetGroup()

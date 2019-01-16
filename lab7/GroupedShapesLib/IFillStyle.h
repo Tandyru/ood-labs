@@ -7,7 +7,7 @@ namespace shape
 struct IFillStyle
 {
 	typedef ColorOptional ColorType;
-	typedef optional<bool> FillType;
+	typedef std::optional<bool> FillType;
 
 	virtual void SetColor(const ColorType& color) = 0;
 	virtual ColorType GetColor() const = 0;

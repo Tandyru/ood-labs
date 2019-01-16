@@ -16,6 +16,9 @@
     <Filter Include="shapes">
       <UniqueIdentifier>{01ad4bd0-13c1-400f-b444-3db8572ffeef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="painting">
+      <UniqueIdentifier>{8c9476b5-9f5f-4788-8db1-5bfb35975ad1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="Transformations.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>painting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -118,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="Transformations.cpp">
       <Filter>shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

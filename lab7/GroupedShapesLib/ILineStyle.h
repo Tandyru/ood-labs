@@ -7,7 +7,7 @@ namespace shape
 class ILineStyle
 {
 public:
-	typedef optional<double> ThicknessType;
+	typedef std::optional<double> ThicknessType;
 	typedef ColorOptional ColorType;
 
 	virtual void SetColor(const ColorType& color) = 0;

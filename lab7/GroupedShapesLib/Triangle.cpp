@@ -30,9 +30,12 @@ void CTriangle::SetFrame(Rect rect)
 	m_vertex3 = TransformVertexToNewRect(m_vertex3, oldRect, rect);
 }
 
-void CTriangle::Draw(ICanvas & canvas) const
+void CTriangle::DrawImpl(ICanvas & canvas)
 {
-	// ??
+	canvas.DrawLine(m_vertex1, m_vertex2);
+	canvas.DrawLine(m_vertex2, m_vertex3);
+	canvas.DrawLine(m_vertex3, m_vertex1);
+	canvas.FillShape(std::vector<Point>{m_vertex1, m_vertex2, m_vertex3});
 }
 
 }

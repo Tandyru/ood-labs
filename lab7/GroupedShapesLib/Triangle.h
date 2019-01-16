@@ -14,7 +14,7 @@ public:
 	Rect GetFrame() const override;
 	void SetFrame(Rect rect) override;
 
-	void Draw(ICanvas & canvas) const override;
+	void DrawImpl(ICanvas & canvas) override;
 
 private:
 	Point m_vertex1;

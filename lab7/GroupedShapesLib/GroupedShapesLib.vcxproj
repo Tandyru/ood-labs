@@ -163,6 +163,7 @@
     <ClInclude Include="ILineStyle.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="LineStyle.h" />
+    <ClInclude Include="Picture.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Rectangle.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="GroupFillStyle.cpp" />
     <ClCompile Include="GroupLineStyle.cpp" />
     <ClCompile Include="LineStyle.cpp" />
+    <ClCompile Include="Picture.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="stdafx.cpp">

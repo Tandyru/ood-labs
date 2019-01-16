@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="painting">
+      <UniqueIdentifier>{ee3f3144-ecee-4a7c-98d6-d273ebbf5e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -27,6 +30,12 @@
     <ClInclude Include="GroupedShapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>painting</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>painting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -34,6 +43,12 @@
     </ClCompile>
     <ClCompile Include="GroupedShapes.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>painting</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>painting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
