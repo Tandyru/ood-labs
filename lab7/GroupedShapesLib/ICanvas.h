@@ -25,10 +25,10 @@ struct ICanvas
 	virtual void FillShape(const std::vector<Point>& points) = 0;
 
 	//	Изменить цвет заполнения внутренних областей фигур
-	virtual void SetFillColor(Color color) = 0;
+	virtual void SetFillColor(const Color& color) = 0;
 
 	//	Изменить цвет рисования линий
-	virtual void SetDrawColor(Color color) = 0;
+	virtual void SetDrawColor(const Color& color) = 0;
 
 	//	Изменить толщину рисования линий
 	virtual void SetLineThickness(double thickness) = 0;

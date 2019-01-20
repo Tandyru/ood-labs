@@ -95,6 +95,10 @@ shared_ptr<IFillStyle> CGroup::GetFillStyle()
 
 void CGroup::Draw(ICanvas & canvas)
 {
+	for (auto shape : m_shapes)
+	{
+		shape->Draw(canvas);
+	}
 }
 
 shared_ptr<IGroup> CGroup::GetGroup()

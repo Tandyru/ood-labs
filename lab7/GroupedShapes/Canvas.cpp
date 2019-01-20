@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Canvas.h"
+#include <algorithm>
 
 using namespace shape;
 using namespace Gdiplus;
@@ -26,25 +27,42 @@ void CCanvas::DrawLine(shape::Point from, shape::Point to)
 
 void CCanvas::DrawEllipse(shape::Point leftTop, double width, double height)
 {
+	m_graphics.DrawEllipse(&m_pen, REAL(leftTop.x), REAL(leftTop.y), REAL(width), REAL(height));
 }
 
 void CCanvas::FillEllipse(shape::Point leftTop, double width, double height)
 {
-	//m_graphics.FillEllipse(m_brush)
+	m_graphics.FillEllipse(&m_brush, REAL(leftTop.x), REAL(leftTop.y), REAL(width), REAL(height));
 }
 
 void CCanvas::FillShape(const std::vector<shape::Point>& points)
 {
+	std::vector<PointF> polygonPoints;
+	std::transform(points.begin(), points.end(), back_inserter(polygonPoints), [](const shape::Point& point) -> PointF {
+		return PointF(REAL(point.x), REAL(point.y));
+	});
+	m_graphics.FillPolygon(&m_brush, &polygonPoints[0], polygonPoints.size());
 }
 
-void CCanvas::SetFillColor(shape::Color color)
-{
+namespace {
+
+inline Gdiplus::Color Convert(const shape::Color& color) {
+	return Gdiplus::Color(color.a, color.r, color.g, color.b);
 }
 
-void CCanvas::SetDrawColor(shape::Color color)
+}
+
+void CCanvas::SetFillColor(const shape::Color& color)
 {
+	m_brush.SetColor(Convert(color));
+}
+
+void CCanvas::SetDrawColor(const shape::Color& color)
+{
+	m_pen.SetColor(Convert(color));
 }
 
 void CCanvas::SetLineThickness(double thickness)
 {
+	m_pen.SetWidth(REAL(thickness));
 }
