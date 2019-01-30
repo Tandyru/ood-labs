@@ -166,10 +166,10 @@ class CMultiGumballMachine : private IMultiGumballMachine
 {
 public:
 	CMultiGumballMachine(unsigned numBalls)
-		: m_count(numBalls)
+		: m_gumballCount(numBalls)
 	{
 
-		if (m_count > 0)
+		if (m_gumballCount > 0)
 		{
 			SetNoQuarterState();
 		}
@@ -194,25 +194,25 @@ public:
 	std::string ToString()const
 	{
 		std::stringstream ss;
-		std::string suffix = (m_count != 1 ? "s" : "");
+		std::string suffix = (m_gumballCount != 1 ? "s" : "");
 		ss << R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: )" << m_count << " gumball" << suffix << R"(
+Inventory: )" << m_gumballCount << " gumball" << suffix << R"(
 Machine is )" << m_currentState->ToString();
 		return ss.str();
 	}
 private:
 	unsigned GetBallCount() const override
 	{
-		return m_count;
+		return m_gumballCount;
 	}
 	virtual void ReleaseBall() override
 	{
-		if (m_count != 0)
+		if (m_gumballCount != 0)
 		{
 			std::cout << "A gumball comes rolling out the slot...\n";
-			--m_count;
+			--m_gumballCount;
 		}
 	}
 	void SetSoldOutState() override
@@ -232,7 +232,7 @@ private:
 		m_currentState.reset(new CHasQuarterState(*this));
 	}
 private:
-	unsigned m_count = 0;
+	unsigned m_gumballCount = 0;
 	std::unique_ptr<IState> m_currentState;
 
 };

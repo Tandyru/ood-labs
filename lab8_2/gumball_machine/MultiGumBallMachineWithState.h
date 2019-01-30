@@ -172,9 +172,9 @@ public:
 		, m_noQuarterState(*this)
 		, m_hasQuarterState(*this)
 		, m_state(&m_soldOutState)
-		, m_count(numBalls)
+		, m_gumballCount(numBalls)
 	{
-		if (m_count > 0)
+		if (m_gumballCount > 0)
 		{
 			m_state = &m_noQuarterState;
 		}
@@ -195,25 +195,25 @@ public:
 	std::string ToString()const
 	{
 		std::stringstream ss;
-		std::string suffix = (m_count != 1 ? "s" : "");
+		std::string suffix = (m_gumballCount != 1 ? "s" : "");
 		ss << R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: )" << m_count << " gumball" << suffix << R"(
+Inventory: )" << m_gumballCount << " gumball" << suffix << R"(
 Machine is )" << m_state->ToString();
 		return ss.str();
 	}
 private:
 	unsigned GetBallCount() const override
 	{
-		return m_count;
+		return m_gumballCount;
 	}
 	virtual void ReleaseBall() override
 	{
-		if (m_count != 0)
+		if (m_gumballCount != 0)
 		{
 			std::cout << "A gumball comes rolling out the slot...\n";
-			--m_count;
+			--m_gumballCount;
 		}
 	}
 	void SetSoldOutState() override
@@ -233,7 +233,7 @@ private:
 		m_state = &m_hasQuarterState;
 	}
 private:
-	unsigned m_count = 0;
+	unsigned m_gumballCount = 0;
 	CSoldState m_soldState;
 	CSoldOutState m_soldOutState;
 	CNoQuarterState m_noQuarterState;
