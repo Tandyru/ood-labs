@@ -20,7 +20,7 @@ namespace gumball_machine_tests
 		{
 			CHasQuarterState state(gumballMachineMock);
 			state.InsertQuarter();
-			Assert::AreEqual("You can't insert another quarter\n", out);
+			Assert::AreEqual("You inserted a quarter\n", out);
 			Assert::IsFalse(gumballMachineMock.IsStateChanged());
 		}
 		
@@ -28,7 +28,7 @@ namespace gumball_machine_tests
 		{
 			CHasQuarterState state(gumballMachineMock);
 			state.EjectQuarter();
-			Assert::AreEqual("Quarter returned\n", out);
+			Assert::AreEqual("Quarter(s) returned\n", out);
 			Assert::IsTrue(gumballMachineMock.noQuarterStateSet);
 		}
 		

@@ -10,6 +10,7 @@ public:
 	bool soldStateSet = false;
 	bool hasQuarterStateSet = false;
 	unsigned ballCount = 1;
+	unsigned quarterCount = 0;
 
 	void ReleaseBall() override 
 	{
@@ -23,6 +24,16 @@ public:
 	unsigned GetBallCount()const override
 	{
 		return ballCount;
+	}
+
+	void SetQuarterCount(unsigned count) override
+	{
+		quarterCount = count;
+	}
+
+	unsigned GetQuarterCount()const override
+	{
+		return quarterCount;
 	}
 
 	void SetSoldOutState() override

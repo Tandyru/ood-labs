@@ -19,6 +19,9 @@ struct IMultiGumballMachine
 	virtual void ReleaseBall() = 0;
 	virtual unsigned GetBallCount()const = 0;
 
+	virtual void SetQuarterCount(unsigned count) = 0;
+	virtual unsigned GetQuarterCount()const = 0;
+
 	virtual void SetSoldOutState() = 0;
 	virtual void SetNoQuarterState() = 0;
 	virtual void SetSoldState() = 0;
@@ -51,11 +54,25 @@ public:
 		if (m_gumballMachine.GetBallCount() == 0)
 		{
 			std::cout << "Oops, out of gumballs\n";
-			m_gumballMachine.SetSoldOutState();
+			if (m_gumballMachine.GetQuarterCount() == 0)
+			{
+				m_gumballMachine.SetSoldOutState();
+			}
+			else
+			{
+				m_gumballMachine.SetHasQuarterState();
+			}
 		}
 		else
 		{
-			m_gumballMachine.SetNoQuarterState();
+			if (m_gumballMachine.GetQuarterCount() == 0)
+			{
+				m_gumballMachine.SetNoQuarterState();
+			}
+			else
+			{
+				m_gumballMachine.SetHasQuarterState();
+			}
 		}
 	}
 	std::string ToString() const override
@@ -99,6 +116,7 @@ private:
 
 class CHasQuarterState : public IState
 {
+	const unsigned MAX_QUARTER_COUNT = 5;
 public:
 	CHasQuarterState(IMultiGumballMachine & gumballMachine)
 		:m_gumballMachine(gumballMachine)
@@ -106,17 +124,33 @@ public:
 
 	void InsertQuarter() override
 	{
-		std::cout << "You can't insert another quarter\n";
+		auto quarterCount = m_gumballMachine.GetQuarterCount();
+		if (quarterCount >= MAX_QUARTER_COUNT)
+		{
+			std::cout << "You can't insert another quarter\n";
+		}
+		else
+		{
+			++quarterCount;
+			m_gumballMachine.SetQuarterCount(quarterCount);
+			std::cout << "You inserted a quarter\n";
+		}
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "Quarter returned\n";
+		std::cout << "Quarter(s) returned\n";
+		m_gumballMachine.SetQuarterCount(0);
 		m_gumballMachine.SetNoQuarterState();
 	}
 	void TurnCrank() override
 	{
 		std::cout << "You turned...\n";
-		m_gumballMachine.SetSoldState();
+
+		if (m_gumballMachine.GetBallCount() > 0)
+		{
+			m_gumballMachine.SetQuarterCount(m_gumballMachine.GetQuarterCount() - 1);
+			m_gumballMachine.SetSoldState();
+		}
 	}
 	void Dispense() override
 	{
@@ -140,6 +174,7 @@ public:
 	void InsertQuarter() override
 	{
 		std::cout << "You inserted a quarter\n";
+		m_gumballMachine.SetQuarterCount(1);
 		m_gumballMachine.SetHasQuarterState();
 	}
 	void EjectQuarter() override
@@ -195,10 +230,12 @@ public:
 	{
 		std::stringstream ss;
 		std::string suffix = (m_gumballCount != 1 ? "s" : "");
+		std::string suffix2 = (m_quarterCount != 1 ? "s" : "");
 		ss << R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: )" << m_gumballCount << " gumball" << suffix << R"(
+Inventory: )" << m_gumballCount << " gumball" << suffix << " and " <<
+m_quarterCount << " quarter" << suffix2 << R"(
 Machine is )" << m_currentState->ToString();
 		return ss.str();
 	}
@@ -214,6 +251,14 @@ private:
 			std::cout << "A gumball comes rolling out the slot...\n";
 			--m_gumballCount;
 		}
+	}
+	void SetQuarterCount(unsigned count) override
+	{
+		m_quarterCount = count;
+	}
+	unsigned GetQuarterCount()const override
+	{
+		return m_quarterCount;
 	}
 	void SetSoldOutState() override
 	{
@@ -233,6 +278,7 @@ private:
 	}
 private:
 	unsigned m_gumballCount = 0;
+	unsigned m_quarterCount = 0;
 	std::unique_ptr<IState> m_currentState;
 
 };

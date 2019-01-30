@@ -136,6 +136,18 @@ Machine is )" << stateStr;
 		Assert::AreEqual(MakeOutput(ballCount, 0, NoQuarterState), gumballMachine.ToString());
 	}
 
+	TEST_METHOD(StayInHasQuarterStateWhenAllGumballsSoldOut)
+	{
+		unsigned ballCount = 2;
+		CMultiGumballMachine gumballMachine(ballCount);
+		gumballMachine.InsertQuarter();
+		gumballMachine.InsertQuarter();
+		gumballMachine.InsertQuarter();
+		gumballMachine.TurnCrank();
+		gumballMachine.TurnCrank();
+		Assert::AreEqual(MakeOutput(ballCount - 2, 1, HasQuarterState), gumballMachine.ToString());
+	}
+
 	TEST_METHOD(SetsToHasQuarterStateFromNoQuarterStateOnInsertQuarter)
 	{
 		unsigned ballCount = 2;

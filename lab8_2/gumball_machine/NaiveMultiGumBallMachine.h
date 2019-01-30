@@ -20,7 +20,6 @@ public:
 
 	CMultiGumballMachine(unsigned count)
 		: m_gumballCount(count)
-		, m_quaterCount(0)
 		, m_state(count > 0 ? State::NoQuarter : State::SoldOut)
 	{
 	}
@@ -34,14 +33,14 @@ public:
 			cout << "You can't insert a quarter, the machine is sold out\n";
 			break;
 		case State::NoQuarter:
-			++m_quaterCount;
+			++m_quarterCount;
 			cout << "You inserted a quarter\n";
 			m_state = State::HasQuarter;
 			break;
 		case State::HasQuarter:
-			if (m_quaterCount < MAX_QUARTER_COUNT)
+			if (m_quarterCount < MAX_QUARTER_COUNT)
 			{
-				++m_quaterCount;
+				++m_quarterCount;
 				cout << "You inserted a quarter\n";
 			}
 			else 
@@ -63,7 +62,7 @@ public:
 		case State::HasQuarter:
 			cout << "Quarter(s) returned\n";
 			m_state = State::NoQuarter;
-			m_quaterCount = 0;
+			m_quarterCount = 0;
 			break;
 		case State::NoQuarter:
 			cout << "You haven't inserted a quarter\n";
@@ -93,7 +92,7 @@ public:
 			if (m_gumballCount > 0) 
 			{
 				m_state = State::Sold;
-				--m_quaterCount;
+				--m_quarterCount;
 				Dispense();
 			}
 			break;
@@ -118,12 +117,12 @@ public:
 			                               : "delivering a gumball";
 		std::stringstream ss;
 		std::string suffix = (m_gumballCount != 1 ? "s" : "");
-		std::string suffix2 = (m_quaterCount != 1 ? "s" : "");
+		std::string suffix2 = (m_quarterCount != 1 ? "s" : "");
 		ss << R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016
 Inventory: )" << m_gumballCount << " gumball" << suffix << " and "<< 
-m_quaterCount << " quarter" << suffix2 << R"(
+m_quarterCount << " quarter" << suffix2 << R"(
 Machine is )" << state;
 		return ss.str();
 	}
@@ -144,14 +143,11 @@ private:
 			}
 			else
 			{
-				if (m_quaterCount == 0)
-				{
-					m_state = State::NoQuarter;
-				}
-				else
-				{
-					m_state = State::HasQuarter;
-				}
+				m_state = State::NoQuarter;
+			}
+			if (m_quarterCount > 0)
+			{
+				m_state = State::HasQuarter;
 			}
 			break;
 		case State::NoQuarter:
@@ -165,7 +161,7 @@ private:
 	}
 
 	unsigned m_gumballCount;	// Количество шариков
-	unsigned m_quaterCount;
+	unsigned m_quarterCount = 0;
 	State m_state = State::SoldOut;
 };
 }
