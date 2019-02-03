@@ -36,13 +36,13 @@ namespace ConsoleTextEditorTests
 		{
 			const string expectedParagraphText = "The text \nof the paragraph.";
 			auto inputCommand = ParseInputCommand("InsertParagraph end "s + expectedParagraphText);
-			auto& command = static_cast<InsertParagraphInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<InsertParagraphInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::InsertParagraph);
 			Assert::IsTrue(command.position == END_POSITION);
 			Assert::IsTrue(command.text == expectedParagraphText);
 			const Position expectedPosition = 12;
 			auto inputCommand2 = ParseInputCommand("InsertParagraph "s + to_string(*expectedPosition) + " " + expectedParagraphText);
-			auto& command2 = static_cast<InsertParagraphInputCommand&>(*inputCommand2);
+			auto& command2 = dynamic_cast<InsertParagraphInputCommand&>(*inputCommand2);
 			Assert::IsTrue(command2.position == expectedPosition);
 		}
 
@@ -70,7 +70,7 @@ namespace ConsoleTextEditorTests
 				" " + to_string(expectedHeight) +
 				" " + expectedPath
 			);
-			auto& command = static_cast<InsertImageInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<InsertImageInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::InsertImage);
 			Assert::IsTrue(command.position == expectedPosition);
 		}
@@ -79,12 +79,12 @@ namespace ConsoleTextEditorTests
 		{
 			const string expectedTitle = "The Title";
 			auto inputCommand = ParseInputCommand("SetTitle "s + expectedTitle);
-			auto& command = static_cast<SetTitleInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<SetTitleInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::SetTitle);
 			Assert::IsTrue(command.title == expectedTitle);
 
 			inputCommand = ParseInputCommand("SetTitle");
-			auto& command2 = static_cast<SetTitleInputCommand&>(*inputCommand);
+			auto& command2 = dynamic_cast<SetTitleInputCommand&>(*inputCommand);
 			Assert::IsTrue(command2.title.empty());
 		}
 
@@ -105,7 +105,7 @@ namespace ConsoleTextEditorTests
 			const string expectedText = "The text \nof the paragraph to replace.";
 			const unsigned int expectedPosition = 33;
 			auto inputCommand = ParseInputCommand("ReplaceText "s + to_string(expectedPosition) + " " + expectedText);
-			auto& command = static_cast<ReplaceTextInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<ReplaceTextInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::ReplaceText);
 			Assert::IsTrue(command.position == expectedPosition);
 			Assert::IsTrue(command.text == expectedText);
@@ -121,7 +121,7 @@ namespace ConsoleTextEditorTests
 				" " + to_string(expectedWidth) +
 				" " + to_string(expectedHeight)
 			);
-			auto& command = static_cast<ResizeImageInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<ResizeImageInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::ResizeImage);
 			Assert::IsTrue(command.position == expectedPosition);
 			Assert::IsTrue(command.width == expectedWidth);
@@ -135,7 +135,7 @@ namespace ConsoleTextEditorTests
 				" " + to_string(expectedPosition)
 			);
 			Assert::IsTrue(inputCommand->type == InputCommandType::DeleteItem);
-			auto& command = static_cast<DeleteItemInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<DeleteItemInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.position == expectedPosition);
 		}
 
@@ -147,7 +147,7 @@ namespace ConsoleTextEditorTests
 				" " + expectedPath
 			);
 			Assert::IsTrue(inputCommand->type == InputCommandType::Save);
-			auto& command = static_cast<SaveInputCommand&>(*inputCommand);
+			auto& command = dynamic_cast<SaveInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.path == expectedPath);
 		}
 	};
