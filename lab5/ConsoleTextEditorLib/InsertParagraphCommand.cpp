@@ -9,17 +9,17 @@ namespace document
 namespace command
 {
 
-CInsertParagraphCommand::CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, const string& text)
+CInsertParagraphCommand::CInsertParagraphCommand(impl::IDocumentImpl& document, optional<size_t> position, std::shared_ptr<IParagraph> paragraph)
 	: m_document(document)
 	, m_position(position)
-	, m_text(text)
+	, m_paragraph(paragraph)
 {
 }
 
 void CInsertParagraphCommand::ExecuteImpl()
 {
 	m_insertedPosition = m_position ? *m_position : m_document.GetItemsCount();
-	m_document.InsertParagraph(m_text, m_insertedPosition);
+	m_document.InsertParagraph(m_paragraph, m_insertedPosition);
 }
 
 void CInsertParagraphCommand::UnexecuteImpl()

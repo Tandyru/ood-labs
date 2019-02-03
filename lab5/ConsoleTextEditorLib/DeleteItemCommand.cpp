@@ -26,7 +26,7 @@ void CDeleteItemCommand::UnexecuteImpl()
 {
 	if (bool(m_paragraph))
 	{
-		m_document.InsertParagraph(m_paragraph->GetText(), m_position);
+		m_document.InsertParagraph(m_paragraph, m_position);
 		m_paragraph.reset();
 	}
 	else if (m_image)

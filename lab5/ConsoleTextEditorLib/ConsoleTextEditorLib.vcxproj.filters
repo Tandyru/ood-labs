@@ -216,12 +216,6 @@
     <ClInclude Include="ICommandHistory.h">
       <Filter>document\command</Filter>
     </ClInclude>
-    <ClInclude Include="ParagraphCommandFactory.h">
-      <Filter>document</Filter>
-    </ClInclude>
-    <ClInclude Include="IParagraphCommandFactory.h">
-      <Filter>document</Filter>
-    </ClInclude>
     <ClInclude Include="IImageCommandFactory.h">
       <Filter>document</Filter>
     </ClInclude>
@@ -373,9 +367,6 @@
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
       <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="ParagraphCommandFactory.cpp">
-      <Filter>document</Filter>
     </ClCompile>
     <ClCompile Include="ImageCommandFactory.cpp">
       <Filter>document</Filter>

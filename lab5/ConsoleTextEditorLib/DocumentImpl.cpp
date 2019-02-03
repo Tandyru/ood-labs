@@ -16,10 +16,9 @@ CDocumentImpl::CDocumentImpl(const ParagraphFactory & paragraphFactory, const Im
 {
 }
 
-void CDocumentImpl::InsertParagraph(const string& text,
-	optional<size_t> position)
+void CDocumentImpl::InsertParagraph(const std::shared_ptr<IParagraph>& paragraph, std::optional<size_t> position)
 {
-	InsertItem<IParagraph>(position, m_paragraphFactory(text));
+	InsertItem<IParagraph>(position, paragraph);
 }
 
 void CDocumentImpl::InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
@@ -85,21 +84,6 @@ size_t CDocumentImpl::GetItemPosition(const std::function<bool(const CConstDocum
 		}
 	}
 	throw std::logic_error("Document item not found");
-}
-
-size_t CDocumentImpl::GetParagraphPosition(const IParagraph & paragraph) const
-{
-	return GetItemPosition([&](const CConstDocumentItem& item) {
-		auto paragraphOfItem = item.GetParagraph();
-		if (paragraphOfItem)
-		{
-			if (paragraphOfItem.get() == &paragraph)
-			{
-				return true;
-			}
-		}
-		return false;
-	});
 }
 
 size_t CDocumentImpl::GetImagePosition(const IImage & image) const

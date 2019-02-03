@@ -190,12 +190,10 @@
     <ClInclude Include="InsertParagraphInputCommand.h" />
     <ClInclude Include="InvalidPositionException.h" />
     <ClInclude Include="IParagraph.h" />
-    <ClInclude Include="IParagraphCommandFactory.h" />
     <ClInclude Include="IResource.h" />
     <ClInclude Include="IsValueInArray.h" />
     <ClInclude Include="MapEnum.h" />
     <ClInclude Include="Paragraph.h" />
-    <ClInclude Include="ParagraphCommandFactory.h" />
     <ClInclude Include="PositionParser.h" />
     <ClInclude Include="ReplaceTextCommand.h" />
     <ClInclude Include="ReplaceTextCommandParser.h" />
@@ -248,7 +246,6 @@
     <ClCompile Include="InsertParagraphCommandParser.cpp" />
     <ClCompile Include="InsertParagraphInputCommand.cpp" />
     <ClCompile Include="Paragraph.cpp" />
-    <ClCompile Include="ParagraphCommandFactory.cpp" />
     <ClCompile Include="PositionParser.cpp" />
     <ClCompile Include="ReplaceTextCommand.cpp" />
     <ClCompile Include="ReplaceTextCommandParser.cpp" />

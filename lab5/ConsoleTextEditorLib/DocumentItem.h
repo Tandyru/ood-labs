@@ -12,7 +12,7 @@ class CDocumentItem : public CConstDocumentItem
 public:
 	CDocumentItem(std::shared_ptr<IImage> image);
 
-	CDocumentItem(std::shared_ptr<IParagraph> paragreph);
+	CDocumentItem(const std::shared_ptr<IParagraph>& paragreph);
 
 	// ¬озвращает указатель на изображение, либо nullptr, если элемент не €вл€етс€ изображением
 	std::shared_ptr<IImage> GetImage();

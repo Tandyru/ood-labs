@@ -57,7 +57,6 @@ private:
 	impl::CDocumentImpl m_impl;
 	std::shared_ptr<command::ICommandHistory> m_commandHistory;
 	resources::CDocumentResources m_resources;
-	std::shared_ptr<command::IParagraphCommandFactory> m_paragraphCommandFactory;
 	std::shared_ptr<command::IImageCommandFactory> m_imageCommandFactory;
 };
 

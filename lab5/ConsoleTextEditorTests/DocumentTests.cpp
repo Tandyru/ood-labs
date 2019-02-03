@@ -11,6 +11,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+using namespace std;
 using namespace document;
 using namespace resources;
 
@@ -51,7 +52,7 @@ namespace ConsoleTextEditorTests
 		{
 			auto expectedText = "paragraph text"s;
 
-			CParagraph paragraph(expectedText, nullptr, nullptr);
+			CParagraph paragraph(expectedText, nullptr);
 
 			Assert::AreEqual(expectedText, paragraph.GetText());
 		}
@@ -60,7 +61,7 @@ namespace ConsoleTextEditorTests
 		{
 			auto expectedText = "paragraph text"s;
 
-			CParagraph paragraph("initial text", nullptr, nullptr);
+			CParagraph paragraph("initial text", nullptr);
 
 			paragraph.SetText(expectedText);
 
@@ -79,7 +80,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestConstDocumentItemContructionWithParagraph)
 		{
-			auto paragraph = make_shared<CParagraph>("initial text", nullptr, nullptr);
+			auto paragraph = make_shared<CParagraph>("initial text", nullptr);
 
 			CConstDocumentItem item(paragraph);
 
@@ -99,7 +100,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestDocumentItemContructionWithParagraph)
 		{
-			auto paragraph = make_shared<CParagraph>("initial text", nullptr, nullptr);
+			auto paragraph = make_shared<CParagraph>("initial text", nullptr);
 
 			CDocumentItem item(paragraph);
 

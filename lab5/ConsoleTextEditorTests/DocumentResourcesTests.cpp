@@ -4,6 +4,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+using namespace std;
 using namespace filesystem;
 using namespace resources;
 

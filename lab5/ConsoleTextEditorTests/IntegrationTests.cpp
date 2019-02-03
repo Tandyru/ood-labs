@@ -46,6 +46,27 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedOutput, out.str());
 		}
 
+		TEST_METHOD(ReplaceTextCommandReplacesTextOnUndoRedo)
+		{
+			const string firstParagraphText = "First paragraph text";
+			const string firstParagraphNewText = "First paragraph new text";
+			const string inputCommands =
+				"InsertParagraph end " + firstParagraphText + "\n" +
+				"ReplaceText 0 " + firstParagraphNewText + "\n" +
+				"Undo\nUndo\n" +
+				"Redo\nRedo\n";
+			stringstream in(inputCommands);
+			stringstream prompt;
+			ReadInputCommands(in, prompt, [&](unique_ptr<input_command::InputCommand>&& inputCommand) {
+				inputCommand->Execute(executor);
+			}, [](auto) {});
+			executor.ExecuteCommand(InputCommandType::List);
+			string expectedOutput = "Title: \n";
+			expectedOutput +=
+				"0. Paragraph: " + firstParagraphNewText + "\n";
+			Assert::AreEqual(expectedOutput, out.str());
+		}
+
 		TEST_METHOD(TestInsertParagraphAndImage)
 		{
 			const string firstParagraphText = "First paragraph text";
@@ -59,7 +80,7 @@ namespace ConsoleTextEditorTests
 				"InsertParagraph " + to_string(secondParagraphPosition) + " To be deleted paragraph" + "\n" +
 				"ResizeImage 2 " + to_string(imageWidth) + " " + to_string(imageHeight) + " " + "\n" +
 				"DeleteItem " + std::to_string(secondParagraphPosition) + "\n" +
-				"ReplaceText 0 " + firstParagraphNewText + "\n" + 
+				"ReplaceText 0 " + firstParagraphNewText + "\n" +
 				"Undo\nUndo\nUndo\nUndo\nUndo\nUndo\n" +
 				"Redo\nRedo\nRedo\nRedo\nRedo\nRedo\n";
 			stringstream in(inputCommands);

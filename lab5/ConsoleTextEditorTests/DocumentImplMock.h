@@ -8,15 +8,23 @@ class CDocumentImplMock : public IDocumentImpl
 {
 public:
 	// Inherited via IDocumentImpl
-	void InsertParagraph(const string & text, optional<size_t> position = optional<size_t>()) override
+	/*
+	void InsertParagraph(const std::string & text, std::optional<size_t> position = std::optional<size_t>()) override
 	{
 		lastCommandText = text;
 		lastCommandPosition = position;
 		itemCount++;
 	}
+	*/
+	void InsertParagraph(const std::shared_ptr<IParagraph>& paragraph, std::optional<size_t> position = std::optional<size_t>()) override
+	{
+		lastCommandText = paragraph->GetText();
+		lastCommandPosition = position;
+		itemCount++;
+	}
 
-	void InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
-		optional<size_t> position = optional<size_t>()) override
+	void InsertImage(std::shared_ptr<resources::IResource> resource, int width, int height,
+		std::optional<size_t> position = std::optional<size_t>()) override
 	{
 		lastCommandResource = resource;
 		lastCommandWidth = width;
@@ -24,7 +32,7 @@ public:
 		lastCommandPosition = position;
 	}
 
-	void InsertImage(shared_ptr<IImage> image, size_t position) override
+	void InsertImage(std::shared_ptr<IImage> image, size_t position) override
 	{
 		lastCommandPosition = position;
 	}
@@ -36,12 +44,12 @@ public:
 
 	virtual CConstDocumentItem GetItem(size_t index) const override
 	{
-		return CConstDocumentItem(shared_ptr<IParagraph>());
+		return CConstDocumentItem(std::shared_ptr<IParagraph>());
 	}
 
 	virtual CDocumentItem GetItem(size_t index) override
 	{
-		return CDocumentItem(shared_ptr<IParagraph>());
+		return CDocumentItem(std::shared_ptr<IParagraph>());
 	}
 
 	virtual void DeleteItem(size_t index) override
@@ -49,19 +57,14 @@ public:
 		itemCount--;
 	}
 
-	void SetTitle(const string& title) override
+	void SetTitle(const std::string& title) override
 	{
 		this->title = title;
 	}
 
-	string GetTitle() const override
+	std::string GetTitle() const override
 	{
 		return title;
-	}
-
-	size_t GetParagraphPosition(const IParagraph & paragraph) const override
-	{
-		return 0;
 	}
 
 	size_t GetImagePosition(const IImage & image) const override
@@ -70,11 +73,11 @@ public:
 	}
 
 public:
-	string lastCommandText;
-	shared_ptr<resources::IResource> lastCommandResource;
-	optional<size_t> lastCommandPosition;
+	std::string lastCommandText;
+	std::shared_ptr<resources::IResource> lastCommandResource;
+	std::optional<size_t> lastCommandPosition;
 	int lastCommandWidth = 0;
 	int lastCommandHeight = 0;
 	size_t itemCount = 0;
-	string title;
+	std::string title;
 };

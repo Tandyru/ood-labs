@@ -11,7 +11,7 @@ CDocumentItem::CDocumentItem(shared_ptr<IImage> image)
 {
 }
 
-CDocumentItem::CDocumentItem(shared_ptr<IParagraph> paragraph)
+CDocumentItem::CDocumentItem(const shared_ptr<IParagraph>& paragraph)
 	: CConstDocumentItem(paragraph)
 {
 }

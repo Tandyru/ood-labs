@@ -12,7 +12,8 @@ namespace impl
 class IDocumentImpl
 {
 public:
-	virtual void InsertParagraph(const std::string& text,
+
+	virtual void InsertParagraph(const std::shared_ptr<IParagraph>& paragraph,
 		std::optional<size_t> position = std::optional<size_t>()) = 0;
 
 	virtual void InsertImage(std::shared_ptr<resources::IResource> resource, int width, int height,
@@ -30,7 +31,6 @@ public:
 	virtual void SetTitle(const std::string& title) = 0;
 	virtual std::string GetTitle() const = 0;
 
-	virtual size_t GetParagraphPosition(const IParagraph & paragraph) const = 0;
 	virtual size_t GetImagePosition(const IImage & paragraph) const = 0;
 
 	virtual ~IDocumentImpl() = default;

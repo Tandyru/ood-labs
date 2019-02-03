@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "DocumentMock.h"
 
+using namespace std;
+
 shared_ptr<IParagraph> CDocumentMock::InsertParagraph(const string & text, optional<size_t> position)
 {
 	lastCommandText = text;

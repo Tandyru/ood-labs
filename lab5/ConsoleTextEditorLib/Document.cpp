@@ -6,7 +6,6 @@
 #include "SetTitleCommand.h"
 #include "ResizeImageCommand.h"
 #include "DocumentToHtmlConvertor.h"
-#include "ParagraphCommandFactory.h"
 #include "ImageCommandFactory.h"
 #include "CommandHistory.h"
 
@@ -21,7 +20,6 @@ CDocument::CDocument()
 	: m_impl(std::bind(&CDocument::CreateParagraph, this, _1), 
 		std::bind(&CDocument::CreateImage, this, _1, _2, _3))
 	, m_commandHistory(make_shared<CCommandHistory>())
-	, m_paragraphCommandFactory(make_shared<CParagraphCommandFactory>(m_impl))
 	, m_imageCommandFactory(make_shared<CImageCommandFactory>(m_impl))
 {
 }
@@ -29,7 +27,8 @@ CDocument::CDocument()
 shared_ptr<IParagraph> CDocument::InsertParagraph(const string& text, optional<size_t> position)
 {
 	CheckPosition(position);
-	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, text);
+	auto paragraph = CreateParagraph(text);
+	auto command = make_unique<command::CInsertParagraphCommand>(m_impl, position, paragraph);
 	m_commandHistory->Do(move(command));
 	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
 	return lastItem.GetParagraph();
@@ -125,7 +124,7 @@ void CDocument::CheckIndex(size_t index)const
 
 shared_ptr<IParagraph> CDocument::CreateParagraph(const string& text)
 {
-	return make_shared<CParagraph>(text, m_commandHistory, m_paragraphCommandFactory);
+	return make_shared<CParagraph>(text, m_commandHistory);
 }
 
 shared_ptr<IImage> CDocument::CreateImage(shared_ptr<resources::IResource> resource, unsigned int width, unsigned int height)

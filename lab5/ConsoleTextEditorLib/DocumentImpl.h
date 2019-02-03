@@ -17,7 +17,7 @@ public:
 
 	CDocumentImpl(const CDocumentImpl&) = delete;
 
-	void InsertParagraph(const std::string& text,
+	void InsertParagraph(const std::shared_ptr<IParagraph>& paragraph,
 		std::optional<size_t> position = std::optional<size_t>()) override;
 
 	void InsertImage(std::shared_ptr<resources::IResource> resource, int width, int height,
@@ -32,7 +32,6 @@ public:
 
 	void DeleteItem(size_t index) override;
 
-	size_t GetParagraphPosition(const IParagraph & paragraph) const override;
 	size_t GetImagePosition(const IImage & paragraph) const override;
 
 	void SetTitle(const std::string& title);

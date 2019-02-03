@@ -90,7 +90,8 @@ namespace ConsoleTextEditorTests
 	private:
 		void DoCommand()
 		{
-			history.Do(make_unique<CInsertParagraphCommand>(document, optional<size_t>(), "text"));
+			std::shared_ptr<IParagraph> paragraph = std::make_shared<CParagraph>("text", nullptr);
+			history.Do(std::make_unique<CInsertParagraphCommand>(document, std::optional<size_t>(), paragraph));
 		}
 	};
 }
