@@ -7,9 +7,9 @@ namespace input_command
 
 struct SetTitleInputCommand : public InputCommand
 {
-	string title;
+	std::string title;
 
-	SetTitleInputCommand(const string& title);
+	SetTitleInputCommand(const std::string& title);
 
 	void Execute(IInputCommandExecutor& executor) override;
 

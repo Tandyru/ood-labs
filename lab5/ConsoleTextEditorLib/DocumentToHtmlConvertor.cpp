@@ -4,6 +4,7 @@
 #include "StringUtils.h"
 #include <fstream>
 
+using namespace std;
 using namespace filesystem;
 
 namespace document

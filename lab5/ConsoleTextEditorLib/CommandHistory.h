@@ -14,7 +14,7 @@ public:
 
 	CCommandHistory(const CCommandHistory&) = delete;
 
-	void Do(unique_ptr<CCommand>&& command) override;
+	void Do(std::unique_ptr<CCommand>&& command) override;
 
 	bool ShouldCreateCommand() const override;
 
@@ -31,7 +31,7 @@ private:
 	void RemoveOldCommands();
 
 private:
-	vector<unique_ptr<CCommand>> m_history;
+	std::vector<std::unique_ptr<CCommand>> m_history;
 	size_t m_currentPosition = 0;
 	bool m_commandExecuting = false;
 };

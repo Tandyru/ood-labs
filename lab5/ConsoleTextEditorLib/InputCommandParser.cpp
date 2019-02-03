@@ -11,6 +11,8 @@
 #include "SaveCommandParser.h"
 #include "Exception.h"
 
+using namespace std;
+
 namespace command_parser
 {
 namespace

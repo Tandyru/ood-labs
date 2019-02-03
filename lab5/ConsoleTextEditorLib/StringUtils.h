@@ -1,3 +1,3 @@
 #pragma once
 
-string w2s(const wchar_t* pcs);
+std::string w2s(const wchar_t* pcs);

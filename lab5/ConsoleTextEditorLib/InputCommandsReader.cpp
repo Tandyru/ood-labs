@@ -4,6 +4,7 @@
 #include <istream>
 #include "ExitException.h"
 
+using namespace std;
 using namespace input_command;
 using namespace command_parser;
 

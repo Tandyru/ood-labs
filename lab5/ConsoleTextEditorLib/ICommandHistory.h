@@ -9,7 +9,7 @@ namespace command
 class ICommandHistory
 {
 public:
-	virtual void Do(unique_ptr<CCommand>&& command) = 0;
+	virtual void Do(std::unique_ptr<CCommand>&& command) = 0;
 
 	virtual bool CanUndo() const = 0;
 	virtual void Undo() = 0;

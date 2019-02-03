@@ -21,11 +21,11 @@ public:
 
 	CDocument(const CDocument&) = delete;
 
-	shared_ptr<IParagraph> InsertParagraph(const string& text,
-		optional<size_t> position = optional<size_t>()) override;
+	std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
+		std::optional<size_t> position = std::optional<size_t>()) override;
 
-	shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
-		optional<size_t> position = optional<size_t>()) override;
+	std::shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
+		std::optional<size_t> position = std::optional<size_t>()) override;
 
 	size_t GetItemsCount()const override;
 
@@ -34,8 +34,8 @@ public:
 
 	void DeleteItem(size_t index) override;
 
-	string GetTitle()const override;
-	void SetTitle(const string & title) override;
+	std::string GetTitle()const override;
+	void SetTitle(const std::string & title) override;
 
 	bool CanUndo()const override;
 	void Undo() override;
@@ -46,19 +46,19 @@ public:
 	void Save(const Path& path)const override;
 
 private:
-	void CheckPosition(optional<size_t> position)const;
+	void CheckPosition(std::optional<size_t> position)const;
 	void CheckIndex(size_t index)const;
 
-	shared_ptr<IParagraph> CreateParagraph(const string & text);
+	std::shared_ptr<IParagraph> CreateParagraph(const std::string & text);
 
-	shared_ptr<IImage> CreateImage(shared_ptr<resources::IResource> path, unsigned int width, unsigned int height);
+	std::shared_ptr<IImage> CreateImage(std::shared_ptr<resources::IResource> path, unsigned int width, unsigned int height);
 
 private:
 	impl::CDocumentImpl m_impl;
-	shared_ptr<command::ICommandHistory> m_commandHistory;
+	std::shared_ptr<command::ICommandHistory> m_commandHistory;
 	resources::CDocumentResources m_resources;
-	shared_ptr<command::IParagraphCommandFactory> m_paragraphCommandFactory;
-	shared_ptr<command::IImageCommandFactory> m_imageCommandFactory;
+	std::shared_ptr<command::IParagraphCommandFactory> m_paragraphCommandFactory;
+	std::shared_ptr<command::IImageCommandFactory> m_imageCommandFactory;
 };
 
 }

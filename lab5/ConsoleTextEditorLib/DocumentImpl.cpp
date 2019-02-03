@@ -3,6 +3,8 @@
 #include "Paragraph.h"
 #include "Image.h"
 
+using namespace std;
+
 namespace document
 {
 namespace impl

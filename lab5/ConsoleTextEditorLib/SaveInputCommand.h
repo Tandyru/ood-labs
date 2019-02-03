@@ -7,9 +7,9 @@ namespace input_command
 
 struct SaveInputCommand : public InputCommand
 {
-	string path;
+	std::string path;
 
-	SaveInputCommand(const string& path);
+	SaveInputCommand(const std::string& path);
 
 	void Execute(IInputCommandExecutor& executor) override;
 };

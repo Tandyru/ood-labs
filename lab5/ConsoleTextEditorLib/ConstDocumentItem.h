@@ -11,21 +11,21 @@ namespace document
 class CConstDocumentItem
 {
 public:
-	CConstDocumentItem(shared_ptr<IImage> image);
+	CConstDocumentItem(std::shared_ptr<IImage> image);
 
-	CConstDocumentItem(shared_ptr<IParagraph> paragraph);
+	CConstDocumentItem(std::shared_ptr<IParagraph> paragraph);
 
 	// Возвращает указатель на константное изображение, либо nullptr,
 	// если элемент не является изображением
-	shared_ptr<const IImage> GetImage()const;
+	std::shared_ptr<const IImage> GetImage()const;
 	// Возвращает указатель на константный параграф, либо nullptr, если элемент не является параграфом
-	shared_ptr<const IParagraph> GetParagraph()const;
+	std::shared_ptr<const IParagraph> GetParagraph()const;
 
 	virtual ~CConstDocumentItem() = default;
 
 protected:
-	shared_ptr<IImage> m_image;
-	shared_ptr<IParagraph> m_paragraph;
+	std::shared_ptr<IImage> m_image;
+	std::shared_ptr<IParagraph> m_paragraph;
 };
 
 }

@@ -4,6 +4,8 @@
 #include "PositionParser.h"
 #include "CommandParser.h"
 
+using namespace std;
+
 namespace command_parser
 {
 

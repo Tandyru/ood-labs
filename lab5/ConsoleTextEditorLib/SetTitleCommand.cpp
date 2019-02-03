@@ -2,6 +2,8 @@
 #include "SetTitleCommand.h"
 #include "IDocumentImpl.h"
 
+using namespace std;
+
 namespace document
 {
 namespace command

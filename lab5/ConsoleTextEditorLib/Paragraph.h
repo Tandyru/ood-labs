@@ -10,19 +10,19 @@ class CParagraph
 	: public IParagraph
 {
 public:
-	using BeforeTextChangeHandler = std::function<void(const IParagraph& paragraph, const string & newText)>;
+	using BeforeTextChangeHandler = std::function<void(const IParagraph& paragraph, const std::string & newText)>;
 
-	CParagraph(const string & text, const shared_ptr<command::ICommandHistory> & commandHistory, 
-		const shared_ptr<command::IParagraphCommandFactory> & commandFactory);
+	CParagraph(const std::string & text, const std::shared_ptr<command::ICommandHistory> & commandHistory,
+		const std::shared_ptr<command::IParagraphCommandFactory> & commandFactory);
 
 	// IParagraph
-	string GetText() const override;
-	void SetText(const string & text) override;
+	std::string GetText() const override;
+	void SetText(const std::string & text) override;
 
 private:
-	string m_text;
-	shared_ptr<command::ICommandHistory> m_commandHistory;
-	shared_ptr<command::IParagraphCommandFactory> m_commandFactory;
+	std::string m_text;
+	std::shared_ptr<command::ICommandHistory> m_commandHistory;
+	std::shared_ptr<command::IParagraphCommandFactory> m_commandFactory;
 };
 
 }

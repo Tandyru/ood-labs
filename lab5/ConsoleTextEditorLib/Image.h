@@ -13,9 +13,9 @@ class CImage
 public:
 	using BeforeResizeHandler = std::function<void(const IImage&, unsigned int, unsigned int)>;
 
-	CImage(shared_ptr<resources::IResource> resource, int width, int height,
-		const shared_ptr<command::ICommandHistory>& commandHistory,
-		const shared_ptr<command::IImageCommandFactory> & commandFactory);
+	CImage(std::shared_ptr<resources::IResource> resource, int width, int height,
+		const std::shared_ptr<command::ICommandHistory>& commandHistory,
+		const std::shared_ptr<command::IImageCommandFactory> & commandFactory);
 
 	// IImage
 	Path GetPath()const override;
@@ -28,9 +28,9 @@ public:
 private:
 	int m_width;
 	int m_height;
-	shared_ptr<resources::IResource> m_resource;
-	shared_ptr<command::ICommandHistory> m_commandHistory;
-	shared_ptr<command::IImageCommandFactory> m_commandFactory;
+	std::shared_ptr<resources::IResource> m_resource;
+	std::shared_ptr<command::ICommandHistory> m_commandHistory;
+	std::shared_ptr<command::IImageCommandFactory> m_commandFactory;
 };
 
 }

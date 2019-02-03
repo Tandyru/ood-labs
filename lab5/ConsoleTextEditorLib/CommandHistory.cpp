@@ -2,6 +2,8 @@
 #include "CommandHistory.h"
 #include "CompositeCommand.h"
 
+using namespace std;
+
 namespace document
 {
 namespace command

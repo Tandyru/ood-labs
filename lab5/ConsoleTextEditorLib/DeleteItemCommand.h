@@ -20,8 +20,8 @@ private:
 
 	impl::IDocumentImpl& m_document;
 	size_t m_position;
-	shared_ptr<IParagraph> m_paragraph;
-	shared_ptr<IImage> m_image;
+	std::shared_ptr<IParagraph> m_paragraph;
+	std::shared_ptr<IImage> m_image;
 	bool m_lastItemDeleted = false;
 };
 

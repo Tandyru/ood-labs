@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Resource.h"
 
+using namespace std;
+
 namespace resources
 {
 

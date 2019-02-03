@@ -2,6 +2,8 @@
 #include "SetTitleInputCommand.h"
 #include "IInputCommandExecutor.h"
 
+using namespace std;
+
 namespace input_command
 {
 

@@ -4,6 +4,7 @@
 #include "StringUtils.h"
 #include "FileUtils.h"
 
+using namespace std;
 using namespace filesystem;
 
 namespace resources

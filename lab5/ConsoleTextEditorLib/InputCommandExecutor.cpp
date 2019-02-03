@@ -6,6 +6,8 @@
 #include "Exception.h"
 #include "ExitException.h"
 
+using namespace std;
+
 namespace input_command
 {
 

@@ -11,8 +11,8 @@ namespace input_command
 class CInputCommandExecutor : public IInputCommandExecutor
 {
 public:
-	using HelpCommandHandler = function<void(ostream& out)>;
-	CInputCommandExecutor(document::IDocument& document, ostream& out,
+	using HelpCommandHandler = std::function<void(std::ostream& out)>;
+	CInputCommandExecutor(document::IDocument& document, std::ostream& out,
 		const HelpCommandHandler& helpHandler);
 	CInputCommandExecutor(const CInputCommandExecutor&) = delete;
 	
@@ -28,7 +28,7 @@ public:
 
 private:
 	document::IDocument & m_document;
-	ostream& m_out;
+	std::ostream& m_out;
 	HelpCommandHandler m_helpHandler;
 };
 

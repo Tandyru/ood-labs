@@ -13,6 +13,7 @@
 namespace document
 {
 
+using namespace std;
 using namespace command;
 using namespace std::placeholders;
 

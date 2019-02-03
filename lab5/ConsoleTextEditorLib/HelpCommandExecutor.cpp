@@ -2,6 +2,8 @@
 #include "SaveInputCommand.h"
 #include "HelpCommandExecutor.h"
 
+using namespace std;
+
 namespace input_command
 {
 

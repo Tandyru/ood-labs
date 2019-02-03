@@ -11,7 +11,7 @@ class CReplaceTextCommand;
 class IParagraphCommandFactory
 {
 public:
-	virtual unique_ptr<CReplaceTextCommand> CreateReplaceTextCommand(const IParagraph & paragraph, const string & newText) = 0;
+	virtual std::unique_ptr<CReplaceTextCommand> CreateReplaceTextCommand(const IParagraph & paragraph, const std::string & newText) = 0;
 
 	virtual ~IParagraphCommandFactory() = default;
 };

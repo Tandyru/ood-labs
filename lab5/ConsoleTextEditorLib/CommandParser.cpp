@@ -4,6 +4,7 @@
 namespace command_parser
 {
 
+using namespace std;
 using namespace input_command;
 
 using CommandBuilder = std::function<unique_ptr<input_command::InputCommand>(const cmatch& match)>;

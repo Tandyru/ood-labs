@@ -4,5 +4,5 @@
 
 namespace command_parser
 {
-	unique_ptr<input_command::InputCommand> ParseInsertImageCommand(string_view input);
+std::unique_ptr<input_command::InputCommand> ParseInsertImageCommand(std::string_view input);
 }

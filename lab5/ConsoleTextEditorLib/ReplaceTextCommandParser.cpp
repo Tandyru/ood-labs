@@ -4,10 +4,11 @@
 #include "PositionParser.h"
 #include "CommandParser.h"
 
+using namespace std;
+using namespace input_command;
+
 namespace command_parser
 {
-
-using namespace input_command;
 
 unique_ptr<input_command::InputCommand> ParseReplaceTextCommand(string_view input)
 {

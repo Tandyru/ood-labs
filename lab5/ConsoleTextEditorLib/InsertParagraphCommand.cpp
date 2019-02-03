@@ -2,6 +2,8 @@
 #include "InsertParagraphCommand.h"
 #include "IDocumentImpl.h"
 
+using namespace std;
+
 namespace document
 {
 namespace command

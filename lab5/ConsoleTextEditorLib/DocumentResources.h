@@ -7,17 +7,17 @@ namespace resources
 class CDocumentResources
 {
 public:
-	CDocumentResources(const string& saveFolderName = "images");
+	CDocumentResources(const std::string& saveFolderName = "images");
 	~CDocumentResources();
 
-	unique_ptr<IResource> AddResource(const Path& originalPath, const string& saveNamePrefix);
+	std::unique_ptr<IResource> AddResource(const Path& originalPath, const std::string& saveNamePrefix);
 
 	// For testing purposes only
 	Path GetDirectoryPath() const;
 
 private:
 	Path m_tempDirectoryPath;
-	string m_saveFolderName;
+	std::string m_saveFolderName;
 	unsigned int m_nextResourceNameSuffix = 1;
 };
 

@@ -3,6 +3,8 @@
 #include "Document.h"
 #include "StringUtils.h"
 
+using namespace std;
+
 namespace document
 {
 

@@ -15,15 +15,15 @@ public:
 
 	// ¬ставл€ет параграф текста в указанную позицию (сдвига€ последующие элементы)
 	// ≈сли параметр position не указан, вставка происходит в конец документа
-	virtual shared_ptr<IParagraph> InsertParagraph(const string& text,
-		optional<size_t> position = optional<size_t>()) = 0;
+	virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
+		std::optional<size_t> position = std::optional<size_t>()) = 0;
 
 	// ¬ставл€ет изображение в указанную позицию (сдвига€ последующие элементы)
 	// ѕараметр path задает путь к вставл€емому изображению
 	// ѕри вставке изображение должно копироватьс€ в подкаталог images 
 	// под автоматически сгенерированным именем
-	virtual shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
-		optional<size_t> position = optional<size_t>()) = 0;
+	virtual std::shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
+		std::optional<size_t> position = std::optional<size_t>()) = 0;
 
 	// ¬озвращает количество элементов в документе
 	virtual size_t GetItemsCount()const = 0;
@@ -36,9 +36,9 @@ public:
 	virtual void DeleteItem(size_t index) = 0;
 
 	// ¬озвращает заголовок документа
-	virtual string GetTitle()const = 0;
+	virtual std::string GetTitle()const = 0;
 	// »змен€ет заголовок документа
-	virtual void SetTitle(const string & title) = 0;
+	virtual void SetTitle(const std::string & title) = 0;
 
 	// —ообщает о доступности операции Undo
 	virtual bool CanUndo()const = 0;

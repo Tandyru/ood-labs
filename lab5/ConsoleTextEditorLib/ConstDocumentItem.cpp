@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ConstDocumentItem.h"
 
+using namespace std;
+
 namespace document
 {
 

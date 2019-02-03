@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "PositionParser.h"
 
+using namespace std;
+
 namespace command_parser
 {
 

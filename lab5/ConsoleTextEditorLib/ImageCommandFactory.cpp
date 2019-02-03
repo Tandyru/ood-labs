@@ -2,6 +2,8 @@
 #include "ImageCommandFactory.h"
 #include "ResizeImageCommand.h"
 
+using namespace std;
+
 namespace document
 {
 namespace command

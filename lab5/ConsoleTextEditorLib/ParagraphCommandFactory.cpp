@@ -2,6 +2,8 @@
 #include "ParagraphCommandFactory.h"
 #include "ReplaceTextCommand.h"
 
+using namespace std;
+
 namespace document
 {
 namespace command

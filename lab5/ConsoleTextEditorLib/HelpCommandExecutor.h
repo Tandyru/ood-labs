@@ -2,5 +2,5 @@
 
 namespace input_command
 {
-void ShowCommandHelp(ostream& out);
+void ShowCommandHelp(std::ostream& out);
 }

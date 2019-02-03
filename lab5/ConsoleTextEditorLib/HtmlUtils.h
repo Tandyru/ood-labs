@@ -5,9 +5,9 @@ namespace document
 namespace html
 {
 
-string EscapeForHtml(string_view original);
-string GetHtmlDocumentHeader(string_view title);
-string GetHtmlDocumentFooter();
+std::string EscapeForHtml(std::string_view original);
+std::string GetHtmlDocumentHeader(std::string_view title);
+std::string GetHtmlDocumentFooter();
 
 }
 }

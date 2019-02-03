@@ -2,6 +2,8 @@
 #include "HtmlUtils.h"
 #include <sstream>
 
+using namespace std;
+
 namespace document
 {
 namespace html

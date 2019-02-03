@@ -11,9 +11,9 @@ struct InsertImageInputCommand : public InputCommand
 	Position position = END_POSITION;
 	unsigned int width = 0;
 	unsigned int height = 0;
-	string path;
+	std::string path;
 
-	InsertImageInputCommand(Position position, unsigned int width, unsigned int height, string path);
+	InsertImageInputCommand(Position position, unsigned int width, unsigned int height, std::string path);
 
 	void Execute(IInputCommandExecutor& executor) override;
 

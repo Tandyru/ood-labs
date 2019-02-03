@@ -3,10 +3,11 @@
 #include "ResizeImageInputCommand.h"
 #include "PositionParser.h"
 
+using namespace std;
+using namespace input_command;
+
 namespace command_parser
 {
-
-using namespace input_command;
 
 unique_ptr<InputCommand> ParseResizeImageCommand(string_view input)
 {

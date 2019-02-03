@@ -5,6 +5,6 @@
 namespace command_parser
 {
 
-	unique_ptr<input_command::InputCommand> ParseInputCommand(string_view input);
+	std::unique_ptr<input_command::InputCommand> ParseInputCommand(std::string_view input);
 
 }

@@ -1,3 +1,3 @@
 #pragma once
 
-string GetUniqueFileName(const string & extension = "");
+std::string GetUniqueFileName(const std::string & extension = "");
