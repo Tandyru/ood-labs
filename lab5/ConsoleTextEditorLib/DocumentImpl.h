@@ -11,16 +11,11 @@ class CDocumentImpl :
 	public IDocumentImpl
 {
 public:
-	using ParagraphFactory = std::function<std::shared_ptr<IParagraph>(const std::string& text)>;
-	using ImageFactory = std::function<std::shared_ptr<IImage>(std::shared_ptr<resources::IResource> resource, unsigned int width, unsigned int height)>;
-	CDocumentImpl(const ParagraphFactory & paragraphFactory, const ImageFactory & imageFactory);
+	CDocumentImpl();
 
 	CDocumentImpl(const CDocumentImpl&) = delete;
 
 	void InsertParagraph(const std::shared_ptr<IParagraph>& paragraph,
-		std::optional<size_t> position = std::optional<size_t>()) override;
-
-	void InsertImage(std::shared_ptr<resources::IResource> resource, int width, int height,
 		std::optional<size_t> position = std::optional<size_t>()) override;
 
 	void InsertImage(std::shared_ptr<IImage> image, size_t position) override;
@@ -31,8 +26,6 @@ public:
 	CDocumentItem GetItem(size_t index) override;
 
 	void DeleteItem(size_t index) override;
-
-	size_t GetImagePosition(const IImage & paragraph) const override;
 
 	void SetTitle(const std::string& title);
 
@@ -56,8 +49,6 @@ private:
 private:
 	std::vector<std::shared_ptr<CDocumentItem>> m_items;
 	std::string m_title;
-	ParagraphFactory m_paragraphFactory;
-	ImageFactory m_imageFactory;
 };
 
 }

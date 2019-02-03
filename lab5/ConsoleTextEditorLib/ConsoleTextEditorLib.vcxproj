@@ -172,9 +172,7 @@
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IDocumentImpl.h" />
     <ClInclude Include="IImage.h" />
-    <ClInclude Include="IImageCommandFactory.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="ImageCommandFactory.h" />
     <ClInclude Include="ImageResource.h" />
     <ClInclude Include="InputCommand.h" />
     <ClInclude Include="InputCommandExecutor.h" />
@@ -232,7 +230,6 @@
     <ClCompile Include="HelpCommandExecutor.cpp" />
     <ClCompile Include="HtmlUtils.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="ImageCommandFactory.cpp" />
     <ClCompile Include="ImageResource.cpp" />
     <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="InputCommandExecutor.cpp" />

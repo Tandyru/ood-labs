@@ -8,13 +8,11 @@ namespace document
 {
 
 CImage::CImage(shared_ptr<resources::IResource> resource, int width, int height, 
-	const shared_ptr<command::ICommandHistory>& commandHistory,
-	const shared_ptr<command::IImageCommandFactory> & commandFactory)
+	const shared_ptr<command::ICommandHistory>& commandHistory)
 	: m_resource(resource)
 	, m_width(width)
 	, m_height(height)
 	, m_commandHistory(commandHistory)
-	, m_commandFactory(commandFactory)
 {
 }
 
@@ -37,7 +35,7 @@ void CImage::Resize(int width, int height)
 {
 	if (m_commandHistory && m_commandHistory->ShouldCreateCommand())
 	{
-		auto command = m_commandFactory->CreateResizeImageCommand(*this, width, height);
+		auto command = make_unique<command::CResizeImageCommand>(shared_from_this(), width, height);
 		m_commandHistory->Do(move(command));
 	}
 	m_width = width;

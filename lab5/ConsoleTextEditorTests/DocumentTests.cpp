@@ -29,7 +29,7 @@ namespace ConsoleTextEditorTests
 			int expectedWidth = 300;
 			int expectedHeight = 200;
 
-			CImage image(resource, expectedWidth, expectedHeight, nullptr, nullptr);
+			CImage image(resource, expectedWidth, expectedHeight, nullptr);
 
 			Assert::AreEqual(expectedWidth, image.GetWidth());
 			Assert::AreEqual(expectedHeight, image.GetHeight());
@@ -37,7 +37,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestImageResize)
 		{
-			CImage image(resource, 300, 200, nullptr, nullptr);
+			CImage image(resource, 300, 200, nullptr);
 
 			int expectedWidth = 400;
 			int expectedHeight = 350;
@@ -70,7 +70,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestConstDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>(resource, 300, 200, nullptr, nullptr);
+			auto image = make_shared<CImage>(resource, 300, 200, nullptr);
 
 			CConstDocumentItem item(image);
 
@@ -90,7 +90,7 @@ namespace ConsoleTextEditorTests
 
 		TEST_METHOD(TestDocumentItemContructionWithImage)
 		{
-			auto image = make_shared<CImage>(resource, 300, 200, nullptr, nullptr);
+			auto image = make_shared<CImage>(resource, 300, 200, nullptr);
 
 			CDocumentItem item(image);
 

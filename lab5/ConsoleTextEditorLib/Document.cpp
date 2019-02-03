@@ -6,7 +6,6 @@
 #include "SetTitleCommand.h"
 #include "ResizeImageCommand.h"
 #include "DocumentToHtmlConvertor.h"
-#include "ImageCommandFactory.h"
 #include "CommandHistory.h"
 
 namespace document
@@ -17,10 +16,7 @@ using namespace command;
 using namespace std::placeholders;
 
 CDocument::CDocument()
-	: m_impl(std::bind(&CDocument::CreateParagraph, this, _1), 
-		std::bind(&CDocument::CreateImage, this, _1, _2, _3))
-	, m_commandHistory(make_shared<CCommandHistory>())
-	, m_imageCommandFactory(make_shared<CImageCommandFactory>(m_impl))
+	: m_commandHistory(make_shared<CCommandHistory>())
 {
 }
 
@@ -40,7 +36,8 @@ shared_ptr<IImage> CDocument::InsertImage(const Path& path, int width, int heigh
 	CheckPosition(position);
 	const auto saveNamePrefix = "image";
 	auto resource = m_resources.AddResource(path, saveNamePrefix);
-	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, width, height, move(resource));
+	auto image = CreateImage(move(resource), width, height);
+	auto command = make_unique<command::CInsertImageCommand>(m_impl, position, image);
 	m_commandHistory->Do(move(command));
 	auto lastItem = m_impl.GetItem(m_impl.GetItemsCount() - 1);
 	return lastItem.GetImage();
@@ -127,9 +124,9 @@ shared_ptr<IParagraph> CDocument::CreateParagraph(const string& text)
 	return make_shared<CParagraph>(text, m_commandHistory);
 }
 
-shared_ptr<IImage> CDocument::CreateImage(shared_ptr<resources::IResource> resource, unsigned int width, unsigned int height)
+shared_ptr<IImage> CDocument::CreateImage(unique_ptr<resources::IResource>&& resource, unsigned int width, unsigned int height)
 {
-	return make_shared<CImage>(resource, width, height, m_commandHistory, m_imageCommandFactory);
+	return make_shared<CImage>(move(resource), width, height, m_commandHistory);
 }
 
 }

@@ -10,21 +10,13 @@ namespace document
 namespace impl
 {
 
-CDocumentImpl::CDocumentImpl(const ParagraphFactory & paragraphFactory, const ImageFactory & imageFactory)
-	: m_paragraphFactory(paragraphFactory)
-	, m_imageFactory(imageFactory)
+CDocumentImpl::CDocumentImpl()
 {
 }
 
 void CDocumentImpl::InsertParagraph(const std::shared_ptr<IParagraph>& paragraph, std::optional<size_t> position)
 {
 	InsertItem<IParagraph>(position, paragraph);
-}
-
-void CDocumentImpl::InsertImage(shared_ptr<resources::IResource> resource, int width, int height,
-	optional<size_t> position)
-{
-	InsertItem<IImage>(position, m_imageFactory(resource, width, height));
 }
 
 void CDocumentImpl::InsertImage(shared_ptr<IImage> image, size_t position)
@@ -84,21 +76,6 @@ size_t CDocumentImpl::GetItemPosition(const std::function<bool(const CConstDocum
 		}
 	}
 	throw std::logic_error("Document item not found");
-}
-
-size_t CDocumentImpl::GetImagePosition(const IImage & image) const
-{
-	return GetItemPosition([&](const CConstDocumentItem& item) {
-		auto imageOfItem = item.GetImage();
-		if (imageOfItem)
-		{
-			if (imageOfItem.get() == &image)
-			{
-				return true;
-			}
-		}
-		return false;
-	});
 }
 
 }

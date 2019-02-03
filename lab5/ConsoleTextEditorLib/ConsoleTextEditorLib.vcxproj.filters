@@ -216,12 +216,6 @@
     <ClInclude Include="ICommandHistory.h">
       <Filter>document\command</Filter>
     </ClInclude>
-    <ClInclude Include="IImageCommandFactory.h">
-      <Filter>document</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageCommandFactory.h">
-      <Filter>document</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -367,9 +361,6 @@
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
       <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageCommandFactory.cpp">
-      <Filter>document</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

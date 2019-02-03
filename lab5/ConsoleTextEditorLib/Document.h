@@ -51,13 +51,12 @@ private:
 
 	std::shared_ptr<IParagraph> CreateParagraph(const std::string & text);
 
-	std::shared_ptr<IImage> CreateImage(std::shared_ptr<resources::IResource> path, unsigned int width, unsigned int height);
+	std::shared_ptr<IImage> CreateImage(std::unique_ptr<resources::IResource>&& path, unsigned int width, unsigned int height);
 
 private:
 	impl::CDocumentImpl m_impl;
 	std::shared_ptr<command::ICommandHistory> m_commandHistory;
 	resources::CDocumentResources m_resources;
-	std::shared_ptr<command::IImageCommandFactory> m_imageCommandFactory;
 };
 
 }

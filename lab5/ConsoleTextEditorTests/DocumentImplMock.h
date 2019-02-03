@@ -8,28 +8,11 @@ class CDocumentImplMock : public IDocumentImpl
 {
 public:
 	// Inherited via IDocumentImpl
-	/*
-	void InsertParagraph(const std::string & text, std::optional<size_t> position = std::optional<size_t>()) override
-	{
-		lastCommandText = text;
-		lastCommandPosition = position;
-		itemCount++;
-	}
-	*/
 	void InsertParagraph(const std::shared_ptr<IParagraph>& paragraph, std::optional<size_t> position = std::optional<size_t>()) override
 	{
 		lastCommandText = paragraph->GetText();
 		lastCommandPosition = position;
 		itemCount++;
-	}
-
-	void InsertImage(std::shared_ptr<resources::IResource> resource, int width, int height,
-		std::optional<size_t> position = std::optional<size_t>()) override
-	{
-		lastCommandResource = resource;
-		lastCommandWidth = width;
-		lastCommandHeight = height;
-		lastCommandPosition = position;
 	}
 
 	void InsertImage(std::shared_ptr<IImage> image, size_t position) override
@@ -65,11 +48,6 @@ public:
 	std::string GetTitle() const override
 	{
 		return title;
-	}
-
-	size_t GetImagePosition(const IImage & image) const override
-	{
-		return 0;
 	}
 
 public:
