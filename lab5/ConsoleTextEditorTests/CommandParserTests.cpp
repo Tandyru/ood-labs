@@ -14,13 +14,13 @@ namespace ConsoleTextEditorTests
 	{
 	public:
 
-		TEST_METHOD(TestParseType)
+		TEST_METHOD(ParsingOfInsertParagraphInputCommandShouldCreateCommandOfAppropriateType)
 		{
 			auto command = ParseInputCommand("InsertParagraph end The text \nof the paragraph.");
 			Assert::IsTrue(command->type == InputCommandType::InsertParagraph);
 		}
 
-		TEST_METHOD(TestParseUnknownTypeThrowsException)
+		TEST_METHOD(ParsingOfUnknownCommandShouldThrowsException)
 		{
 			try
 			{
@@ -32,7 +32,7 @@ namespace ConsoleTextEditorTests
 			}
 		}
 
-		TEST_METHOD(TestParseInsertParagraph)
+		TEST_METHOD(InsertParagraphParsedCommandContainsCorrectData)
 		{
 			const string expectedParagraphText = "The text \nof the paragraph.";
 			auto inputCommand = ParseInputCommand("InsertParagraph end "s + expectedParagraphText);
@@ -46,7 +46,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command2.position == expectedPosition);
 		}
 
-		TEST_METHOD(TestParseInsertParagraphWithInvalidPosition)
+		TEST_METHOD(ParsingOfInsertParagraphCommandWithInvalidPositionThrowsException)
 		{
 			try
 			{
@@ -58,7 +58,7 @@ namespace ConsoleTextEditorTests
 			}
 		}
 
-		TEST_METHOD(TestParseInsertImage)
+		TEST_METHOD(InsertImageParsedCommandContainsCorrectData)
 		{
 			const unsigned int expectedPosition = 11;
 			const unsigned int expectedWidth = 200;
@@ -75,20 +75,23 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command.position == expectedPosition);
 		}
 
-		TEST_METHOD(TestParseSetTitle)
+		TEST_METHOD(SetTitleParsedCommandContainsCorrectTitle)
 		{
 			const string expectedTitle = "The Title";
 			auto inputCommand = ParseInputCommand("SetTitle "s + expectedTitle);
 			auto& command = dynamic_cast<SetTitleInputCommand&>(*inputCommand);
 			Assert::IsTrue(command.type == InputCommandType::SetTitle);
 			Assert::IsTrue(command.title == expectedTitle);
-
-			inputCommand = ParseInputCommand("SetTitle");
-			auto& command2 = dynamic_cast<SetTitleInputCommand&>(*inputCommand);
-			Assert::IsTrue(command2.title.empty());
 		}
 
-		TEST_METHOD(TestParseNonargCommands)
+		TEST_METHOD(SetTitleParsedCommandContainsEmptyTitleIfTitleArgumentAbsent)
+		{
+			auto inputCommand = ParseInputCommand("SetTitle");
+			auto& command = dynamic_cast<SetTitleInputCommand&>(*inputCommand);
+			Assert::IsTrue(command.title.empty());
+		}
+
+		TEST_METHOD(NonargParsedCommandsHaveCorrectType)
 		{
 			auto inputCommand = ParseInputCommand("List");
 			Assert::IsTrue(inputCommand->type == InputCommandType::List);
@@ -100,7 +103,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(inputCommand->type == InputCommandType::Redo);
 		}
 
-		TEST_METHOD(TestParseReplaceText)
+		TEST_METHOD(ReplaceTextParsedCommandContainsCorrectData)
 		{
 			const string expectedText = "The text \nof the paragraph to replace.";
 			const unsigned int expectedPosition = 33;
@@ -111,7 +114,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command.text == expectedText);
 		}
 
-		TEST_METHOD(TestParseResizeImage)
+		TEST_METHOD(ResizeImageParsedCommandContainsCorrectData)
 		{
 			const unsigned int expectedPosition = 12;
 			const unsigned int expectedWidth = 250;
@@ -128,7 +131,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command.height == expectedHeight);
 		}
 
-		TEST_METHOD(TestParseDeleteItem)
+		TEST_METHOD(DeleteItemParsedCommandContainsCorrectTypeAndPosition)
 		{
 			const unsigned int expectedPosition = 15;
 			auto inputCommand = ParseInputCommand("DeleteItem"s +
@@ -139,7 +142,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(command.position == expectedPosition);
 		}
 
-		TEST_METHOD(TestParseSave)
+		TEST_METHOD(SaveParsedCommandContainsCorrectTypeAndPath)
 		{
 			const unsigned int expectedPosition = 15;
 			const string expectedPath = "c:\\output\\file\\path";

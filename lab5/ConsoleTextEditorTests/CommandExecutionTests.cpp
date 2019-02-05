@@ -29,7 +29,7 @@ namespace ConsoleTextEditorTests
 		{
 		}
 
-		TEST_METHOD(TestHelpCommandExecution)
+		TEST_METHOD(HelpCommandExecutionCallsHelpHandler)
 		{
 			InputCommand command(InputCommandType::Help);
 
@@ -37,7 +37,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(helpHandlerCalled);
 		}
 
-		TEST_METHOD(TestInsertParagraphCommandExecution)
+		TEST_METHOD(InsertParagraphCommandExecutionUsesCorrectPosition)
 		{
 			Position expectedPosition = 3;
 			const string expectedText = "Text";
@@ -47,7 +47,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(expectedPosition == *(document.lastCommandPosition));
 		}
 
-		TEST_METHOD(TestResizeImageCommandExecution)
+		TEST_METHOD(ResizeImageCommandExecutionSetsCorrectImageSize)
 		{
 			document.item = make_unique<DocumentImageItemMock>();
 

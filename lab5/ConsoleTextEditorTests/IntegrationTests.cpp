@@ -32,7 +32,7 @@ namespace ConsoleTextEditorTests
 		{
 		}
 
-		TEST_METHOD(TestSetTitle)
+		TEST_METHOD(SetTitleCommandExecutionGetsCorrectOutput)
 		{
 			const string title = "Test document title";
 			const string inputCommands = "SetTitle " + title;
@@ -67,7 +67,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedOutput, out.str());
 		}
 
-		TEST_METHOD(TestInsertParagraphAndImage)
+		TEST_METHOD(ParagraphAndImageCommandsExecutionProducesCorrectOutput)
 		{
 			const string firstParagraphText = "First paragraph text";
 			const string firstParagraphNewText = "First paragraph new text";
@@ -101,7 +101,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedOutput, out.str());
 		}
 
-		TEST_METHOD(TestSaveDocument)
+		TEST_METHOD(SaveCommandExecutionMakesOutputFileAndResourceCopies)
 		{
 			const string paragraphText = "First paragraph text";
 			const string inputCommands =

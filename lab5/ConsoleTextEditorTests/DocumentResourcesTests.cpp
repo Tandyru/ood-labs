@@ -15,7 +15,7 @@ namespace ConsoleTextEditorTests
 	public:
 		CDocumentResources resources;
 
-		TEST_METHOD(TestTempFolderCreation)
+		TEST_METHOD(TempFolderExistsOnResourceCreationAndAbsendAfterResourceDestroying)
 		{
 			Path tmpfolderPath;
 			{
@@ -26,7 +26,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(!exists(tmpfolderPath));
 		}
 
-		TEST_METHOD(TestAddResource)
+		TEST_METHOD(ResourceFileCopyHasBeenDeletedAfterResourceDeleting)
 		{
 			auto resource = resources.AddResource("../../ConsoleTextEditorTests/res/lamp.jpg", "image");
 			auto filePath = resource->GetFilePath();

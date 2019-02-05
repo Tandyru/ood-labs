@@ -16,20 +16,20 @@ namespace ConsoleTextEditorTests
 		CCommandHistory history;
 		CDocumentImplMock document;
 
-		TEST_METHOD(TestInitialState)
+		TEST_METHOD(InInitialStateHistoryCannotUndoAndRedo)
 		{
 			Assert::IsFalse(history.CanRedo());
 			Assert::IsFalse(history.CanUndo());
 		}
 
-		TEST_METHOD(TestStateAfterOneCommandDo)
+		TEST_METHOD(AfterOneCommandDoHistoryCanUndo)
 		{
 			DoCommand();
 			Assert::IsTrue(history.CanUndo());
 			Assert::IsFalse(history.CanRedo());
 		}
 
-		TEST_METHOD(TestStateAfterOneCommandDoUndoRedo)
+		TEST_METHOD(AfterOneCommandDoUndoRedoHistoryCanUndoAndCannotRedo)
 		{
 			DoCommand();
 			Assert::IsTrue(history.CanUndo());
@@ -42,7 +42,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(history.CanUndo());
 		}
 
-		TEST_METHOD(TestStateAfterTwoCommandsDoUndoRedo)
+		TEST_METHOD(AfterTwoCommandsDoUndoRedoHistoryCanUndoAndCannotRedo)
 		{
 			DoCommand();
 			DoCommand();
@@ -60,7 +60,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(history.CanUndo());
 		}
 
-		TEST_METHOD(TestStateAfterDoCommandAfterRedo)
+		TEST_METHOD(AfterDoCommandAfterRedoHistoryCanUndoAndCannotRedo)
 		{
 			DoCommand();
 			DoCommand();
@@ -72,7 +72,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(history.CanUndo());
 		}
 
-		TEST_METHOD(TestStateAfterEraseOldUndoCommands)
+		TEST_METHOD(HistoryCanContainTenCommandsMaximum)
 		{
 			const auto MAX_HISTORY_SIZE = 10;
 			for (auto counter = 0; counter < MAX_HISTORY_SIZE + 2; counter++)

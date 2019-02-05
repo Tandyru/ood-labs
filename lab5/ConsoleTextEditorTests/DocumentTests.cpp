@@ -24,7 +24,7 @@ namespace ConsoleTextEditorTests
 		shared_ptr<resources::IResource> resource;
 		string imagePath = "../../ConsoleTextEditorTests/res/lamp.jpg";
 
-		TEST_METHOD(TestImageConstruction)
+		TEST_METHOD(ImageSizeMethodsRetrieveInputValues)
 		{
 			int expectedWidth = 300;
 			int expectedHeight = 200;
@@ -35,7 +35,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedHeight, image.GetHeight());
 		}
 
-		TEST_METHOD(TestImageResize)
+		TEST_METHOD(ImageSizeMethodsRetrieveCorrectValuesAfterImageResize)
 		{
 			CImage image(resource, 300, 200, nullptr);
 
@@ -48,7 +48,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedHeight, image.GetHeight());
 		}
 
-		TEST_METHOD(TestParagraphConstruction)
+		TEST_METHOD(ParagraphGetTextMethodReturnsInputText)
 		{
 			auto expectedText = "paragraph text"s;
 
@@ -57,7 +57,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedText, paragraph.GetText());
 		}
 
-		TEST_METHOD(TestParagraphSetText)
+		TEST_METHOD(ParagraphGetTextMethodReturnsArgumentOfSetTextMethod)
 		{
 			auto expectedText = "paragraph text"s;
 
@@ -68,7 +68,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedText, paragraph.GetText());
 		}
 
-		TEST_METHOD(TestConstDocumentItemContructionWithImage)
+		TEST_METHOD(ConstDocumentItemContructedWithImageContainsImage)
 		{
 			auto image = make_shared<CImage>(resource, 300, 200, nullptr);
 
@@ -78,7 +78,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(!bool(item.GetParagraph()));
 		}
 
-		TEST_METHOD(TestConstDocumentItemContructionWithParagraph)
+		TEST_METHOD(ConstDocumentItemContructedWithParagraphContainsParagraph)
 		{
 			auto paragraph = make_shared<CParagraph>("initial text", nullptr);
 
@@ -88,7 +88,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(bool(item.GetParagraph()));
 		}
 
-		TEST_METHOD(TestDocumentItemContructionWithImage)
+		TEST_METHOD(DocumentItemContructedWithImageContainsImage)
 		{
 			auto image = make_shared<CImage>(resource, 300, 200, nullptr);
 
@@ -98,7 +98,7 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(!bool(item.GetParagraph()));
 		}
 
-		TEST_METHOD(TestDocumentItemContructionWithParagraph)
+		TEST_METHOD(DocumentItemContructedWithParagraphContainsParagraph)
 		{
 			auto paragraph = make_shared<CParagraph>("initial text", nullptr);
 
@@ -108,14 +108,14 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(bool(item.GetParagraph()));
 		}
 
-		TEST_METHOD(TestInsertParagraphIntoInvalidPosition)
+		TEST_METHOD(InsertingParagraphIntoInvalidPositionThrosException)
 		{
 			Assert::ExpectException<CInvalidPositionException>([&]() {
 				document.InsertParagraph("", 1);
 			});
 		}
 
-		TEST_METHOD(TestInsertParagraph)
+		TEST_METHOD(ParagraphAddedByInsertParagraphMethodCanBeObtainedThrowTheDocumentItem)
 		{
 			const auto expectedText = "paragraphText";
 
@@ -129,7 +129,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(string(expectedText), paragraph->GetText());
 		}
 
-		TEST_METHOD(TestInsertParagraphIntoNonendPosition)
+		TEST_METHOD(InsertParagraphMethodAddsParagraphIntoCorrectPositions)
 		{
 			document.InsertParagraph("Second paragraph");
 			const auto firstParagraphText = "First paragraph";
@@ -141,7 +141,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(string(firstParagraphText), paragraph->GetText());
 		}
 
-		TEST_METHOD(TestInsertParagraphBeforeImage)
+		TEST_METHOD(InsertParagraphMethodAddsParagraphIntoCorrectPositionAfterImage)
 		{
 			const auto firstParagraphText = "First paragraph";
 			const auto secondParagraphText = "Second paragraph";
@@ -155,7 +155,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(string(secondParagraphText), paragraph->GetText());
 		}
 
-		TEST_METHOD(TestInsertImage)
+		TEST_METHOD(InsertImageMethodAddsImageItemWithCorrectSize)
 		{
 			const auto expectedPath = imagePath;
 			const auto expectedWidth = 300;
@@ -174,7 +174,7 @@ namespace ConsoleTextEditorTests
 			Assert::AreEqual(expectedHeight, image->GetHeight());
 		}
 
-		TEST_METHOD(TestImageFileLifeCicle)
+		TEST_METHOD(ImageFileLifeCicleEndAfterLastReferenceDeleted)
 		{
 			document.InsertImage(imagePath, 320, 240);
 			Path tmpImagePath;
@@ -191,21 +191,21 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(!filesystem::exists(tmpImagePath));
 		}
 
-		TEST_METHOD(TestGetItemInvalidIndex)
+		TEST_METHOD(TryingToGetItemFromInvalidPositionThrowsException)
 		{
 			Assert::ExpectException<CInvalidPositionException>([&]() {
 				document.GetItem(10);
 			});
 		}
 
-		TEST_METHOD(TestDeleteItem)
+		TEST_METHOD(DeleteItemMethodsRemovesItem)
 		{
 			document.InsertParagraph("");
 			document.DeleteItem(0);
 			Assert::AreEqual(size_t(0), document.GetItemsCount());
 		}
 
-		TEST_METHOD(TestReplaceText)
+		TEST_METHOD(UndoOfReplaceTextCommandRestoresItemText)
 		{
 			const string expectedOldText = "oldText";
 			document.InsertParagraph("oldText");
@@ -225,21 +225,31 @@ namespace ConsoleTextEditorTests
 			Assert::IsFalse(document.CanUndo());
 		}
 
-		TEST_METHOD(TestResizeImage)
+		TEST_METHOD(UndoOfResizeImageRestoresItemImageSize)
 		{
-			document.InsertImage(imagePath, 300, 200);
+			auto oldWidth = 300;
+			auto oldHeight = 200;
+			document.InsertImage(imagePath, oldWidth, oldHeight);
 			auto item = document.GetItem(0);
 			auto image = item.GetImage();
-			image->Resize(600, 400);
+			auto newWidth = 600;
+			auto newHeight = 400;
+			image->Resize(newWidth, newHeight);
 			Assert::AreEqual(size_t(1), document.GetItemsCount());
+			const auto image2 = document.GetItem(0).GetImage();
+			Assert::AreEqual(newWidth, image2->GetWidth());
+			Assert::AreEqual(newHeight, image2->GetHeight());
 			Assert::IsTrue(document.CanUndo());
 			document.Undo(); // undo "resize image" command
 			Assert::IsTrue(document.CanUndo());
+			const auto image3 = document.GetItem(0).GetImage();
+			Assert::AreEqual(oldWidth, image3->GetWidth());
+			Assert::AreEqual(oldHeight, image3->GetHeight());
 			document.Undo(); // undo "insert image" command
 			Assert::IsFalse(document.CanUndo());
 		}
 
-		TEST_METHOD(TestSetTitle)
+		TEST_METHOD(UndoOfSetTitleRestoresPreviousTitle)
 		{
 			const string expectedTitle = "Test Title";
 			document.SetTitle(expectedTitle);
@@ -247,12 +257,6 @@ namespace ConsoleTextEditorTests
 			Assert::IsTrue(document.CanUndo());
 			document.Undo();
 			Assert::AreEqual(string(), document.GetTitle());
-		}
-
-		TEST_METHOD(TestImageResource)
-		{
-			document.InsertImage(imagePath, 300, 200);
-
 		}
 	};
 }
