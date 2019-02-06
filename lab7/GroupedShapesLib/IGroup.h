@@ -1,10 +1,11 @@
 #pragma once
 #include "IShape.h"
+#include "IEnumerator.h"
 
 namespace shape
 {
 
-class IGroup : public IShape
+class IGroup : public IShape, public IEnumerator<IFillStyle>
 {
 public:
 	virtual size_t GetShapeCount() const = 0;

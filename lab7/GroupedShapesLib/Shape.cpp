@@ -27,6 +27,11 @@ shared_ptr<IGroup> CShape::GetGroup()
 	return shared_ptr<IGroup>();
 }
 
+shared_ptr<const IGroup> CShape::GetGroup() const
+{
+	return shared_ptr<const IGroup>();
+}
+
 shared_ptr<ILineStyle> CShape::GetLineStyle()
 {
 	return m_lineStyle;

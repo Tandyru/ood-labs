@@ -1,5 +1,6 @@
 #pragma once
 #include "IFillStyle.h"
+#include "IEnumerator.h"
 
 namespace shape
 {
@@ -8,8 +9,9 @@ class IGroup;
 
 class CGroupFillStyle : public IFillStyle
 {
+	using IFillStyleEnumerator = IEnumerator<IFillStyle>;
 public:
-	CGroupFillStyle(weak_ptr<IGroup> group);
+	CGroupFillStyle(weak_ptr<IFillStyleEnumerator> enumerator);
 
 	void SetColor(const ColorType& color) override;
 	ColorType GetColor() const override;
@@ -18,7 +20,11 @@ public:
 	IFillStyle::FillType GetFill() const override;
 
 private:
-	weak_ptr<IGroup> m_group;
+	void ForEach(const std::function<void(const IFillStyle&)>& func) const;
+	void ForEach(const std::function<void(IFillStyle&)>& func);
+
+private:
+	weak_ptr<IFillStyleEnumerator> m_enumerator;
 };
 
 }

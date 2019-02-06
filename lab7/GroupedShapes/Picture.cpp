@@ -36,6 +36,7 @@ unique_ptr<CPicture> GetPicture()
 
 	auto sun = make_shared<CEllipse>(Point{ 80, 60 }, 30, 30);
 	sun->GetFillStyle()->SetColor(Color{ 240, 255, 30, 255 });
+	sun->GetLineStyle()->SetColor(Color{ 240, 180, 30, 255 });
 	AppendShape(root, sun);
 	
 	// Boat

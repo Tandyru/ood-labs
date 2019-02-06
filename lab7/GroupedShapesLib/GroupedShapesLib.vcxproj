@@ -152,6 +152,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="ColorOptional.h" />
     <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="EnumerationUtils.h" />
     <ClInclude Include="FillStyle.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="GroupFillStyle.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="GroupUtils.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IFillStyle.h" />
+    <ClInclude Include="IEnumerator.h" />
     <ClInclude Include="IGroup.h" />
     <ClInclude Include="ILineStyle.h" />
     <ClInclude Include="IShape.h" />

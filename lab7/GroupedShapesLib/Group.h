@@ -1,5 +1,6 @@
 #pragma once
 #include "IGroup.h"
+#include "IEnumerator.h"
 #include <vector>
 
 namespace shape
@@ -16,6 +17,11 @@ public:
 	std::shared_ptr<IFillStyle> GetFillStyle() override;
 	void Draw(ICanvas & canvas) override;
 	std::shared_ptr<IGroup> GetGroup() override;
+	std::shared_ptr<const IGroup> GetGroup() const override;
+
+	// Inherited via IEnumerator<IFillStyle>
+	void ForEach(const std::function<void(const IFillStyle&)>& func) const override;
+	void ForEach(const std::function<void(IFillStyle&)>& func) override;
 
 	// Inherited via IGroup
 	size_t GetShapeCount() const override;

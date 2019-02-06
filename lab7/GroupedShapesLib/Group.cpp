@@ -106,4 +106,49 @@ shared_ptr<IGroup> CGroup::GetGroup()
 	return shared_from_this();
 }
 
+shared_ptr<const IGroup> CGroup::GetGroup() const
+{
+	return shared_from_this();
+}
+
+void CGroup::ForEach(const std::function<void(const IFillStyle&)>& func) const
+{
+	for (const auto shape : m_shapes)
+	{
+		shared_ptr<const IGroup> group = shape->GetGroup();
+		if (group) 
+		{
+			group->ForEach(func);
+		}
+		else
+		{
+			auto fillStyle = shape->GetFillStyle();
+			if (fillStyle)
+			{
+				func(*fillStyle);
+			}
+		}
+	}
+}
+
+void CGroup::ForEach(const std::function<void(IFillStyle&)>& func)
+{
+	for (auto shape : m_shapes)
+	{
+		shared_ptr<IGroup> group = shape->GetGroup();
+		if (group)
+		{
+			group->ForEach(func);
+		}
+		else
+		{
+			auto fillStyle = shape->GetFillStyle();
+			if (fillStyle)
+			{
+				func(*fillStyle);
+			}
+		}
+	}
+}
+
 }

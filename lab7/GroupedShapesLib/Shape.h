@@ -13,6 +13,7 @@ public:
 	Rect GetFrame() const override;
 	void SetFrame(Rect rect) override;
 	std::shared_ptr<IGroup> GetGroup() override;
+	std::shared_ptr<const IGroup> GetGroup() const override;
 	std::shared_ptr<ILineStyle> GetLineStyle() override;
 	std::shared_ptr<IFillStyle> GetFillStyle() override;
 

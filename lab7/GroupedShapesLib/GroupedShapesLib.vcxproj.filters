@@ -90,6 +90,12 @@
     <ClInclude Include="Picture.h">
       <Filter>painting</Filter>
     </ClInclude>
+    <ClInclude Include="IEnumerator.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumerationUtils.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

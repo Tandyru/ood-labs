@@ -1,44 +1,61 @@
 #include "stdafx.h"
 #include "GroupFillStyle.h"
-#include "IGroup.h"
-#include "GroupUtils.h"
-
-using namespace shape::group;
+#include "EnumerationUtils.h"
 
 namespace shape
 {
 
-CGroupFillStyle::CGroupFillStyle(weak_ptr<IGroup> group)
-	: m_group(group)
+CGroupFillStyle::CGroupFillStyle(weak_ptr<IFillStyleEnumerator> enumerator)
+	: m_enumerator(enumerator)
 {
 }
 
 void CGroupFillStyle::SetColor(const ColorType & color)
 {
-	ForEach(m_group, [&](IShape& shape) {
-		shape.GetFillStyle()->SetColor(color);
+	ForEach([&](IFillStyle& fillStyle) {
+		fillStyle.SetColor(color);
 	});
 }
 
 IFillStyle::ColorType CGroupFillStyle::GetColor() const
 {
-	return GetGroupCommonValue<IFillStyle::ColorType>(m_group, [&](IShape& shape) {
-		return shape.GetFillStyle()->GetColor();
+	return GetCommonValue<IFillStyle::ColorType, IFillStyle>(m_enumerator, [](const IFillStyle& fillStyle) {
+		return fillStyle.GetColor();
 	});
 }
 
 void CGroupFillStyle::SetFill(const FillType & fill)
 {
-	ForEach(m_group, [&](IShape& shape) {
-		shape.GetFillStyle()->SetFill(fill);
+	ForEach([&](IFillStyle& fillStyle) {
+		fillStyle.SetFill(fill);
 	});
 }
 
 IFillStyle::FillType CGroupFillStyle::GetFill() const
 {
-	return GetGroupCommonValue<IFillStyle::FillType>(m_group, [&](IShape& shape) {
-		return shape.GetFillStyle()->GetFill();
+	return GetCommonValue<IFillStyle::FillType, IFillStyle>(m_enumerator, [](const IFillStyle& fillStyle) {
+		return fillStyle.GetFill();
 	});
+}
+
+void CGroupFillStyle::ForEach(const std::function<void(const IFillStyle&)>& func) const
+{
+	if (auto enumerator = m_enumerator.lock())
+	{
+		enumerator->ForEach([&](const IFillStyle& fillStyle) {
+			func(fillStyle);
+		});
+	}
+}
+
+void CGroupFillStyle::ForEach(const std::function<void(IFillStyle&)>& func)
+{
+	if (auto enumerator = m_enumerator.lock())
+	{
+		enumerator->ForEach([&](IFillStyle& fillStyle) {
+			func(fillStyle);
+		});
+	}
 }
 
 }
