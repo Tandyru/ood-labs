@@ -1,5 +1,6 @@
 #pragma once
 #include "ILineStyle.h"
+#include "IEnumerator.h"
 
 namespace shape
 {
@@ -8,8 +9,9 @@ class IGroup;
 
 class CGroupLineStyle : public ILineStyle
 {
+	using ILineStyleEnumerator = IEnumerator<ILineStyle>;
 public:
-	CGroupLineStyle(weak_ptr<IGroup> group);
+	CGroupLineStyle(std::unique_ptr<ILineStyleEnumerator>&& enumerator);
 
 	void SetColor(const ColorType& color) override;
 	ColorType GetColor() const override;
@@ -18,7 +20,10 @@ public:
 	ILineStyle::ThicknessType GetThickness() const override;
 
 private:
-	weak_ptr<IGroup> m_group;
+	void ForEach(const std::function<void(ILineStyle&)>& func);
+
+private:
+	std::unique_ptr<ILineStyleEnumerator> m_enumerator;
 };
 
 }

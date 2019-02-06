@@ -2,11 +2,13 @@
 #include "GroupFillStyle.h"
 #include "EnumerationUtils.h"
 
+using namespace std;
+
 namespace shape
 {
 
-CGroupFillStyle::CGroupFillStyle(weak_ptr<IFillStyleEnumerator> enumerator)
-	: m_enumerator(enumerator)
+CGroupFillStyle::CGroupFillStyle(unique_ptr<IFillStyleEnumerator>&& enumerator)
+	: m_enumerator(move(enumerator))
 {
 }
 
@@ -40,9 +42,9 @@ IFillStyle::FillType CGroupFillStyle::GetFill() const
 
 void CGroupFillStyle::ForEach(const std::function<void(const IFillStyle&)>& func) const
 {
-	if (auto enumerator = m_enumerator.lock())
+	if (m_enumerator)
 	{
-		enumerator->ForEach([&](const IFillStyle& fillStyle) {
+		m_enumerator->ForEach([&](const IFillStyle& fillStyle) {
 			func(fillStyle);
 		});
 	}
@@ -50,9 +52,9 @@ void CGroupFillStyle::ForEach(const std::function<void(const IFillStyle&)>& func
 
 void CGroupFillStyle::ForEach(const std::function<void(IFillStyle&)>& func)
 {
-	if (auto enumerator = m_enumerator.lock())
+	if (m_enumerator)
 	{
-		enumerator->ForEach([&](IFillStyle& fillStyle) {
+		m_enumerator->ForEach([&](IFillStyle& fillStyle) {
 			func(fillStyle);
 		});
 	}

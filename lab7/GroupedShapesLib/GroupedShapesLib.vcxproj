@@ -157,6 +157,7 @@
     <ClInclude Include="Group.h" />
     <ClInclude Include="GroupFillStyle.h" />
     <ClInclude Include="GroupLineStyle.h" />
+    <ClInclude Include="GroupStyleEnumerator.h" />
     <ClInclude Include="GroupUtils.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IFillStyle.h" />

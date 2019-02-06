@@ -96,6 +96,9 @@
     <ClInclude Include="EnumerationUtils.h">
       <Filter>shapes</Filter>
     </ClInclude>
+    <ClInclude Include="GroupStyleEnumerator.h">
+      <Filter>shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

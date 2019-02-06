@@ -3,6 +3,9 @@
 #include "GroupLineStyle.h"
 #include "GroupFillStyle.h"
 #include "Transformations.h"
+#include "GroupStyleEnumerator.h"
+
+using namespace std;
 
 namespace shape
 {
@@ -43,6 +46,20 @@ void CGroup::RemoveShapeAtIndex(size_t index)
 	m_shapes.erase(m_shapes.begin() + index);
 }
 
+std::unique_ptr<IEnumerator<IFillStyle>> CGroup::GetFillStyleEnumerator()
+{
+	return make_unique<CGroupStyleEnumerator<IFillStyle>>(shared_from_this(), [](IShape& shape) {
+		return shape.GetFillStyle();
+	});
+}
+
+std::unique_ptr<IEnumerator<ILineStyle>> CGroup::GetLineStyleEnumerator()
+{
+	return make_unique<CGroupStyleEnumerator<ILineStyle>>(shared_from_this(), [](IShape& shape) {
+		return shape.GetLineStyle();
+	});
+}
+
 Rect CGroup::GetFrame() const
 {
 	Rect result;
@@ -79,7 +96,7 @@ shared_ptr<ILineStyle> CGroup::GetLineStyle()
 {
 	if (!m_lineStyle)
 	{
-		m_lineStyle = make_shared<CGroupLineStyle>(shared_from_this());
+		m_lineStyle = make_shared<CGroupLineStyle>(move(GetLineStyleEnumerator()));
 	}
 	return m_lineStyle;
 }
@@ -88,7 +105,7 @@ shared_ptr<IFillStyle> CGroup::GetFillStyle()
 {
 	if (!m_fillStyle)
 	{
-		m_fillStyle = make_shared<CGroupFillStyle>(shared_from_this());
+		m_fillStyle = make_shared<CGroupFillStyle>(move(GetFillStyleEnumerator()));
 	}
 	return m_fillStyle;
 }
@@ -109,46 +126,6 @@ shared_ptr<IGroup> CGroup::GetGroup()
 shared_ptr<const IGroup> CGroup::GetGroup() const
 {
 	return shared_from_this();
-}
-
-void CGroup::ForEach(const std::function<void(const IFillStyle&)>& func) const
-{
-	for (const auto shape : m_shapes)
-	{
-		shared_ptr<const IGroup> group = shape->GetGroup();
-		if (group) 
-		{
-			group->ForEach(func);
-		}
-		else
-		{
-			auto fillStyle = shape->GetFillStyle();
-			if (fillStyle)
-			{
-				func(*fillStyle);
-			}
-		}
-	}
-}
-
-void CGroup::ForEach(const std::function<void(IFillStyle&)>& func)
-{
-	for (auto shape : m_shapes)
-	{
-		shared_ptr<IGroup> group = shape->GetGroup();
-		if (group)
-		{
-			group->ForEach(func);
-		}
-		else
-		{
-			auto fillStyle = shape->GetFillStyle();
-			if (fillStyle)
-			{
-				func(*fillStyle);
-			}
-		}
-	}
 }
 
 }

@@ -19,15 +19,13 @@ public:
 	std::shared_ptr<IGroup> GetGroup() override;
 	std::shared_ptr<const IGroup> GetGroup() const override;
 
-	// Inherited via IEnumerator<IFillStyle>
-	void ForEach(const std::function<void(const IFillStyle&)>& func) const override;
-	void ForEach(const std::function<void(IFillStyle&)>& func) override;
-
 	// Inherited via IGroup
 	size_t GetShapeCount() const override;
 	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) const override;
 	void InsertShapeAtIndex(std::shared_ptr<IShape> shape, size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
+	std::unique_ptr<IEnumerator<IFillStyle>> GetFillStyleEnumerator() override;
+	std::unique_ptr<IEnumerator<ILineStyle>> GetLineStyleEnumerator() override;
 
 private:
 	void CheckIndex(size_t index) const;

@@ -5,9 +5,9 @@ namespace shape
 {
 
 template<typename VT, typename HT>
-VT GetCommonValue(weak_ptr<IEnumerator<HT>> weakEnumerator, const std::function<VT(const HT&)>& getter)
+VT GetCommonValue(const unique_ptr<IEnumerator<HT>>& enumerator, const std::function<VT(const HT&)>& getter)
 {
-	if (auto enumerator = weakEnumerator.lock())
+	if (enumerator)
 	{
 		VT commonValue;
 		bool first = true;

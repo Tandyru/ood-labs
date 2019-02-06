@@ -11,7 +11,7 @@ class CGroupFillStyle : public IFillStyle
 {
 	using IFillStyleEnumerator = IEnumerator<IFillStyle>;
 public:
-	CGroupFillStyle(weak_ptr<IFillStyleEnumerator> enumerator);
+	CGroupFillStyle(std::unique_ptr<IFillStyleEnumerator>&& enumerator);
 
 	void SetColor(const ColorType& color) override;
 	ColorType GetColor() const override;
@@ -24,7 +24,7 @@ private:
 	void ForEach(const std::function<void(IFillStyle&)>& func);
 
 private:
-	weak_ptr<IFillStyleEnumerator> m_enumerator;
+	std::unique_ptr<IFillStyleEnumerator> m_enumerator;
 };
 
 }
